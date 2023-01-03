@@ -1,7 +1,7 @@
 module.exports.profile = {
   name: 'patientTWCR',
   version: '1.0.0',
-  // fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
+  fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
 }
 
@@ -20,7 +20,17 @@ module.exports.fields = [
     }
   },
   {
-    source: 'identifier',
+    source: 'idCardNumber',
+    target: 'Patient.identifier',
+    beforeConvert: (data) => {
+      let identifier = data;
+      identifier.type.coding = [identifier.type.coding];
+
+      return identifier;
+    }
+  },
+  {
+    source: 'medicalRecord',
     target: 'Patient.identifier',
     beforeConvert: (data) => {
       let identifier = data;
@@ -42,12 +52,14 @@ module.exports.fields = [
   {
     source: 'name',
     target: 'Patient.name',
+    /*
     beforeConvert: (data) => {
       let name = data;
       name.given = [name.given];
 
       return name;
     }
+    */
   },
   {
     source: 'telecom',
@@ -56,6 +68,14 @@ module.exports.fields = [
   {
     source: 'gender',
     target: 'Patient.gender',
+    beforeConvert: (data) => {
+      if(data == "1")
+        return "male";
+      else if(data == "2")
+        return "female";
+      else
+        return "other";
+    }
   },
   {
     source: 'birthDate',
@@ -65,6 +85,7 @@ module.exports.fields = [
     source: 'address',
     target: 'Patient.address',
   },
+  /*
   {
     source: 'maritalStatus',
     target: 'Patient.maritalStatus',
@@ -109,4 +130,5 @@ module.exports.fields = [
     source: 'managingOrganization',
     target: 'Patient.managingOrganization',
   }
+  */
 ]
