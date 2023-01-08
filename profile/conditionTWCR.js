@@ -57,9 +57,9 @@ module.exports.fields = [
     target: 'Condition.code',
     beforeConvert: (data) => {
       let code = data;
-      
+
       code.coding.code = parseInt(code.coding.code);
-      if(code.coding.code < 10){
+      if (code.coding.code < 10) {
         let cacheNumber = code.coding.code;
         code.coding.code = "0" + String(cacheNumber);
         // 按照 https://mitw.dicom.org.tw/IG/TWCR_SF/ValueSet-sequence-number-valueset.html
@@ -75,8 +75,19 @@ module.exports.fields = [
     source: 'subject',
     target: 'Condition.subject'
   },
+  { // optional
+    source: 'encounter',
+    target: 'Condition.encounter'
+  },
   {
-    source: 'onsetDateTime',
-    target: 'Condition.onsetDateTime'
-  }
+    source: 'onsetAge',
+    target: 'Condition.onsetAge',
+    beforeConvert: (data) => {
+      return parseInt(data); // 根據FHIR的定義，應該要是正整數
+    }
+  },
+  { // optional
+    source: 'recorder',
+    target: 'Condition.recorder'
+  },
 ]
