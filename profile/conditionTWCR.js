@@ -57,6 +57,15 @@ module.exports.fields = [
     target: 'Condition.code',
     beforeConvert: (data) => {
       let code = data;
+      
+      code.coding.code = parseInt(code.coding.code);
+      if(code.coding.code < 10){
+        let cacheNumber = code.coding.code;
+        code.coding.code = "0" + String(cacheNumber);
+        // 按照 https://mitw.dicom.org.tw/IG/TWCR_SF/ValueSet-sequence-number-valueset.html
+        // 的定義值，把code value進行轉換
+      }
+
       code.coding = [code.coding];// 把coding按照FHIR Definition包成Array
 
       return code;
