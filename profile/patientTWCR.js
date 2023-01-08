@@ -69,9 +69,9 @@ module.exports.fields = [
     source: 'gender',
     target: 'Patient.gender',
     beforeConvert: (data) => {
-      if(data == "1")
+      if (data == "1")
         return "male";
-      else if(data == "2")
+      else if (data == "2")
         return "female";
       else
         return "other";
