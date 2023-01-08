@@ -20,13 +20,36 @@ module.exports.fields = [
     }
   },
   {
-    source: 'category',
+    source: 'ClassOfCase',
     target: 'Condition.category',
     beforeConvert: (data) => {
       let category = data;
       category.coding = [category.coding];// 把coding按照FHIR Definition包成Array
 
       return category;
+      // ClassOfCase是category中的一個Slice
+    }
+  },
+  {
+    source: 'ClassOfDiagnosisStatus',
+    target: 'Condition.category',
+    beforeConvert: (data) => {
+      let category = data;
+      category.coding = [category.coding];// 把coding按照FHIR Definition包成Array
+
+      return category;
+      // ClassOfDiagnosisStatus是category中的一個Slice
+    }
+  },
+  {
+    source: 'ClassOfTreatmentStatus',
+    target: 'Condition.category',
+    beforeConvert: (data) => {
+      let category = data;
+      category.coding = [category.coding];// 把coding按照FHIR Definition包成Array
+
+      return category;
+      // ClassOfTreatmentStatus是category中的一個Slice
     }
   },
   {
