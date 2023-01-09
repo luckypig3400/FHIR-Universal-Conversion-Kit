@@ -95,10 +95,11 @@ module.exports.fields = [
     target: 'Condition.evidence',
     beforeConvert: (data) => {
       let evidence = data;
+
+      evidence.code.coding = [evidence.code.coding];// 把coding按照FHIR Definition包成Array
+
       evidence.code = [evidence.code];// 把code按照mitw定義包成Array
       // https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-condition-profile.html
-
-      evidence.coding = [evidence.coding];// 把coding按照FHIR Definition包成Array
 
       return evidence;
     }
