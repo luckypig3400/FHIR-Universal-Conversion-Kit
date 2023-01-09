@@ -66,6 +66,17 @@ module.exports.fields = [
     target: 'Condition.bodySite',
     beforeConvert: (data) => {
       let primarySite = data;
+      
+      let c = primarySite.coding.code; // 固定為4碼，需轉換為帶小數點的值
+      let newCode = c[0] + c[1] + c[2] + "." + c[3];
+      primarySite.coding.code = newCode;
+      
+      function checkCode(code){
+        return code == newCode;
+      } // https://www.w3schools.com/jsref/jsref_findindex.asp
+      let displayIndex = primarySite_coding_code.findIndex(checkCode);
+      primarySite.coding.display = primarySite_coding_display[displayIndex];
+
       primarySite.coding = [primarySite.coding];// 把coding按照FHIR Definition包成Array
 
       return primarySite;
