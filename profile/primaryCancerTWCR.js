@@ -47,6 +47,42 @@ module.exports.fields = [
     }
   },
   {
+    // Extension: BehaviorCode
+    // https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-primary-cancer-profile.html
+    source: 'BehaviorCode',
+    target: 'Condition.extension',
+    beforeConvert: (data) => {
+      BehaviorCode = data;
+
+      BehaviorCode.extension = [BehaviorCode.extension]; // 根據範例JSON把BehaviorCode.extensiony包成Array
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/Condition-PrimaryCancerExample.json.html
+
+      return BehaviorCode;
+    }
+  },
+  {
+    // bodySite: primary-site
+    source: 'primary-site',
+    target: 'Condition.bodySite',
+    beforeConvert: (data) => {
+      let primarySite = data;
+      primarySite.coding = [primarySite.coding];// 把coding按照FHIR Definition包成Array
+
+      return primarySite;
+    }
+  },
+  {
+    // bodySite: laterality
+    source: 'laterality',
+    target: 'Condition.bodySite',
+    beforeConvert: (data) => {
+      let laterality = data;
+      laterality.coding = [laterality.coding];// 把coding按照FHIR Definition包成Array
+
+      return laterality;
+    }
+  },
+  {
     source: 'subject',
     target: 'Condition.subject'
   },
@@ -57,20 +93,5 @@ module.exports.fields = [
   { // optional
     source: 'recorder',
     target: 'Condition.recorder'
-  },
-  /*
-  {
-    source: 'evidence',
-    target: 'Condition.evidence',
-    beforeConvert: (data) => {
-      let evidence = data;
-      evidence.code = [evidence.code];// 把code按照mitw定義包成Array
-      // https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-condition-profile.html
-
-      evidence.coding = [evidence.coding];// 把coding按照FHIR Definition包成Array
-
-      return evidence;
-    }
   }
-  */
 ]
