@@ -77,7 +77,14 @@ module.exports.fields = [
   },
   { // optional
     source: 'encounter',
-    target: 'Condition.encounter'
+    target: 'Condition.encounter',
+    beforeConvert: (data) => {
+      if(data.reference == ""){
+        return null;
+      }
+      else
+        return data;
+    }
   },
   {
     source: 'onsetAge',
@@ -88,7 +95,14 @@ module.exports.fields = [
   },
   { // optional
     source: 'recorder',
-    target: 'Condition.recorder'
+    target: 'Condition.recorder',
+    beforeConvert: (data) => {
+      if(data.reference == ""){
+        return null;
+      }
+      else
+        return data;
+    }
   },
   {
     source: 'evidence',
