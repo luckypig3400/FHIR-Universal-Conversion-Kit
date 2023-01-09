@@ -90,7 +90,9 @@ module.exports.fields = [
     source: 'onsetAge',
     target: 'Condition.onsetAge',
     beforeConvert: (data) => {
-      return parseInt(data); // 根據FHIR的定義，應該要是正整數
+      let onsetAge = data;
+      onsetAge.value = parseInt(onsetAge.value); // 根據FHIR的定義，應該要是正整數
+      return onsetAge
     }
   },
   { // optional
