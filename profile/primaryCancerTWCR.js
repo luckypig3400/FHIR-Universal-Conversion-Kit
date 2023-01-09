@@ -24,6 +24,25 @@ module.exports.fields = [
   },
   {
     // Extension: Histology
+    // https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-primary-cancer-profile.html
+    source: 'Histology',
+    target: 'Condition.extension',
+    beforeConvert: (data) => {
+      Histology = data;
+
+      function checkCode(code) {
+        let codeToCheck = Histology.extension.valueCodeableConcept.coding.code;
+        return code == codeToCheck;
+      } // https://www.w3schools.com/jsref/jsref_findindex.asp
+      let displayIndex = Histology_extension_valueCodeableConcept_coding_code.findIndex(checkCode);
+      Histology.extension.valueCodeableConcept.coding.display = Histology_extension_valueCodeableConcept_coding_display[displayIndex];
+
+      Histology.extension = [Histology.extension];
+      // 根據範例JSON把Histology.extensiony包成Array:
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/Condition-PrimaryCancerExample.json.html
+      
+      return Histology;
+    }
   },
   {
     source: 'subject',
