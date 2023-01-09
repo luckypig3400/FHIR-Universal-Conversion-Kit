@@ -8,6 +8,17 @@ module.exports.profile = {
 module.exports.globalResource = {
   // Should be resource name
   Condition: {
+    // 全域資料參考自以下網頁:
+    // https://mitw.dicom.org.tw/IG/TWCR_SF/Condition-ConditionExample.json.html
+    meta: {
+      profile: [
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/condition-profile"
+      ]
+    },
+    text: {
+      status: "empty",
+      div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，應該產生這筆資料的摘要</div>"
+    }
   }
 }
 
@@ -79,7 +90,7 @@ module.exports.fields = [
     source: 'encounter',
     target: 'Condition.encounter',
     beforeConvert: (data) => {
-      if(data.reference == ""){
+      if (data.reference == "") {
         return null;
       }
       else
@@ -99,7 +110,7 @@ module.exports.fields = [
     source: 'recorder',
     target: 'Condition.recorder',
     beforeConvert: (data) => {
-      if(data.reference == ""){
+      if (data.reference == "") {
         return null;
       }
       else

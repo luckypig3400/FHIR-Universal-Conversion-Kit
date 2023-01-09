@@ -8,6 +8,17 @@ module.exports.profile = {
 module.exports.globalResource = {
   // Should be resource name
   Condition: {
+    // 全域資料參考自以下網頁:
+    // https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-primary-cancer-profile.html
+    meta: {
+      profile: [
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/primary-cancer-profile"
+      ]
+    },
+    text: {
+      status: "empty",
+      div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，應該產生這筆資料的摘要</div>"
+    }
   }
 }
 
