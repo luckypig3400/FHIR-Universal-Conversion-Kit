@@ -39,8 +39,9 @@ module.exports.fields = [
       let displayIndex = Histology_extension_valueCodeableConcept_coding_code.findIndex(checkCode);
       Histology.extension.valueCodeableConcept.coding.display = Histology_extension_valueCodeableConcept_coding_display[displayIndex];
 
+      Histology.extension.valueCodeableConcept.coding = [Histology.extension.valueCodeableConcept.coding];
       Histology.extension = [Histology.extension];
-      // 根據範例JSON把Histology.extensiony包成Array:
+      // 根據範例JSON把Histology.extensiony與valueCodeableConcept.coding包成Array:
       // https://mitw.dicom.org.tw/IG/TWCR_SF/Condition-PrimaryCancerExample.json.html
 
       return Histology;
@@ -54,7 +55,9 @@ module.exports.fields = [
     beforeConvert: (data) => {
       BehaviorCode = data;
 
-      BehaviorCode.extension = [BehaviorCode.extension]; // 根據範例JSON把BehaviorCode.extensiony包成Array
+      BehaviorCode.extension.valueCodeableConcept.coding = [BehaviorCode.extension.valueCodeableConcept.coding];
+      BehaviorCode.extension = [BehaviorCode.extension];
+      // 根據範例JSON把BehaviorCode.extensiony與valueCodeableConcept.coding包成Array
       // https://mitw.dicom.org.tw/IG/TWCR_SF/Condition-PrimaryCancerExample.json.html
 
       return BehaviorCode;
@@ -66,12 +69,12 @@ module.exports.fields = [
     target: 'Condition.bodySite',
     beforeConvert: (data) => {
       let primarySite = data;
-      
+
       let c = primarySite.coding.code; // 固定為4碼，需轉換為帶小數點的值
       let newCode = c[0] + c[1] + c[2] + "." + c[3];
       primarySite.coding.code = newCode;
-      
-      function checkCode(code){
+
+      function checkCode(code) {
         return code == newCode;
       } // https://www.w3schools.com/jsref/jsref_findindex.asp
       let displayIndex = primarySite_coding_code.findIndex(checkCode);
@@ -101,7 +104,7 @@ module.exports.fields = [
     source: 'encounter',
     target: 'Condition.encounter',
     beforeConvert: (data) => {
-      if(data.reference == ""){
+      if (data.reference == "") {
         return null;
       }
       else
@@ -112,7 +115,7 @@ module.exports.fields = [
     source: 'recorder',
     target: 'Condition.recorder',
     beforeConvert: (data) => {
-      if(data.reference == ""){
+      if (data.reference == "") {
         return null;
       }
       else
