@@ -2,6 +2,13 @@
 
 FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that can convert albitary data to HL7 FHIR data. 
 
+## TODO List
+- [ ] 把先前撰寫的3份TWCR F.U.C.K profiles改為讀取原始csv欄位資料
+- [ ] 日後所有的TWCR profiles都直接讀取原始csv，無須再轉換為新csv(excel)格式
+- [ ] 自動根據[TWCR FHIR IG官網](https://mitw.dicom.org.tw/IG/TWCR_SF/index.html)的CodeSystems與ValueSets判斷對應profile的轉換值
+- [ ] 每日自動檢查一次[TWCR FHIR IG資料集](https://mitw.dicom.org.tw/IG/TWCR_SF/downloads.html)是否更新
+- [ ] 自動抓取最新版的[TWCR FHIR IG資料集](https://mitw.dicom.org.tw/IG/TWCR_SF/downloads.html)
+
 ## Installation & Usage Overview
 ### 1. Make sure your system enviroment already meet the [Requirements](#requirements)
 

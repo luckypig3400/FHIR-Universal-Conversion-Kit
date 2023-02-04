@@ -17,7 +17,7 @@ module.exports.globalResource = {
     },
     text: {
       status: "empty",
-      div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，應該產生這筆資料的摘要</div>"
+      div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
     }
   }
 }
