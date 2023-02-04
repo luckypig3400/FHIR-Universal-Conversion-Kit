@@ -1,3 +1,6 @@
+const checkTWCR = require("../TWCR_ValueSets/fetchLatestTWCR.js");
+// 檔案路徑要以FUCK核心所在的位置為基準
+
 module.exports.profile = {
   name: 'conditionTWCR',
   version: '1.0.0',
@@ -27,6 +30,9 @@ module.exports.fields = [
     source: 'id',
     target: 'Condition.id',
     beforeConvert: (data) => {
+      // 在首個轉換項目檢查TWCR的package是否有更新
+      checkTWCR();
+
       return `conTWCR-${data}`
     }
   },
