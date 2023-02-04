@@ -45,6 +45,47 @@ function fetchLatestTWCR() {
           packageFile.on("finish", () => {
             packageFile.close();
             console.log("Download Completed");
+
+            // -----------------------------------
+            // Unzip Downloaded file
+            // https://stackoverflow.com/questions/10308110/simplest-way-to-download-and-unzip-files-in-node-js-cross-platform
+            'use strict';
+            var path = require('path');
+            var StreamZip = require('../src/node_modules/node-stream-zip/node_stream_zip');
+
+            var zip = new StreamZip({
+              file: "../TWCR_ValueSets/definitions.json.zip"
+              , storeEntries: true
+            });
+
+            zip.on('error', function (err) { console.error('[ERROR]', err); });
+
+            zip.on('entry', function (entry) {
+              var pathname = path.resolve('../TWCR_ValueSets/definitionsJSON', entry.name);
+              if (/\.\./.test(path.relative('../TWCR_ValueSets/definitionsJSON', pathname))) {
+                console.warn("[zip warn]: ignoring maliciously crafted paths in zip file:", entry.name);
+                return;
+              }
+              if ('/' === entry.name[entry.name.length - 1]) {
+                console.log('[DIR]', entry.name);
+                return;
+              }
+              console.log('[FILE]', entry.name);
+              zip.stream(entry.name, function (err, stream) {
+                if (err) { console.error('Error:', err.toString()); return; }
+
+                stream.on('error', function (err) { console.log('[ERROR]', err); return; });
+                // example: save contents to file
+                fs.mkdir(
+                  path.dirname(pathname),
+                  { recursive: true },
+                  function (err) {
+                    stream.pipe(fs.createWriteStream(pathname));
+                  }
+                );
+              });
+            });
+            // -----------------------------------
           });
         });
         // -----------------------------------
