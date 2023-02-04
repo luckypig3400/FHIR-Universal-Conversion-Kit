@@ -35,7 +35,18 @@ function fetchLatestTWCR() {
 
         // -----------------------------------
         // TWCR FHIR IG網站有更新，自動下載最新版Value Set package
+        console.log("Downloading TWCR definitions.json.zip ...");
+        // https://stackoverflow.com/questions/11944932/how-to-download-a-file-with-node-js-without-using-third-party-libraries
+        const packageFile = fs.createWriteStream("../TWCR_ValueSets/definitions.json.zip");
+        const request = https.get(obj.definitionsDownloadLink, function (response) {
+          response.pipe(packageFile);
 
+          // after download completed close filestream
+          packageFile.on("finish", () => {
+            packageFile.close();
+            console.log("Download Completed");
+          });
+        });
         // -----------------------------------
       }
 
