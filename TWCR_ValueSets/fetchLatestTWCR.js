@@ -47,7 +47,7 @@ function fetchLatestTWCR() {
             console.log("Download Completed");
 
             // -----------------------------------
-            // Unzip Downloaded file
+            // Unzip Downloaded file Start
             // https://stackoverflow.com/questions/10308110/simplest-way-to-download-and-unzip-files-in-node-js-cross-platform
             'use strict';
             var path = require('path');
@@ -85,7 +85,11 @@ function fetchLatestTWCR() {
                 );
               });
             });
+            // Unzip Downloaded file End
             // -----------------------------------
+            setTimeout(() => {
+              console.log("定義檔更新成功，請將剛才上傳的資料重新POST一次\n以套用最新版的定義資訊!");
+            }, 3600);
           });
         });
         // -----------------------------------
