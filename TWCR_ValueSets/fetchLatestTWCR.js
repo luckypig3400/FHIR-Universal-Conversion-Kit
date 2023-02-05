@@ -8,7 +8,7 @@ function fetchLatestTWCR() {
   // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
 
   if (todayDate > obj.lastCheckDate) {
-    // 今天尚未檢查TWCR FHIR IG網站是否更新，開始執行檢查
+    console.log("今天尚未檢查TWCR FHIR IG網站是否更新，開始執行檢查...");
     var https = require("https");
     // https://stackoverflow.com/questions/6819143/curl-equivalent-in-node-js
     var options = obj.officalSite;
@@ -25,7 +25,7 @@ function fetchLatestTWCR() {
         // https://www.w3schools.com/jsref/jsref_localecompare.asp
 
         console.log("TWCR FHIR IG last-modified date: " + res.headers["last-modified"] +
-          "is newer than the local file check result: " + obj.officalSiteLastModified
+          " 新於本地檢查紀錄檔的日期:" + obj.officalSiteLastModified
         );
 
         obj.officalSiteLastModified = res.headers["last-modified"];
@@ -88,13 +88,15 @@ function fetchLatestTWCR() {
             // Unzip Downloaded file End
             // -----------------------------------
             setTimeout(() => {
-              console.log("定義檔更新成功，請將剛才上傳的資料重新POST一次\n以套用最新版的定義資訊!");
-            }, 3600);
+              console.log("定義檔更新成功，請重啟F.U.C.K並\n將剛才上傳的資料重新POST一次\n以套用最新版的定義資訊!");
+            }, 1500);
           });
         });
         // -----------------------------------
       }
-
+      else {
+        console.log("順利檢查TWCR FHIR IG package下載頁面，目前本地定義檔為最新版無須更新!");
+      }
     });
     req.on('error', function (e) {
       console.log('problem with request: ' + e.message);
