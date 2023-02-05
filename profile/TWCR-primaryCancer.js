@@ -1,5 +1,5 @@
 module.exports.profile = {
-  name: 'primaryCancerTWCR',
+  name: 'TWCR-primaryCancer',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload

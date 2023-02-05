@@ -1,5 +1,5 @@
 module.exports.profile = {
-  name: 'patientTWCR',
+  name: 'TWCR-patient',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
