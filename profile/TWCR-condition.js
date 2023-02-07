@@ -1,4 +1,5 @@
 const checkTWCR = require("../TWCR_ValueSets/fetchLatestTWCR.js");
+const tools = require("../TWCR_ValueSets/tools.js");
 // 檔案路徑要以FUCK核心所在的位置為基準
 
 module.exports.profile = {
@@ -7,7 +8,7 @@ module.exports.profile = {
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
 }
-
+let trID = "TimeRandomID";
 module.exports.globalResource = {
   // Should be resource name
   Condition: {
@@ -30,16 +31,16 @@ module.exports.fields = [
     source: 'id',
     target: 'Condition.id',
     beforeConvert: (data) => {
-      // 在首個轉換項目檢查TWCR的package是否有更新
-      checkTWCR();
-
-      return `conTWCR-${data}`
+      return `TWCR-Condition-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
   {
     source: 'ClassOfCase',
     target: 'Condition.category',
     beforeConvert: (data) => {
+      checkTWCR();
+      // 在首個轉換項目檢查TWCR的package是否有更新
+
       let category = data;
       category.coding = [category.coding];// 把coding按照FHIR Definition包成Array
 
