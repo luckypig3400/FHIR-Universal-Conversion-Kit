@@ -35,13 +35,26 @@ module.exports.fields = [
     }
   },
   {
-    source: 'ClassOfCase',
+    source: 'CLASS',
     target: 'Condition.category',
     beforeConvert: (data) => {
       checkTWCR();
       // 在首個轉換項目檢查TWCR的package是否有更新
 
-      let category = data;
+      let category = JSON.parse(`{
+        "coding":
+        {
+          "system": "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/class-of-case-codesystem",
+          "code": "codeValue",
+          "display": "displayValue"
+        }
+      }`);
+      // 此處的JSON String應避免帶有[]後續會比較好處理
+
+      category.coding.code = data;
+      category.coding.display = "申報醫院診斷，但未於申報醫院接受首次療程";
+      // diplay應抓取相對的ValueSet並從中找出code對應的顯示值
+
       category.coding = [category.coding];// 把coding按照FHIR Definition包成Array
 
       return category;
