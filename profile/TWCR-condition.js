@@ -57,8 +57,9 @@ module.exports.fields = [
       }`);
 
       category.coding[0].code = data;
-      category.coding[0].display = "申報醫院診斷，但未於申報醫院接受首次療程";
-      // diplay應抓取相對的ValueSet並從中找出code對應的顯示值
+
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-class-of-case-codesystem.json", data);
+      category.coding[0].display = displayValue;
 
       return category;
       // ClassOfCase是category中的一個Slice

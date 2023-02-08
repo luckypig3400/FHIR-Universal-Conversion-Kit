@@ -45,9 +45,27 @@ function makeid(length) {
   return result;
 }
 
-function genernateTimePlusRandomID(){
+function genernateTimePlusRandomID() {
   return getCurrentTimestamp() + "-" + makeid(6);
+}
+
+const fs = require('fs');
+function searchCodeSystemDisplayValue(jsonPath, codeValue) {
+  let codeSystem = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
+
+  let concepts = codeSystem.concept;
+  let result = "Error-Could_not_find_any_match_displayValue";
+
+  for (let i = 0; i < concepts.length; i++) {
+    if (String(concepts[i].code) == String(codeValue)) {
+      result = String(concepts[i].display);
+      break;
+    }
+  }
+
+  return result;
 }
 
 module.exports.getCurrentTimestamp = getCurrentTimestamp;
 module.exports.genernateTimePlusRandomID = genernateTimePlusRandomID;
+module.exports.searchCodeSystemDisplayValue = searchCodeSystemDisplayValue;
