@@ -82,8 +82,9 @@ module.exports.fields = [
       `);
 
       category.coding[0].code = data;
-      category.coding[0].display = "於申報醫院診斷";
-      // diplay應抓取相對的ValueSet並從中找出code對應的顯示值
+      
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-class-of-diangosis-status-codesystem.json", data);
+      category.coding[0].display = displayValue;
 
       return category;
       // ClassOfDiagnosisStatus是category中的一個Slice
@@ -106,8 +107,9 @@ module.exports.fields = [
       `);
 
       category.coding[0].code = data;
-      category.coding[0].display = "未於申報醫院接受任何治療即死亡";
-      // diplay應抓取相對的ValueSet並從中找出code對應的顯示值
+      
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-class-of-treatment-status-codesystem.json", data);
+      category.coding[0].display = displayValue;
 
       return category;
       // ClassOfTreatmentStatus是category中的一個Slice
@@ -130,8 +132,9 @@ module.exports.fields = [
       `);
 
       code.coding[0].code = data;
-      code.coding[0].display = "個案一生中第 1 個惡性腫瘤或原位癌";
-      // diplay應抓取相對的ValueSet並從中找出code對應的顯示值
+      
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-sequence-number-codesystem.json", data);
+      code.coding[0].display = displayValue;
 
       code.coding[0].code = parseInt(code.coding[0].code);
       if (code.coding[0].code < 10) {
@@ -180,8 +183,9 @@ module.exports.fields = [
       `);
 
       evidence.code[0].coding[0].code = data;
-      evidence.code[0].coding[0].display = "組織病理學確診(Positive histology)";
-      // diplay應抓取相對的ValueSet並從中找出code對應的顯示值
+      
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-diagnostic-confirmation-codesystem.json", data);
+      evidence.code[0].coding[0].display = displayValue;
 
       // https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-condition-profile.html
       return evidence;
