@@ -33,7 +33,7 @@ module.exports.fields = [
     source: 'id',
     target: 'Patient.id',
     beforeConvert: (data) => {
-      data = data.toString().replaceAll("*","-");
+      data = data.toString().replaceAll("*", "-");
       return `TWCR-Patient-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
@@ -41,6 +41,9 @@ module.exports.fields = [
     source: 'IDNUM', //idCardNumber.value
     target: 'Patient.identifier',
     beforeConvert: (data) => {
+      checkTWCR();
+      // 在首個轉換項目檢查TWCR的package是否有更新
+
       let identifier = JSON.parse(`
       {
         "type" : {
