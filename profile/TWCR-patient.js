@@ -1,15 +1,21 @@
+const checkTWCR = require("../TWCR_ValueSets/fetchLatestTWCR.js");
+const tools = require("../TWCR_ValueSets/tools.js");
+// 檔案路徑要以FUCK核心所在的位置為基準
+
 module.exports.profile = {
   name: 'TWCR-patient',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
 }
+// 此Profile的JSON結構資料參考自以下網頁:
+// https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-patient-profile.html
+// 此Profile的完整JSON範例檔:
+// https://mitw.dicom.org.tw/IG/TWCR_SF/Patient-PatientExample.json.html
 
 module.exports.globalResource = {
   // Should be resource name
   Patient: {
-    // 全域資料參考自以下網頁:
-    // https://mitw.dicom.org.tw/IG/TWCR_SF/Patient-PatientExample.json.html
     meta: {
       profile: [
         "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/patient-profile"
@@ -27,57 +33,74 @@ module.exports.fields = [
     source: 'id',
     target: 'Patient.id',
     beforeConvert: (data) => {
-      return `patTWCR-${data}`
+      data = data.toString().replaceAll("*","-");
+      return `TWCR-Patient-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
   {
-    source: 'idCardNumber',
+    source: 'IDNUM', //idCardNumber.value
     target: 'Patient.identifier',
     beforeConvert: (data) => {
-      let identifier = data;
-      identifier.type.coding = [identifier.type.coding];
+      let identifier = JSON.parse(`
+      {
+        "type" : {
+          "coding" : [
+            {
+              "system" : "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code" : "NI",
+              "display" : "National unique individual identifier"
+            }
+          ]
+        },
+        "system" : "http://www.moi.gov.tw/",
+        "value" : "123456789"
+      }
+      `);
+      identifier.value = data;
 
       return identifier;
     }
   },
   {
-    source: 'medicalRecord',
+    source: 'PHISTNUM', //medicalRecord.value
     target: 'Patient.identifier',
     beforeConvert: (data) => {
-      let identifier = data;
-      identifier.type.coding = [identifier.type.coding];
+      let identifier = JSON.parse(`
+      {
+        "type" : {
+          "coding" : [
+            {
+              "system" : "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code" : "MR",
+              "display" : "Medical record number"
+            }
+          ]
+        },
+        "system" : "https://www.vghtpe.gov.tw/Index.action",
+        "value" : "10216"
+      }
+      `);
+      identifier.value = data;
 
       return identifier;
     }
   },
   {
-    source: 'active',
-    target: 'Patient.active',
-    beforeConvert: (data) => {
-      // https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript
-      let booleanValue = (data.toString().toLowerCase() === "true");
-
-      return booleanValue;
-    }
-  },
-  {
-    source: 'name',
+    source: 'PATNAME', //name.text
     target: 'Patient.name',
-    /*
     beforeConvert: (data) => {
-      let name = data;
-      name.given = [name.given];
+      let name = JSON.parse(`
+      {
+        "text" : "Patient Name"
+      }
+      `);
+      name.text = data;
 
       return name;
     }
-    */
   },
   {
-    source: 'telecom',
-    target: 'Patient.telecom',
-  },
-  {
-    source: 'gender',
+    source: 'SEX',
     target: 'Patient.gender',
     beforeConvert: (data) => {
       if (data == "1")
@@ -89,57 +112,28 @@ module.exports.fields = [
     }
   },
   {
-    source: 'birthDate',
+    source: 'BIRTH', //birthDate
     target: 'Patient.birthDate',
+    beforeConvert: (data) => {
+      let YYYY = data[0] + data[1] + data[2] + data[3];
+      let MM = data[4] + data[5];
+      let DD = data[6] + data[7];
+
+      return `${YYYY}-${MM}-${DD}`;
+    }
   },
   {
-    source: 'address',
+    source: 'RESCODE', //address.postalCode
     target: 'Patient.address',
-  },
-  /*
-  {
-    source: 'maritalStatus',
-    target: 'Patient.maritalStatus',
     beforeConvert: (data) => {
-      let maritalStatus = data;
-      maritalStatus.coding = [maritalStatus.coding];
+      let address = JSON.parse(`
+      {
+        "postalCode" : "112"
+      }
+      `);
+      address.postalCode = data;
 
-      return maritalStatus;
+      return address;
     }
-  },
-  {
-    source: 'photo',
-    target: 'Patient.photo',
-  },
-  {
-    source: 'contact',
-    target: 'Patient.contact',
-    beforeConvert: (data) => {
-      let contact = data;
-      contact.relationship.coding = [contact.relationship.coding];
-
-      contact.relationship = [contact.relationship];
-
-      contact.name.given = [contact.name.given];
-
-      contact.telecom = [contact.telecom];
-
-      return contact;
-    }
-  },
-  {
-    source: 'communication',
-    target: 'Patient.communication',
-    beforeConvert: (data) => {
-      let communication = data;
-      communication.language.coding = [communication.language.coding];
-
-      return communication;
-    }
-  },
-  {
-    source: 'managingOrganization',
-    target: 'Patient.managingOrganization',
   }
-  */
 ]
