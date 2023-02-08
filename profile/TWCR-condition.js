@@ -132,9 +132,6 @@ module.exports.fields = [
       `);
 
       code.coding[0].code = data;
-      
-      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-sequence-number-codesystem.json", data);
-      code.coding[0].display = displayValue;
 
       code.coding[0].code = parseInt(code.coding[0].code);
       if (code.coding[0].code < 10) {
@@ -143,6 +140,9 @@ module.exports.fields = [
         // 按照 https://mitw.dicom.org.tw/IG/TWCR_SF/ValueSet-sequence-number-valueset.html
         // 的定義值，把code value進行轉換
       }
+
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-sequence-number-codesystem.json", String(code.coding[0].code));
+      code.coding[0].display = displayValue;
 
       return code;
     }
