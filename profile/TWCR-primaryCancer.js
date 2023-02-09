@@ -3,7 +3,7 @@ const tools = require("../TWCR_ValueSets/tools.js");
 // 檔案路徑要以FUCK核心所在的位置為基準
 
 module.exports.profile = {
-  name: 'TWCR-primaryCancer',
+  name: 'TWCR-PrimaryCancer',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
