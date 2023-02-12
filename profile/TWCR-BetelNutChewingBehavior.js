@@ -68,7 +68,10 @@ module.exports.fields = [
       `);
 
       return componentAmount;
-    },
+    }
+  },
+  {
+    source: 'BETELBE',
     target: 'Observation.component',
     beforeConvert: (data) => {
       let componentYear = JSON.parse(`
@@ -95,7 +98,10 @@ module.exports.fields = [
       `);
 
       return componentYear;
-    },
+    }
+  },
+  {
+    source: 'BETELBE',
     target: 'Observation.component',
     beforeConvert: (data) => {
       let componentQuit = JSON.parse(`
