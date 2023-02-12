@@ -62,6 +62,9 @@ module.exports.fields = [
         ]
       }
       `);
+      data = String(data).toUpperCase(); //其CodeSystem定義值均為大寫字母
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/ValueSet-grade-clinical-valueset.html
+
       valueCodeableConcept.coding[0].code = data;
       let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-grade-clinical-codesystem.json", data);
       valueCodeableConcept.coding[0].display = displayValue;
