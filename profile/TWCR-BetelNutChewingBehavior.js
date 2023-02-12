@@ -41,5 +41,87 @@ module.exports.fields = [
     // 詢問Lily 此profile binding的值集是否要另外設計(目前是用吸菸的CodeSystem)
 
     // 必須將BETELBE拆為三欄資料，否則無法順利轉換(除非可以關閉F.U.C.K自動在目標FHIR Resource加上[]的功能)
+    source: 'BETELBE',
+    target: 'Observation.component',
+    beforeConvert: (data) => {
+      let componentAmount = JSON.parse(`
+      {
+        "code" : {
+          "coding" : [
+            {
+              "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-behavior-codesystem",
+              "code" : "amount",
+              "display" : "每日嚼檳榔量，以 ”顆” 計算"
+            }
+          ]
+        },
+        "valueCodeableConcept" : {
+          "coding" : [
+            {
+              "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-amount-codesystem",
+              "code" : "00",
+              "display" : "無嚼檳榔"
+            }
+          ]
+        }
+      }
+      `);
+
+      return componentAmount;
+    },
+    target: 'Observation.component',
+    beforeConvert: (data) => {
+      let componentYear = JSON.parse(`
+      {
+        "code" : {
+          "coding" : [
+            {
+              "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-behavior-codesystem",
+              "code" : "year",
+              "display" : "嚼檳榔年"
+            }
+          ]
+        },
+        "valueCodeableConcept" : {
+          "coding" : [
+            {
+              "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-year-codesystem",
+              "code" : "00",
+              "display" : "無嚼檳榔"
+            }
+          ]
+        }
+      }
+      `);
+
+      return componentYear;
+    },
+    target: 'Observation.component',
+    beforeConvert: (data) => {
+      let componentQuit = JSON.parse(`
+      {
+        "code" : {
+          "coding" : [
+            {
+              "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-behavior-codesystem",
+              "code" : "quit",
+              "display" : "戒嚼檳榔年"
+            }
+          ]
+        },
+        "valueCodeableConcept" : {
+          "coding" : [
+            {
+              "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-quit-codesystem",
+              "code" : "88",
+              "display" : "無嚼檳榔"
+            }
+          ]
+        }
+      }
+      `);
+
+      return componentQuit;
+    }
   }
 ]
