@@ -18,12 +18,22 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/grade-clinical-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "registered", //registered | preliminary | final | amended +
+    code: {
+      coding: [
+        {
+          system: "http://loinc.org",
+          code: "75620-5",
+          display: "TNM clinical staging before treatment panel Cancer"
+        }
+      ]
     }
   }
 }
@@ -38,5 +48,25 @@ module.exports.fields = [
   },
   {
     // 臨床分級/分化	CISTCR31	valueCodeableConcept.coding[].code
+    source: 'CISTCR31',
+    target: 'Observation.valueCodeableConcept',
+    beforeConvert: (data) => {
+      let valueCodeableConcept = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/grade-clinical-codesystem",
+            "code" : "code",
+            "display" : "displayValue"
+          }
+        ]
+      }
+      `);
+      valueCodeableConcept.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-grade-clinical-codesystem.json", data);
+      valueCodeableConcept.coding[0].display = displayValue;
+
+      return valueCodeableConcept;
+    }
   }
 ]
