@@ -43,6 +43,9 @@ module.exports.fields = [
     // 最初診斷日期	DOID	onsetPeriod.start
     source: 'DOID',
     target: 'Condition.onsetPeriod',
+    target: 'Condition.id',
+    // 單一欄位可以放到相同FHIR Resoucre的不同Object
+    // 但仍找不到方法解決BetelNutChewingBehavior的放到同個Object多次
     beforeConvert: (data) => {
       let onsetPeriod = JSON.parse(`
       {
