@@ -19,12 +19,22 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/height-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "registered", //registered | preliminary | final | amended +
+    code: {
+      coding: [
+        {
+          system: "http://loinc.org",
+          code: "3137-7",
+          display: "Body height Measured"
+        }
+      ]
     }
   }
 }
@@ -40,5 +50,38 @@ module.exports.fields = [
   {
     // 身高	HEIGHT	valueCodeableConcept / valueQuantity
     // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
+    source: 'HEIGHT',
+    target: 'Observation.valueCodeableConcept',
+    target: 'Observation.valueQuantity',
+    beforeConvert: (data) => {
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-HeightExample.json.html
+      let valueQuantity = JSON.parse(`
+      {
+        "value" : 160,
+        "unit" : "cm",
+        "system" : "http://unitsofmeasure.org",
+        "code" : "cm"
+      }
+      `);
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-HeightExample-1.json.html
+      let valueCodeableConcept = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/height-codesystem",
+            "code" : "999",
+            "display" : "病歷未記載或不詳"
+          }
+        ]
+      }
+      `);
+
+      if (String(data) != "999") {
+        valueQuantity.value = parseInt(String(data));
+        return valueQuantity;
+      }
+      else
+        return valueCodeableConcept;
+    }
   }
 ]
