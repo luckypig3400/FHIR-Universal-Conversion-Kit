@@ -66,14 +66,6 @@ module.exports.fields = [
         }
       }
       `);
-
-      return componentAmount;
-    }
-  },
-  {
-    source: 'BETELBE',
-    target: 'Observation.component',
-    beforeConvert: (data) => {
       let componentYear = JSON.parse(`
       {
         "code" : {
@@ -96,14 +88,6 @@ module.exports.fields = [
         }
       }
       `);
-
-      return componentYear;
-    }
-  },
-  {
-    source: 'BETELBE',
-    target: 'Observation.component',
-    beforeConvert: (data) => {
       let componentQuit = JSON.parse(`
       {
         "code" : {
@@ -127,7 +111,8 @@ module.exports.fields = [
       }
       `);
 
-      return componentQuit;
+      return [componentAmount, componentYear, componentQuit];
+      // https://stackoverflow.com/questions/2917175/return-multiple-values-in-javascript
     }
   }
 ]
