@@ -18,12 +18,18 @@ module.exports.globalResource = {
   Encounter: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/encounter-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "finished", //planned | arrived | triaged | in-progress | onleave | finished | cancelled +
+    class: {
+      system: "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+      code: "AMB",
+      display: "ambulatory"
     }
   }
 }
@@ -38,5 +44,22 @@ module.exports.fields = [
   },
   {
     // 首次就診日期	DOFC	period.start
+    source: 'DOFC',
+    target: 'Encounter.period',
+    beforeConvert: (data) => {
+      let period = JSON.parse(`
+      {
+        "start" : "2019-02-12"
+      }
+      `);
+
+      let s = String(data);
+      let YYYY = s[0] + s[1] + s[2] + s[3];
+      let MM = s[4] + s[5];
+      let DD = s[6] + s[7];
+      period.start = `${YYYY}-${MM}-${DD}`;
+
+      return period;
+    }
   }
 ]
