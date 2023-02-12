@@ -18,12 +18,22 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/grade-pathological-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "registered", //registered | preliminary | final | amended +
+    code: {
+      coding: [
+        {
+          system: "http://loinc.org",
+          code: "75621-3",
+          display: "TNM pathologic staging after surgery panel Cancer"
+        }
+      ]
     }
   }
 }
@@ -38,5 +48,29 @@ module.exports.fields = [
   },
   {
     // 病理分級/分化	CISTCR31	valueCodeableConcept.coding[].code
+    // TWCR-GradeClinical已使用CISTCR31，此份profile疑似應使用CISTCR32的欄位資料
+    source: 'CISTCR32',
+    target: 'Observation.valueCodeableConcept',
+    beforeConvert: (data) => {
+      let valueCodeableConcept = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/grade-pathological-codesystem",
+            "code" : "code",
+            "display" : "displayValue"
+          }
+        ]
+      }
+      `);
+      data = String(data).toUpperCase(); //其CodeSystem定義值均為大寫字母
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/ValueSet-grade-pathological-valueset.html
+
+      valueCodeableConcept.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-grade-pathological-codesystem.json", data);
+      valueCodeableConcept.coding[0].display = displayValue;
+
+      return valueCodeableConcept;
+    }
   }
 ]
