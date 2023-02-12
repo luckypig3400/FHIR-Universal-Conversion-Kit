@@ -53,6 +53,9 @@ module.exports.fields = [
     source: 'HEIGHT',
     target: 'Observation.valueCodeableConcept',
     target: 'Observation.valueQuantity',
+
+    // 尋找方法嘗試能否經過beforeConvert的處理後再決定target(或是詢問Lorex)
+
     beforeConvert: (data) => {
       // https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-HeightExample.json.html
       let valueQuantity = JSON.parse(`
