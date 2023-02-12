@@ -39,5 +39,7 @@ module.exports.fields = [
   {
     // 嚼檳榔行為	BETELBE	valueCodeableConcept
     // 詢問Lily 此profile binding的值集是否要另外設計(目前是用吸菸的CodeSystem)
+
+    // 必須將BETELBE拆為三欄資料，否則無法順利轉換(除非可以關閉F.U.C.K自動在目標FHIR Resource加上[]的功能)
   }
 ]
