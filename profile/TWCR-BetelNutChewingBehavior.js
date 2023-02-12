@@ -18,7 +18,7 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/betel-nut-chewing-behavior-profile"
       ]
     },
     text: {

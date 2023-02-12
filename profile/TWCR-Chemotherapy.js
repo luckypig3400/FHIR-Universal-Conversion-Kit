@@ -18,7 +18,7 @@ module.exports.globalResource = {
   Procedure: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/chemotherapy-profile"
       ]
     },
     text: {
