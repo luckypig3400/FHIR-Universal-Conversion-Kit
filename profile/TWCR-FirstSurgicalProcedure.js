@@ -18,12 +18,16 @@ module.exports.globalResource = {
   Procedure: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/surgical-procedure-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "completed", //preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
 }
@@ -38,5 +42,15 @@ module.exports.fields = [
   },
   {
     // 首次手術日期	DOFSUG	performedDateTime
+    source: 'DOFSUG',
+    target: 'Procedure.performedDateTime',
+    beforeConvert: (data) => {
+      let s = String(data);
+      let YYYY = s[0] + s[1] + s[2] + s[3];
+      let MM = s[4] + s[5];
+      let DD = s[6] + s[7];
+
+      return `${YYYY}-${MM}-${DD}`;
+    }
   }
 ]
