@@ -24,6 +24,9 @@ module.exports.globalResource = {
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
 }
@@ -38,5 +41,22 @@ module.exports.fields = [
   },
   {
     // 最初診斷日期	DOID	onsetPeriod.start
+    source: 'DOID',
+    target: 'Condition.onsetPeriod',
+    beforeConvert: (data) => {
+      let onsetPeriod = JSON.parse(`
+      {
+        "start" : "2019-02-22"
+      }
+      `);
+
+      let s = String(data);
+      let YYYY = s[0] + s[1] + s[2] + s[3];
+      let MM = s[4] + s[5];
+      let DD = s[6] + s[7];
+      onsetPeriod.start = `${YYYY}-${MM}-${DD}`;
+
+      return onsetPeriod;
+    }
   }
 ]
