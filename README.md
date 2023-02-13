@@ -11,6 +11,7 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [x] 建立剩餘TWCR Profiles的空白F.U.C.K轉換templates
 - [ ] 註解meta profile以方便未來上傳FHIR Server的測試
 - [ ] 撰寫剩餘TWCR Profiles的F.U.C.K轉換templates
+- [ ] 更新遺忘在首個轉換項目檢查TWCR的package是否有更新的profiles
 
 ## Installation & Usage Overview
 ### 1. Make sure your system enviroment already meet the [Requirements](#requirements)
