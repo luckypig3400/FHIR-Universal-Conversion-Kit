@@ -28,6 +28,15 @@ module.exports.globalResource = {
   }
 }
 
+// Global Preprocessor Hook
+// Data will run the following function before we iterate each fields
+module.exports.beforeProcess = (data) => {
+  // Do something
+  console.log(data);
+  
+  return data
+}
+
 module.exports.fields = [
   {
     source: 'id',
