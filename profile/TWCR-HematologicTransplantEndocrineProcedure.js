@@ -18,12 +18,25 @@ module.exports.globalResource = {
   Procedure: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/hematologic-transplant-endocrine-procedure-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "completed", //preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown
+    category: {
+      coding: [
+        {
+          system: "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/procedure-code-codesystem",
+          code: "HematologicTransplantAndEndocrineProcedure",
+          display: "申報醫院骨髓/幹細胞移植或內分泌處置"
+        }
+      ]
+    },
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
 }
@@ -38,6 +51,45 @@ module.exports.fields = [
   },
   {
     // 申報醫院骨髓/幹細胞移植或內分泌處置	HTAEP	code
+    source: 'HTAEP',
+    target: 'Procedure.code',
+    beforeConvert: (data) => {
+      let code = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/hematologic-transplant-and-endocrine-procedure-codesystem",
+            "code" : "codeValue",
+            "display" : "displayValue"
+          }
+        ]
+      }
+      `);
+      code.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-hematologic-transplant-and-endocrine-procedure-codesystem.json", data);
+      code.coding[0].display = displayValue;
+
+      return code;
+    }
+  },
+  {
     // 申報醫院骨髓/幹細胞移植或內分泌處置開始日期	DHTEPS	performedPeriod.start
+    source: 'DHTEPS',
+    target: 'Procedure.performedPeriod',
+    beforeConvert: (data) => {
+      let performedPeriod = JSON.parse(`
+      {
+        "start" : "2020-03-06"
+      }
+      `);
+      let s = String(data);
+      let YYYY = s[0] + s[1] + s[2] + s[3];
+      let MM = s[4] + s[5];
+      let DD = s[6] + s[7];
+
+      performedPeriod.start = `${YYYY}-${MM}-${DD}`;
+
+      return performedPeriod;
+    }
   }
 ]
