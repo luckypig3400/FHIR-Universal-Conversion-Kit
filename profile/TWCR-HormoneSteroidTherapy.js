@@ -34,6 +34,9 @@ module.exports.globalResource = {
           display: "申報醫院荷爾蒙/類固醇治療"
         }
       ]
+    },
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
 }
