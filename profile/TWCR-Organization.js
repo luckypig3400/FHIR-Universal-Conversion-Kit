@@ -18,7 +18,7 @@ module.exports.globalResource = {
   Organization: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/organization-profile"
       ]
     },
     text: {
@@ -38,5 +38,31 @@ module.exports.fields = [
   },
   {
     // 申報醫院代碼	HOSCODE	identifier(identifier.value)
+    source: 'HOSCODE',
+    target: 'Organization.identifier',
+    // 此部分參考TWcore FHIR IG的台灣醫事機構範例
+    // https://twcore.mohw.gov.tw/ig/StructureDefinition-Organization-hosp-twcore.html
+    beforeConvert: (data) => {
+      let identifier = JSON.parse(`
+      {
+        "use" : "official",
+        "type" : {
+          "coding" : [
+            {
+              "system" : "https://twcore.mohw.gov.tw/tsfhir/CodeSystem/v2-0203",
+              "code" : "HOI"
+            }
+          ]
+        },
+        "system" : "https://twcore.mohw.gov.tw/tsfhir/CodeSystem/organization-identifier-tw",
+        "value" : "value"
+      }
+      `);
+      // https://twcore.mohw.gov.tw/ig/Organization-org-hosp-example.json.html
+
+      identifier.value = String(data);
+
+      return identifier;
+    }
   }
 ]
