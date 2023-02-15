@@ -39,6 +39,18 @@ module.exports.globalResource = {
   }
 }
 
+// Global Preprocessor Hook
+// Data will run the following function before we iterate each fields
+module.exports.beforeProcess = (data) => {
+  // HEIGHT *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
+  // 經過beforeProcess的處理後再決定target
+  data.HEIGHT_copy = String(data.HEIGHT);
+
+  // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
+  // console.log(data);
+  return data;
+}
+
 module.exports.fields = [
   {
     source: 'id',
@@ -52,20 +64,7 @@ module.exports.fields = [
     // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
     source: 'HEIGHT',
     target: 'Observation.valueCodeableConcept',
-    target: 'Observation.valueQuantity',
-
-    // 尋找方法嘗試能否經過beforeConvert的處理後再決定target(或是詢問Lorex)
-
     beforeConvert: (data) => {
-      // https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-HeightExample.json.html
-      let valueQuantity = JSON.parse(`
-      {
-        "value" : 160,
-        "unit" : "cm",
-        "system" : "http://unitsofmeasure.org",
-        "code" : "cm"
-      }
-      `);
       // https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-HeightExample-1.json.html
       let valueCodeableConcept = JSON.parse(`
       {
@@ -79,12 +78,35 @@ module.exports.fields = [
       }
       `);
 
-      if (String(data) != "999") {
+      if (parseInt(String(data)) <= 600) {
+        return null;
+      }
+      else
+        return valueCodeableConcept;
+    }
+  },
+  {
+    // 身高	HEIGHT	valueCodeableConcept / valueQuantity
+    // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
+    source: 'HEIGHT_copy',
+    target: 'Observation.valueQuantity',
+    beforeConvert: (data) => {
+      // https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-HeightExample.json.html
+      let valueQuantity = JSON.parse(`
+      {
+        "value" : 160,
+        "unit" : "cm",
+        "system" : "http://unitsofmeasure.org",
+        "code" : "cm"
+      }
+      `);
+
+      if (parseInt(String(data)) <= 600) {
         valueQuantity.value = parseInt(String(data));
         return valueQuantity;
       }
       else
-        return valueCodeableConcept;
+        return null;
     }
   }
 ]
