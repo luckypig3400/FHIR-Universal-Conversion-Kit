@@ -31,10 +31,16 @@ module.exports.globalResource = {
 // Global Preprocessor Hook
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
-  // Do something
-  console.log(data);
-  
-  return data
+  // 必須將BETELBE拆為三欄資料，否則無法順利轉換
+  // (因為F.U.C.K自動幫DataType為Array的目標FHIR Resource加上[])
+  data.BETELBE_amount = String(data.BETELBE).slice(0, 2);
+  data.BETELBE_year = String(data.BETELBE).slice(2, 4);
+  data.BETELBE_quit = String(data.BETELBE).slice(4, 6);
+
+  // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
+  // console.log(data);
+
+  return data;
 }
 
 module.exports.fields = [
@@ -48,9 +54,7 @@ module.exports.fields = [
   {
     // 嚼檳榔行為	BETELBE	valueCodeableConcept
     // 詢問Lily 此profile binding的值集是否要另外設計(目前是用吸菸的CodeSystem)
-
-    // 必須將BETELBE拆為三欄資料，否則無法順利轉換(除非可以關閉F.U.C.K自動在目標FHIR Resource加上[]的功能)
-    source: 'BETELBE',
+    source: 'BETELBE_amount',
     target: 'Observation.component',
     beforeConvert: (data) => {
       let componentAmount = JSON.parse(`
@@ -68,13 +72,24 @@ module.exports.fields = [
           "coding" : [
             {
               "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-amount-codesystem",
-              "code" : "00",
-              "display" : "無嚼檳榔"
+              "code" : "",
+              "display" : ""
             }
           ]
         }
       }
       `);
+      componentAmount.valueCodeableConcept.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-betel-nut-chewing-amount-codesystem.json", data);
+      componentAmount.valueCodeableConcept.coding[0].display = displayValue;
+
+      return componentAmount;
+    }
+  },
+  {
+    source: 'BETELBE_year',
+    target: 'Observation.component',
+    beforeConvert: (data) => {
       let componentYear = JSON.parse(`
       {
         "code" : {
@@ -90,13 +105,24 @@ module.exports.fields = [
           "coding" : [
             {
               "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-year-codesystem",
-              "code" : "00",
-              "display" : "無嚼檳榔"
+              "code" : "",
+              "display" : ""
             }
           ]
         }
       }
       `);
+      componentYear.valueCodeableConcept.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-betel-nut-chewing-year-codesystem.json", data);
+      componentYear.valueCodeableConcept.coding[0].display = displayValue;
+
+      return componentYear;
+    }
+  },
+  {
+    source: 'BETELBE_quit',
+    target: 'Observation.component',
+    beforeConvert: (data) => {
       let componentQuit = JSON.parse(`
       {
         "code" : {
@@ -112,16 +138,18 @@ module.exports.fields = [
           "coding" : [
             {
               "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/betel-nut-chewing-quit-codesystem",
-              "code" : "88",
-              "display" : "無嚼檳榔"
+              "code" : "",
+              "display" : ""
             }
           ]
         }
       }
       `);
+      componentQuit.valueCodeableConcept.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-betel-nut-chewing-quit-codesystem.json", data);
+      componentQuit.valueCodeableConcept.coding[0].display = displayValue;
 
-      return [componentAmount, componentYear, componentQuit];
-      // https://stackoverflow.com/questions/2917175/return-multiple-values-in-javascript
+      return componentQuit;
     }
   }
 ]
