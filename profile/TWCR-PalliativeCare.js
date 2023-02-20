@@ -9,7 +9,7 @@ module.exports.profile = {
   action: 'return', // return, upload
 }
 // 此Profile的JSON結構資料參考自以下網頁:
-// https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-chemotherapy-profile.html
+// https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-palliative-care-profile.html
 // 此Profile的完整JSON範例檔:
 // https://mitw.dicom.org.tw/IG/TWCR_SF/Procedure-PalliativeCareExample.json.html
 
@@ -18,12 +18,25 @@ module.exports.globalResource = {
   Procedure: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/palliative-care-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "completed", //preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown
+    category: {
+      coding: [
+        {
+          system: "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/procedure-code-codesystem",
+          code: "PalliativeCare",
+          display: "申報醫院緩和照護"
+        }
+      ]
+    },
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
 }
@@ -38,7 +51,25 @@ module.exports.fields = [
   },
   {
     // 申報醫院緩和照護	PCATF	code
-    
-    // 詢問Lily 申報醫院緩和照護值集CodeSystem疑似缺少code1、3、5
+    source: 'PCATF',
+    target: 'Procedure.code',
+    beforeConvert: (data) => {
+      let code = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/palliative-care-codesystem",
+            "code" : "code",
+            "display" : "display"
+          }
+        ]
+      }
+      `);
+      code.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-palliative-care-codesystem.json", data);
+      code.coding[0].display = displayValue;
+
+      return code;
+    }
   }
 ]
