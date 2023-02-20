@@ -21,8 +21,9 @@ function fetchLatestTWCR() {
       // 檢查網頁Header的文件最後更新日期
       var text1 = res.headers["last-modified"].toString();
       var text2 = obj.officalSiteLastModified.toString();
-      if (-1 == text1.localeCompare(text2)) {
+      if (0 != text1.localeCompare(text2)) {
         // https://www.w3schools.com/jsref/jsref_localecompare.asp
+        // The localeCompare() method returns sort order -1, 1, or 0 (for before, after, or equal).
 
         console.log("TWCR FHIR IG last-modified date: " + res.headers["last-modified"] +
           " 新於本地檢查紀錄檔的日期:" + obj.officalSiteLastModified
