@@ -11,6 +11,7 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [x] 建立剩餘TWCR Profiles的空白F.U.C.K轉換templates
 - [ ] 註解meta profile以方便未來上傳FHIR Server的測試
 - [ ] 撰寫剩餘TWCR Profiles的F.U.C.K轉換templates
+- [ ] 依照TWCR FHIR IG再度[檢查所有profile內的Subject是否為必填](https://hackmd.io/@LuckyPig/Lily_TWCR_IG_issuesList#%E3%80%90Genernal-Issues%E3%80%91)
 - [ ] 把檢查TWCR的package是否有更新的功能全部移至Use Global Preprocessor Hook內(beforeProcess)
 
 ## Installation & Usage Overview
