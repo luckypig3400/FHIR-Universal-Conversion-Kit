@@ -18,7 +18,7 @@ module.exports.globalResource = {
   Practitioner: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/practitioner-profile"
       ]
     },
     text: {
@@ -38,6 +38,18 @@ module.exports.fields = [
   },
   {
     // 摘錄者	CISTCR22	identifier(identifier.value)
-		// *北榮提供之 TCDB 無摘錄者資料
+    // *北榮提供之 TCDB 無摘錄者資料
+    source: 'CISTCR22',
+    target: 'Practitioner.identifier',
+    beforeConvert: (data) => {
+      let identifier = JSON.parse(`
+      {
+        "value" : "PractitionerIdentifierValue"
+      }
+      `);
+      identifier.value = data;
+
+      return identifier;
+    }
   }
 ]
