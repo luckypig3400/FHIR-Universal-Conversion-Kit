@@ -18,12 +18,16 @@ module.exports.globalResource = {
   Procedure: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/surgical-procedure-of-primary-site-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "completed", //preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
 }
@@ -38,7 +42,25 @@ module.exports.fields = [
   },
   {
     // 申報醫院原發部位手術方式	SPPSTF	code
+    source: 'SPPSTF',
+    target: 'Procedure.code',
+    beforeConvert: (data) => {
+      let code = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/surgical-procedure-of-primary-site-codesystem",
+            "code" : "code",
+            "display" : "display"
+          }
+        ]
+      }
+      `);
+      code.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-surgical-procedure-of-primary-site-codesystem.json", data);
+      code.coding[0].display = displayValue;
 
-    // 詢問Lily 申報醫院原發部位手術方式值集CodeSystem疑似缺少code98
+      return code;
+    }
   }
 ]
