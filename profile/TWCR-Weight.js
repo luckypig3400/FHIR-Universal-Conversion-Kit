@@ -19,14 +19,44 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "profileURL"
+        "https://mitw.dicom.org.tw/IG/TWCR/StructureDefinition/weight-profile"
       ]
     },
     text: {
       status: "empty",
       div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">目前為空值，可根據使用需求自行產生這筆資料的摘要資訊並填入此欄位</div>"
+    },
+    status: "registered", //registered | preliminary | final | amended +
+    code: {
+      coding: [
+        {
+          system: "http://loinc.org",
+          code: "29463-7",
+          display: "Body Weight"
+        }
+      ]
     }
   }
+}
+
+// Global Preprocessor Hook
+// Data will run the following function before we iterate each fields
+module.exports.beforeProcess = (data) => {
+  // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
+  // 經過beforeProcess的處理後再決定target
+
+  // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
+  // console.log(data);
+
+  if (parseInt(String(data.WEIGHT)) >= 600) {
+    // 體重超過600公斤不太可能發生，應該推論為code999或是其他code值
+    data.WEIGHT_valueCodeableConcept = String(data.WEIGHT);
+  } else {
+    // 記載的數據確實為體重，以valueQuantity儲存
+    data.WEIGHT_valueQuantity = String(data.WEIGHT);
+  }
+
+  return data;
 }
 
 module.exports.fields = [
@@ -40,5 +70,45 @@ module.exports.fields = [
   {
     // 體重	WEIGHT	valueCodeableConcept / valueQuantity
     // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
+    source: 'WEIGHT_valueCodeableConcept',
+    target: 'Observation.valueCodeableConcept',
+    beforeConvert: (data) => {
+      let valueCodeableConcept = JSON.parse(`
+      {
+        "coding" : [
+          {
+            "system" : "https://mitw.dicom.org.tw/IG/TWCR/CodeSystem/weight-codesystem",
+            "code" : "code",
+            "display" : "display"
+          }
+        ]
+      }
+      `);
+      valueCodeableConcept.coding[0].code = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-weight-codesystem.json", data);
+      valueCodeableConcept.coding[0].display = displayValue;
+
+      return valueCodeableConcept;
+    }
+  },
+  {
+    // 體重	WEIGHT	valueCodeableConcept / valueQuantity
+    // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
+    source: 'WEIGHT_valueQuantity',
+    target: 'Observation.valueQuantity',
+    beforeConvert: (data) => {
+      let valueQuantity = JSON.parse(`
+      {
+        "value" : 168,
+        "unit" : "kg",
+        "system" : "http://unitsofmeasure.org",
+        "code" : "kg"
+      }
+      `);
+
+      valueQuantity.value = parseInt(String(data));
+
+      return valueQuantity;
+    }
   }
 ]
