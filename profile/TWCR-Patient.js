@@ -28,6 +28,15 @@ module.exports.globalResource = {
   }
 }
 
+// Global Preprocessor Hook
+// Data will run the following function before we iterate each fields
+module.exports.beforeProcess = (data) => {
+  checkTWCR();
+  // 在開始轉換前檢查TWCR的package是否有更新
+
+  return data;
+}
+
 module.exports.fields = [
   {
     source: 'id',
@@ -41,9 +50,6 @@ module.exports.fields = [
     source: 'IDNUM', //idCardNumber.value
     target: 'Patient.identifier',
     beforeConvert: (data) => {
-      checkTWCR();
-      // 在首個轉換項目檢查TWCR的package是否有更新
-
       let identifier = JSON.parse(`
       {
         "type" : {

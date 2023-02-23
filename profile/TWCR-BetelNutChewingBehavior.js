@@ -31,6 +31,9 @@ module.exports.globalResource = {
 // Global Preprocessor Hook
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
+  checkTWCR();
+  // 在開始轉換前檢查TWCR的package是否有更新
+
   // 必須將BETELBE拆為三欄資料，否則無法順利轉換
   // (因為F.U.C.K自動幫DataType為Array的目標FHIR Resource加上[])
   data.BETELBE_amount = String(data.BETELBE).slice(0, 2);

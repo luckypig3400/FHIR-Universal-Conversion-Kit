@@ -31,6 +31,15 @@ module.exports.globalResource = {
   }
 }
 
+// Global Preprocessor Hook
+// Data will run the following function before we iterate each fields
+module.exports.beforeProcess = (data) => {
+  checkTWCR();
+  // 在開始轉換前檢查TWCR的package是否有更新
+
+  return data;
+}
+
 module.exports.fields = [
   {
     source: 'id',
@@ -43,9 +52,6 @@ module.exports.fields = [
     source: 'CLASS',
     target: 'Condition.category',
     beforeConvert: (data) => {
-      checkTWCR();
-      // 在首個轉換項目檢查TWCR的package是否有更新
-
       let category = JSON.parse(`{
         "coding":[
           {
@@ -82,7 +88,7 @@ module.exports.fields = [
       `);
 
       category.coding[0].code = data;
-      
+
       let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-class-of-diangosis-status-codesystem.json", data);
       category.coding[0].display = displayValue;
 
@@ -107,7 +113,7 @@ module.exports.fields = [
       `);
 
       category.coding[0].code = data;
-      
+
       let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-class-of-treatment-status-codesystem.json", data);
       category.coding[0].display = displayValue;
 
@@ -183,7 +189,7 @@ module.exports.fields = [
       `);
 
       evidence.code[0].coding[0].code = data;
-      
+
       let displayValue = tools.searchCodeSystemDisplayValue("../TWCR_ValueSets/definitionsJSON/CodeSystem-diagnostic-confirmation-codesystem.json", data);
       evidence.code[0].coding[0].display = displayValue;
 

@@ -35,10 +35,19 @@ module.exports.globalResource = {
         }
       ]
     },
-    subject : {
-      reference : "Patient/PatientExample"
+    subject: {
+      reference: "Patient/PatientExample"
     }
   }
+}
+
+// Global Preprocessor Hook
+// Data will run the following function before we iterate each fields
+module.exports.beforeProcess = (data) => {
+  checkTWCR();
+  // 在開始轉換前檢查TWCR的package是否有更新
+
+  return data;
 }
 
 module.exports.fields = [
@@ -55,9 +64,6 @@ module.exports.fields = [
     source: 'CHMTF',
     target: 'Procedure.code',
     beforeConvert: (data) => {
-      checkTWCR();
-      // 在首個轉換項目檢查TWCR的package是否有更新
-
       let code = JSON.parse(`
       {
         "coding" : [

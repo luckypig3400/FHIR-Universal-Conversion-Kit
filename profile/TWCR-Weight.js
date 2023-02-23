@@ -42,6 +42,9 @@ module.exports.globalResource = {
 // Global Preprocessor Hook
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
+  checkTWCR();
+  // 在開始轉換前檢查TWCR的package是否有更新
+
   // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
   // 經過beforeProcess的處理後再決定target
 
