@@ -1,12 +1,8 @@
 module.exports.profile = {
   name: 'procedureMS',
   version: '1.0.0',
-  // fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
-  // action: 'return', // return, upload
-  
-  // fhirServerBaseUrl: 'http://140.131.93.149:8080/fhir',
-  fhirServerBaseUrl: 'http://192.168.50.6:8082/fhir',
-  action: 'upload',
+  fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
+  action: 'return', // return, upload
 }
 
 module.exports.globalResource = {
