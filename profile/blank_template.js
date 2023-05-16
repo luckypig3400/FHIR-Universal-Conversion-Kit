@@ -3,7 +3,7 @@ const tools = require("../SugarValueSets/tools.js");
 // 檔案路徑要以FUCK核心所在的位置為基準
 
 module.exports.profile = {
-  name: 'DiagnosticReportLC',
+  name: 'blank_template',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
@@ -30,7 +30,7 @@ module.exports.globalResource = {
 
 // Global Preprocessor Hook, data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
-  checkSugar(); // 在開始轉換前檢查TWCR的package是否有更新
+  checkSugar(); // 在開始轉換前檢查非小細胞肺癌FHIR IG的package是否有更新
 
   // 在此可以對POST進來的原始資料進行處理!
 
@@ -42,7 +42,7 @@ module.exports.fields = [
     source: 'id',
     target: 'Condition.id',
     beforeConvert: (data) => {
-      return `TWCR-PrimaryCancer-${data}-${tools.getCurrentTimestamp()}`;
+      return `DiagnosticReportLC-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
 ]

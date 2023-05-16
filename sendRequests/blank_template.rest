@@ -1,0 +1,14 @@
+###
+
+POST http://localhost:1337
+Content-Type: application/json
+
+{
+  "profile": "blank_template",
+  "data": [
+    {
+      "id": "1",
+      "status": "preparation"
+    }
+  ]
+}
