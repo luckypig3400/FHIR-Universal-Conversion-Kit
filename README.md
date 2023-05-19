@@ -2,6 +2,23 @@
 
 FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that can convert albitary data to HL7 FHIR data. 
 
+## 非小細胞肺癌FHIR IG轉換profile
+### 難易度概覽
+#### Hard🔥
++ [DiagnosticReport LC](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-DiagnosticReport-LC.html)
++ [ImagingStudy](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-ImagingStudyBase.html)
++ [NASH DiagnosticReport](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-NASH-DiagnosticReport.html)
+
+#### Medium Complex
++ All of [Imageprofiles](https://mitw.dicom.org.tw/IG/NSCLC/Imageprofiles.html)
+
+#### Medium
++ Observation Profiles of [NASH profiles](https://mitw.dicom.org.tw/IG/NSCLC/NASHprofiles.html#observation)
++ Observation Profiles of [Lung profiles](https://mitw.dicom.org.tw/IG/NSCLC/Lungprofiles.html#observation)
++ [SpecimenLC](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-MitwSpecimen.html)
+
+### TODO List
+
 ## Installation & Usage Overview
 ### 1. Make sure your system enviroment already meet the [Requirements](#requirements)
 
