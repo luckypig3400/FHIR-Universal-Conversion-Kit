@@ -1,0 +1,734 @@
+POST http://localhost:1337
+Content-Type: application/json
+
+{
+  "profile": "conditionMS",
+  "data": [
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    },
+    {
+      "id": "",
+      "text": {
+        "status": "",
+        "div": ""
+      },
+      "clinicalStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "verificationStatus": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "category": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "severity": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "code": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "bodySite": {
+        "coding": {
+          "system": "",
+          "code": "",
+          "display": ""
+        },
+        "text": ""
+      },
+      "subject": {
+        "reference": ""
+      },
+      "onsetDateTime": "",
+      "abatementDateTime": "",
+      "asserter": {
+        "reference": ""
+      },
+      "note": {
+        "text": ""
+      }
+    }
+  ]
+}
