@@ -45,4 +45,13 @@ module.exports.fields = [
       return `DiagnosticReportLC-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
+  {
+    source: 'clinicalStatus',
+    target: 'Condition.clinicalStatus',
+    beforeConvert: (data) => {
+      // active | recurrence | relapse | inactive | remission | resolved | unknown
+      if (data == "") return null;
+      return data;
+    }
+  }
 ]
