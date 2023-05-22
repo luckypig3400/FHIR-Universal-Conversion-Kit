@@ -66,6 +66,61 @@ function searchCodeSystemDisplayValue(jsonPath, codeValue) {
   return result;
 }
 
+//const fs = require('fs');
+function searchCodeSystemCodeValue(jsonPath, codeValue) {
+  let codeSystem = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
+
+  let concepts = codeSystem.concept;
+  let result = "Error-Could_not_find_any_match_displayValue";
+
+  for (let i = 0; i < concepts.length; i++) {
+    if (String(concepts[i].display) == String(codeValue)) {
+      result = String(concepts[i].code);
+      break;
+    }
+  }
+
+  return result;
+}
+
+//const fs = require('fs');
+function searchValueSetCodeValue(jsonPath, codeValue) {
+  let ValueSet = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
+
+  let concepts = ValueSet.compose.include[0].concept;
+  let result = "Error-Could_not_find_any_match_displayValue";
+
+  for (let i = 0; i < concepts.length; i++) {
+    if (String(concepts[i].code) == String(codeValue)) {
+      result = String(concepts[i].display);
+      break;
+    }
+  }
+
+  return result;
+}
+
+//const fs = require('fs');
+function searchValueSetDisplayValue(jsonPath, codeValue) {
+  let ValueSet = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
+
+  let concepts = ValueSet.compose.include[0].concept;
+  let result = "Error-Could_not_find_any_match_displayValue";
+
+  for (let i = 0; i < concepts.length; i++) {
+    if (String(concepts[i].display) == String(codeValue)) {
+      result = String(concepts[i].code);
+      break;
+    }
+  }
+
+  return result;
+}
+
+
 module.exports.getCurrentTimestamp = getCurrentTimestamp;
 module.exports.genernateTimePlusRandomID = genernateTimePlusRandomID;
 module.exports.searchCodeSystemDisplayValue = searchCodeSystemDisplayValue;
+module.exports.searchCodeSystemCodeValue = searchCodeSystemCodeValue;
+module.exports.searchValueSetCodeValue = searchValueSetCodeValue;
+module.exports.searchValueSetDisplayValue = searchValueSetDisplayValue;

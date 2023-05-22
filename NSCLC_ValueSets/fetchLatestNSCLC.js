@@ -1,14 +1,14 @@
 const fs = require('fs');
 // https://stackoverflow.com/questions/10011011/using-node-js-how-do-i-read-a-json-file-into-server-memory
-var obj = JSON.parse(fs.readFileSync('../SugarValueSets/sugar-fhir-ig_info.json', 'utf-8'));
+var obj = JSON.parse(fs.readFileSync('../NSCLC_ValueSets/NSCLC_info.json', 'utf-8'));
 // 檔案路徑要以FUCK核心所在的位置為基準
 
-function fetchLatestSugar() {
+function fetchLatestNSCLC() {
   var todayDate = new Date().toISOString().slice(0, 10);
   // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
 
   if (todayDate > obj.lastCheckDate) {
-    console.log("今天尚未檢查 非小細胞肺癌FHIR IG網站是否更新，開始執行檢查...");
+    console.log("今天尚未檢查NSCLC FHIR IG網站是否更新，開始執行檢查...");
     var https = require("https");
     // https://stackoverflow.com/questions/6819143/curl-equivalent-in-node-js
     var options = obj.officalSite;
@@ -25,20 +25,20 @@ function fetchLatestSugar() {
         // https://www.w3schools.com/jsref/jsref_localecompare.asp
         // The localeCompare() method returns sort order -1, 1, or 0 (for before, after, or equal).
 
-        console.log("非小細胞肺癌FHIR IG last-modified date: " + res.headers["last-modified"] +
-          " 最新於本地檢查紀錄檔的日期:" + obj.officalSiteLastModified
+        console.log("NSCLC FHIR IG last-modified date: " + res.headers["last-modified"] +
+          " 新於本地檢查紀錄檔的日期:" + obj.officalSiteLastModified
         );
 
         obj.officalSiteLastModified = res.headers["last-modified"];
         // 回存網頁最後更新日期
-        fs.writeFileSync('../SugarValueSets/sugar-fhir-ig_info.json', JSON.stringify(obj));
+        fs.writeFileSync('../NSCLC_ValueSets/NSCLC_info.json', JSON.stringify(obj));
         // 將檢查紀錄寫回json文件
 
         // -----------------------------------
-        // 非小細胞肺癌FHIR IG網站有更新，自動下載最新版Value Set package
-        console.log("Downloading 非小細胞肺癌definitions.json.zip ...");
+        // NSCLC FHIR IG網站有更新，自動下載最新版Value Set package
+        console.log("Downloading NSCLC definitions.json.zip ...");
         // https://stackoverflow.com/questions/11944932/how-to-download-a-file-with-node-js-without-using-third-party-libraries
-        const packageFile = fs.createWriteStream("../SugarValueSets/definitions.json.zip");
+        const packageFile = fs.createWriteStream("../NSCLC_ValueSets/definitions.json.zip");
         const request = https.get(obj.definitionsDownloadLink, function (response) {
           response.pipe(packageFile);
 
@@ -55,15 +55,15 @@ function fetchLatestSugar() {
             var StreamZip = require('../src/node_modules/node-stream-zip/node_stream_zip');
 
             var zip = new StreamZip({
-              file: "../SugarValueSets/definitions.json.zip"
+              file: "../NSCLC_ValueSets/definitions.json.zip"
               , storeEntries: true
             });
 
             zip.on('error', function (err) { console.error('[ERROR]', err); });
 
             zip.on('entry', function (entry) {
-              var pathname = path.resolve('../SugarValueSets/definitionsJSON', entry.name);
-              if (/\.\./.test(path.relative('../SugarValueSets/definitionsJSON', pathname))) {
+              var pathname = path.resolve('../NSCLC_ValueSets/definitionsJSON', entry.name);
+              if (/\.\./.test(path.relative('../NSCLC_ValueSets/definitionsJSON', pathname))) {
                 console.warn("[zip warn]: ignoring maliciously crafted paths in zip file:", entry.name);
                 return;
               }
@@ -96,7 +96,7 @@ function fetchLatestSugar() {
         // -----------------------------------
       }
       else {
-        console.log("順利檢查非小細胞肺癌FHIR IG package下載頁面，目前本地定義檔為最新版無須更新!");
+        console.log("順利檢查NSCLC FHIR IG package下載頁面，目前本地定義檔為最新版無須更新!");
       }
     });
     req.on('error', function (e) {
@@ -110,9 +110,9 @@ function fetchLatestSugar() {
     // -----------------------------------
     obj.lastCheckDate = todayDate;
     // 回存最後的檢查日期
-    fs.writeFileSync('../SugarValueSets/sugar-fhir-ig_info.json', JSON.stringify(obj));
+    fs.writeFileSync('../NSCLC_ValueSets/NSCLC_info.json', JSON.stringify(obj));
     // 將檢查紀錄寫回json文件
   }
 }
 
-module.exports = fetchLatestSugar;
+module.exports = fetchLatestNSCLC;
