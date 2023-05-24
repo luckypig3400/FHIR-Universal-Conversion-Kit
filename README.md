@@ -2,23 +2,37 @@
 
 FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that can convert albitary data to HL7 FHIR data. 
 
-## 非小細胞肺癌FHIR IG轉換profile
-### 難易度概覽
-#### Hard🔥
-+ [DiagnosticReport LC](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-DiagnosticReport-LC.html)
-+ [ImagingStudy](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-ImagingStudyBase.html)
-+ [NASH DiagnosticReport](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-NASH-DiagnosticReport.html)
-
-#### Medium Complex
-+ All of [Imageprofiles](https://mitw.dicom.org.tw/IG/NSCLC/Imageprofiles.html)
-
-#### Medium
-+ Observation Profiles of [NASH profiles](https://mitw.dicom.org.tw/IG/NSCLC/NASHprofiles.html#observation)
-+ Observation Profiles of [Lung profiles](https://mitw.dicom.org.tw/IG/NSCLC/Lungprofiles.html#observation)
-+ [SpecimenLC](https://mitw.dicom.org.tw/IG/NSCLC/StructureDefinition-MitwSpecimen.html)
-
 ### TODO List
 - [ ] [NASH profiles](https://mitw.dicom.org.tw/IG/NSCLC/NASHprofiles.html)頁面的 NAS Hprofiles可能為 NASH profiles
+- [ ] 產生10筆仿照子芸學姊提供的原始資料格式之假資料
+
+## 非小細胞肺癌FHIR IG轉換profile資料欄位映射
+### Data columns mapping Table for [Lung profiles](https://mitw.dicom.org.tw/IG/NSCLC/Lungprofiles.html#observation)
+
+😸 基本上子芸學姊的欄位取名都一樣，但是因為變數名稱不能有空格，所以學姊全都把空格拿掉了 👧
+
+
+| 主要映射Profile(是欄位也是Profile名稱) | 其餘欄位                                                                                                                                                                  | 備註                                        |
+|:-------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Histologictype                         |                                                                                                                                                                           | 縮空格                                      |
+| Histologic pattern                     |                                                                                                                                                                           |                                             |
+| Cell type                              | Mitosis                                                                                                                                                                   | 縮空格、Mitosis轉到Celltype                 |
+| Total tumor size                       | Tumor size, Tumor bed size, Total tuamor size (cm)                                                                                                                        |                                             |
+| Size of invasive focus                 | Size of viable invasive focus, Estimated viable invasive tumor size, Size of invasive focus (cm)                                                                          | 縮空格、Size of invasive focus (cm)括號拿掉 |
+| Tumor differentiation                  | Tumor grading (WHO 2021), Tumor grading                                                                                                                                   | Tumor grading (WHO 2021)括號拿掉            |
+| Angiolymphatic invasion                |                                                                                                                                                                           | 縮空格                                      |
+| Perineural invasion                    |                                                                                                                                                                           | 縮空格                                      |
+| Spread Through Air Spaces (STAS)       |                                                                                                                                                                           | STAS                                        |
+| Tumornecrosis                          |                                                                                                                                                                           | 縮空格                                      |
+| Pleural invasion                       |                                                                                                                                                                           | 縮空格                                      |
+| Non-tumorous parenchyma                |                                                                                                                                                                           |                                             |
+| Pathological staging                   |                                                                                                                                                                           |                                             |
+| T category                             | T category<br>(based on the size of invasive focus), T category<br>(based on the size of viable invasive focus), T category<br>(based on viable invasive tumor size only) | 縮空格、拿括號                              |
+| Anicllary studies                      | Ancillary study, Immunohistochemical study, EBV, ISH, Immunohistochemical stains, Immunnohistochemical stain, Others                                                      |                                             |
+| Treatment effect in primary tumor      | Treatment effect in lymph node metastases, TreatmentEffect                                                                                                                |                                             |
+| M category                             |                                                                                                                                                                           |                                             |
+| Lymph nodes                            | Lymph node                                                                                                                                                                |                                             |
+| Resection margin                       | Bronchus cut end, Cut end, Staple cut end                                                                                                                                 |                                             |
 
 ## Installation & Usage Overview
 ### 1. Make sure your system enviroment already meet the [Requirements](#requirements)
