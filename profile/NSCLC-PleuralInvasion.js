@@ -1,4 +1,4 @@
-const checkLUNG = require("../NSCLC-ValueSets/fetchLatestNSCLC.js");
+const checkLUNG = require("../NSCLC_ValueSets/fetchLatestNSCLC.js");
 const tools = require("../NSCLC_ValueSets/tools.js");
 // 檔案路徑要以FUCK核心所在的位置為基準
 
