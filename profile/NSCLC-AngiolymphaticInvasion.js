@@ -51,17 +51,17 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.AngiolymphaticInvasion == "present" | "+" | "(+)")
+  if (data.Angiolymphaticinvasion == "present" | "+" | "(+)")
   {
-      data.AngiolymphaticInvasion = "1";
+      data.Angiolymphaticinvasion = "1";
   }
-  else if (data.AngiolymphaticInvasion == "absent" | "-" | "(-)")
+  else if (data.Angiolymphaticinvasion == "absent" | "-" | "(-)")
   {
-      data.AngiolymphaticInvasion = "0";
+      data.Angiolymphaticinvasion = "0";
   }
-  else if (data.AngiolymphaticInvasion != null)
+  else if (data.Angiolymphaticinvasion != null)
   {
-      data.AngiolymphaticInvasion = "8";
+      data.Angiolymphaticinvasion = "8";
   }
   return data;
 }
