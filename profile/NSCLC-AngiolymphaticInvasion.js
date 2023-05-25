@@ -90,9 +90,9 @@ module.exports.fields = [
       }
       `);
 
-      let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
-      valueCodeableConcept.coding[0].code = codevalue;
-      valueCodeableConcept.coding[0].display = data;
+      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
+      valueCodeableConcept.coding[0].code = data;
+      valueCodeableConcept.coding[0].display = displayValue;
 
       return valueCodeableConcept;
     }
