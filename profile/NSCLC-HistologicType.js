@@ -51,13 +51,13 @@ module.exports.globalResource = {
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
   checkLUNG();
-  // 在開始轉換前檢查TWCR的package是否有更新
-
-  // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
-  // 經過beforeProcess的處理後再決定target
+  // 在開始轉換前檢查NSCLC的package是否有更新
 
   // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
   // console.log(data);
+
+  let Histologictype_oringinal = data.Histologictype.charAt(0).toUpperCase() + data.Histologictype.slice(1);
+  // 備份傳入的原始Histologictype值，同時將首個字母轉為大寫
 
   data.Histologictype = data.Histologictype.toString().toUpperCase();
   // 將所有字元轉大寫再比較，或許更能避免資料中大小寫差異造成資料轉換時被忽略的窘境
@@ -95,9 +95,11 @@ module.exports.beforeProcess = (data) => {
   else if (data.Histologictype == "Non-small cell carcinoma admixed with round cell sarcomatoid area") {
     data.Histologictype = "Squamous cell carcinoma, sarcomatoid";
   }
+  else{// 都不符合上方特殊結果，將全被轉換為大寫字母的資料回復為原始資料
+    data.Histologictype = Histologictype_oringinal;
+  }
 
   return data;
-
 }
 
 module.exports.fields = [
