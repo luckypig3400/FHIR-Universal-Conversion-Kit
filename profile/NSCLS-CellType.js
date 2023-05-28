@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -72,16 +72,16 @@ module.exports.fields = [
     source: 'Cell type',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   },
   {
     source: 'Mitosis',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   }
 ]

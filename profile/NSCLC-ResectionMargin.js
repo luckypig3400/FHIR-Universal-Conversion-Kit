@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -66,32 +66,32 @@ module.exports.fields = [
     source: 'Resection margin',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   },
   {
     source: 'Bronchus cut end',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   },
   {
     source: 'Cut end',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   },
   {
     source: 'Staple cut end',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   }
 ]

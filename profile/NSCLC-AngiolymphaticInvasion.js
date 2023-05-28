@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,17 +51,14 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.Angiolymphaticinvasion == "present" | "+" | "(+)")
-  {
-      data.Angiolymphaticinvasion = "1";
+  if (data.Angiolymphaticinvasion == "present" | "+" | "(+)") {
+    data.Angiolymphaticinvasion = "1";
   }
-  else if (data.Angiolymphaticinvasion == "absent" | "-" | "(-)")
-  {
-      data.Angiolymphaticinvasion = "0";
+  else if (data.Angiolymphaticinvasion == "absent" | "-" | "(-)") {
+    data.Angiolymphaticinvasion = "0";
   }
-  else if (data.Angiolymphaticinvasion != null)
-  {
-      data.Angiolymphaticinvasion = "8";
+  else if (data.Angiolymphaticinvasion != null) {
+    data.Angiolymphaticinvasion = "8";
   }
   return data;
 }

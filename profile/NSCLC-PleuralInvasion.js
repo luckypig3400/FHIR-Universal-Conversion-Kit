@@ -28,14 +28,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -46,8 +46,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -62,17 +62,14 @@ module.exports.beforeProcess = (data) => {
 
   // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
   // console.log(data);
-  if (data.Pleuralinvasion == "present" | "+" | "(+)")
-  {
-      data.Pleuralinvasion = "1";
+  if (data.Pleuralinvasion == "present" | "+" | "(+)") {
+    data.Pleuralinvasion = "1";
   }
-  else if (data.Pleuralinvasion == "absent" | "-" | "(-)")
-  {
-      data.Pleuralinvasion = "0";
+  else if (data.Pleuralinvasion == "absent" | "-" | "(-)") {
+    data.Pleuralinvasion = "0";
   }
-  else if (data.Pleuralinvasion != null)
-  {
-      data.Pleuralinvasion = "8"
+  else if (data.Pleuralinvasion != null) {
+    data.Pleuralinvasion = "8"
   }
   return data;
 }

@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -57,17 +57,14 @@ module.exports.beforeProcess = (data) => {
 
   // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
   // console.log(data);
-  if (data.Tumornecrosis == "present" | "+" | "(+)")
-  {
-      data.Tumornecrosis = "1";
+  if (data.Tumornecrosis == "present" | "+" | "(+)") {
+    data.Tumornecrosis = "1";
   }
-  else if (data.Tumornecrosis == "absent" | "-" | "(-)")
-  {
-      data.Tumornecrosis = "0";
+  else if (data.Tumornecrosis == "absent" | "-" | "(-)") {
+    data.Tumornecrosis = "0";
   }
-  else if (data.Tumornecrosis != null)
-  {
-      data.Tumornecrosis = "8";
+  else if (data.Tumornecrosis != null) {
+    data.Tumornecrosis = "8";
   }
   return data;
 }
