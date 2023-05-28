@@ -59,36 +59,37 @@ module.exports.beforeProcess = (data) => {
   // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
   // console.log(data);
 
-  data = data.Histologictype.charAt(0).toUpperCase() + data.slice(1)
+  data.Histologictype = data.Histologictype.toString().toUpperCase();
+  // 將所有字元轉大寫再比較，或許更能避免資料中大小寫差異造成資料轉換時被忽略的窘境
 
-  if (data.Histologictype == "Minimally invasive adenocarcinoma") {
-    data.Histologictype = "Minimally invasive adenocarcinoma,non-mucinous";
+  if (data.Histologictype == "Minimally invasive adenocarcinoma".toUpperCase()) {
+    data.Histologictype = "Minimally invasive adenocarcinoma, non-mucinous";
   }
-  else if (data.Histologictype == "Adenocarcinoma acinar predominant") {
+  else if (data.Histologictype == "Adenocarcinoma acinar predominant".toUpperCase()) {
     data.Histologictype = "Acinar adenocarcinoma";
   }
-  else if (data.Histologictype == "Adenocarcinoma micropapillary predominant") {
+  else if (data.Histologictype == "Adenocarcinoma micropapillary predominant".toUpperCase()) {
     data.Histologictype = "Micropapillary adenocarcinoma";
   }
-  else if (data.Histologictype == "Adenocarcinoma solid predominant") {
+  else if (data.Histologictype == "Adenocarcinoma solid predominant".toUpperCase()) {
     data.Histologictype = "Solid adenocarcinoma";
   }
-  else if (data.Histologictype == "Adenocarcinoma papillary predominant") {
+  else if (data.Histologictype == "Adenocarcinoma papillary predominant".toUpperCase()) {
     data.Histologictype = "Papillary adenocarcinoma, NOS";
   }
-  else if (data.Histologictype == "Adenocarcinoma lepidic predominant") {
+  else if (data.Histologictype == "Adenocarcinoma lepidic predominant".toUpperCase()) {
     data.Histologictype = "Lepidic adenocarcinoma";
   }
-  else if (data.Histologictype == "Squamous cell carcinoma non-keratinizing") {
+  else if (data.Histologictype == "Squamous cell carcinoma non-keratinizing".toUpperCase()) {
     data.Histologictype = "Squamous cell carcinoma, nonkeratinizing, NOS";
   }
-  else if (data.Histologictype == "Squamous cell carcinoma keratinizing") {
+  else if (data.Histologictype == "Squamous cell carcinoma keratinizing".toUpperCase()) {
     data.Histologictype = "Squamous cell carcinoma, keratinizing, NOS"
   }
-  else if (data.Histologictype == "Adenocarcinoma in situ") {
+  else if (data.Histologictype == "Adenocarcinoma in situ".toUpperCase()) {
     data.Histologictype = "Adenocarcinoma in situ, NOS";
   }
-  else if (data.Histologictype == "Invasive mucinous adenocarcinoma") {
+  else if (data.Histologictype == "Invasive mucinous adenocarcinoma".toUpperCase()) {
     data.Histologictype = "Mucinous adenocarcinoma";
   }
   else if (data.Histologictype == "Non-small cell carcinoma admixed with round cell sarcomatoid area") {
@@ -123,7 +124,8 @@ module.exports.fields = [
       }
       `);
 
-      let codevalue = tools.searchValueSetDisplayValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
+      // let codevalue = tools.searchValueSetDisplayValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
+      let codevalue = "Error";
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
