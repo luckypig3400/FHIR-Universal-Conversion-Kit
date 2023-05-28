@@ -88,7 +88,7 @@ module.exports.fields = [
       }
       `);
       valueCodeableConcept.coding[0].code = data;
-      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitionsJSON/CodeSystem-NSCLC-Invasion.json", data);
+      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
       valueCodeableConcept.coding[0].display = displayValue;
 
       return valueCodeableConcept;
