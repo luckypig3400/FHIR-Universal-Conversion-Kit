@@ -4,7 +4,10 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 
 ### TODO List
 - [ ] [NASH profiles](https://mitw.dicom.org.tw/IG/NSCLC/NASHprofiles.html)頁面的 NAS Hprofiles可能為 NASH profiles
-- [ ] 產生10筆仿照子芸學姊提供的原始資料格式之假資料
+- [x] ~~產生10筆仿照子芸學姊提供的原始資料格式之假資料~~ (為保護個資，測試資料採用Postman傳送)
+- [ ] 驗證目前已有的Profiles轉換出的資料格式正確性
+- [ ] 校驗目前已有的Profiles轉換出的資料於Code、Display部分是否存在Error
+- [ ] 補完其餘Lung Profiles(撰寫初版並和 :smile_cat:子芸學姊討論)
 
 ## 非小細胞肺癌FHIR IG轉換profile資料欄位映射
 ### Data columns mapping Table for [Lung profiles](https://mitw.dicom.org.tw/IG/NSCLC/Lungprofiles.html#observation)
