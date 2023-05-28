@@ -9,6 +9,9 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [ ] 校驗目前已有的Profiles轉換出的資料於Code、Display部分是否存在Error
 - [ ] 補完其餘Lung Profiles(撰寫初版並和 :smile_cat:子芸學姊討論)
 
+### Issues List
++ NSCLC-HistologicType Profile中所查詢的`ValueSet-ICD-O-3-Morphology.json`似乎沒有定義值集
+
 ## 非小細胞肺癌FHIR IG轉換profile資料欄位映射
 ### Data columns mapping Table for [Lung profiles](https://mitw.dicom.org.tw/IG/NSCLC/Lungprofiles.html#observation)
 
