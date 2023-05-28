@@ -63,7 +63,7 @@ module.exports.fields = [
     }
   },
   {
-    source: 'Non-tumorous parenchyma',
+    source: 'Nontumorousparenchyma',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
       valueString = data;
