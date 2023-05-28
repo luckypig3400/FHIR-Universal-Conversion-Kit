@@ -54,7 +54,7 @@ function searchCodeSystemDisplayValue(jsonPath, codeValue) {
   let codeSystem = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
 
   let concepts = codeSystem.concept;
-  let result = "Error-Could_not_find_any_match_displayValue";
+  let result = "Error-Could_not_find_any_match_displayValue_in_CodeSystem";
 
   for (let i = 0; i < concepts.length; i++) {
     if (String(concepts[i].code) == String(codeValue)) {
@@ -66,15 +66,15 @@ function searchCodeSystemDisplayValue(jsonPath, codeValue) {
   return result;
 }
 
-//const fs = require('fs');
-function searchCodeSystemCodeValue(jsonPath, codeValue) {
+function searchCodeSystemCodeValue(jsonPath, displayValue) {
+  // 已知display值，用其來搜尋於CodeSystem內對應的code Value
   let codeSystem = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
 
   let concepts = codeSystem.concept;
-  let result = "Error-Could_not_find_any_match_displayValue";
+  let result = "Error-Could_not_find_any_match_codeValue_in_CodeSystem";
 
   for (let i = 0; i < concepts.length; i++) {
-    if (String(concepts[i].display) == String(codeValue)) {
+    if (String(concepts[i].display) == String(displayValue)) {
       result = String(concepts[i].code);
       break;
     }
@@ -83,16 +83,16 @@ function searchCodeSystemCodeValue(jsonPath, codeValue) {
   return result;
 }
 
-//const fs = require('fs');
-function searchValueSetCodeValue(jsonPath, codeValue) {
+function searchValueSetDisplayValue(jsonPath, codeValue) {
+  // 已知code值，用其來搜尋於ValueSet內對應的display Value
   let ValueSet = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
 
   let concepts = ValueSet.compose.include[0].concept;
-  let result = "Error-Could_not_find_any_match_displayValue";
+  let result = "Error-Could_not_find_any_match_displayValue_in_ValueSet";
 
   for (let i = 0; i < concepts.length; i++) {
     if (String(concepts[i].code) == String(codeValue)) {
-      result = String(concepts[i].display);
+      result = String(concepts[i].diplay);
       break;
     }
   }
@@ -100,15 +100,15 @@ function searchValueSetCodeValue(jsonPath, codeValue) {
   return result;
 }
 
-//const fs = require('fs');
-function searchValueSetDisplayValue(jsonPath, codeValue) {
+function searchValueSetCodeValue(jsonPath, displayValue) {
+  // 已知display值，用其來搜尋於ValueSet內對應的code Value
   let ValueSet = JSON.parse(fs.readFileSync(jsonPath.toString(), 'utf-8'));
 
   let concepts = ValueSet.compose.include[0].concept;
-  let result = "Error-Could_not_find_any_match_displayValue";
+  let result = "Error-Could_not_find_any_match_codeValue_in_ValueSet";
 
   for (let i = 0; i < concepts.length; i++) {
-    if (String(concepts[i].display) == String(codeValue)) {
+    if (String(concepts[i].display) == String(displayValue)) {
       result = String(concepts[i].code);
       break;
     }
