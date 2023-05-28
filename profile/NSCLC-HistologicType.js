@@ -124,8 +124,8 @@ module.exports.fields = [
       }
       `);
 
-      // let codevalue = tools.searchValueSetDisplayValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
-      let codevalue = "Error";
+      let codevalue = tools.searchValueSetCodeValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
+      // 此份profile，已知display值，以其值搜索ValueSet中對應的code value
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
