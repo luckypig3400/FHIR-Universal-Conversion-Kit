@@ -12,6 +12,7 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 ### Issues List
 + ~~NSCLC-HistologicType Profile中所查詢的`ValueSet-ICD-O-3-Morphology.json`似乎沒有定義值集~~(已解決，因為FHIR IG上的定義值集JSON包尚未更新至最新版)
 + ~~子芸學姊的FHIR IG官網上提供的[definitions.json.zip](https://mitw.dicom.org.tw/IG/NSCLC/downloads.html)似乎還沒更新到最新版~~(子芸學姊回復目前尚未更新到網站上)
++ Error NSCLC-HistologicType ValueSet 找不到對應的值(Keep中的筆記有詳細描述)
 + NSCLC-PleuralInvasion的valueCoadableConcept，在資料轉換上似乎少了[Pleural-Invasion的資料](https://mitw.dicom.org.tw/IG/NSCLC/Observation-Pleuralinvasion.json.html)("code" : "PL0")
 
 ## 非小細胞肺癌FHIR IG轉換profile資料欄位映射
