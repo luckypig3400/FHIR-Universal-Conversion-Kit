@@ -5,13 +5,14 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 ### TODO List
 - [ ] [NASH profiles](https://mitw.dicom.org.tw/IG/NSCLC/NASHprofiles.html)頁面的 NAS Hprofiles可能為 NASH profiles
 - [x] ~~產生10筆仿照子芸學姊提供的原始資料格式之假資料~~ (為保護個資，測試資料採用Postman傳送)
-- [ ] 驗證目前已有的Profiles能夠正常被F.U.C.K執行(從NSCLC-PerineuralInvasion開始)
+- [ ] 驗證目前已有的Profiles能夠正常被F.U.C.K執行(從NSCLC-ResectionMargin開始)
 - [ ] 校驗目前已有的Profiles轉換出的資料於Code、Display部分是否存在Error
 - [ ] 補完其餘Lung Profiles(撰寫初版並和 :smile_cat:子芸學姊討論)
 
 ### Issues List
 + NSCLC-HistologicType Profile中所查詢的`ValueSet-ICD-O-3-Morphology.json`似乎沒有定義值集
 + 子芸學姊的FHIR IG官網上提供的[definitions.json.zip](https://mitw.dicom.org.tw/IG/NSCLC/downloads.html)似乎還沒更新到最新版
++ NSCLC-PleuralInvasion的valueCoadableConcept，在資料轉換上似乎少了[Pleural-Invasion的資料](https://mitw.dicom.org.tw/IG/NSCLC/Observation-Pleuralinvasion.json.html)("code" : "PL0")
 
 ## 非小細胞肺癌FHIR IG轉換profile資料欄位映射
 ### Data columns mapping Table for [Lung profiles](https://mitw.dicom.org.tw/IG/NSCLC/Lungprofiles.html#observation)
