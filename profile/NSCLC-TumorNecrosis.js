@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -52,36 +52,29 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
 
-  if (data.Tumornecrosis.indexOf("present") != -1)
-  {
-      data.Tumornecrosis = "1";
-  }
-  else if (data.Tumornecrosis.indexOf("+") != -1)
-  {
+  if (data.Tumornecrosis.indexOf("present") != -1) {
     data.Tumornecrosis = "1";
   }
-  else if (data.Tumornecrosis.indexOf("(+)") != -1)
-  {
+  else if (data.Tumornecrosis.indexOf("+") != -1) {
     data.Tumornecrosis = "1";
   }
-  else if (data.Tumornecrosis.indexOf("absent") != -1)
-  {
-      data.Tumornecrosis = "0";
+  else if (data.Tumornecrosis.indexOf("(+)") != -1) {
+    data.Tumornecrosis = "1";
   }
-  else if (data.Tumornecrosis.indexOf("-") != -1)
-  {
-      data.Tumornecrosis = "0";
+  else if (data.Tumornecrosis.indexOf("absent") != -1) {
+    data.Tumornecrosis = "0";
   }
-  else if (data.Tumornecrosis.indexOf("(-)") != -1)
-  {
-      data.Tumornecrosis = "0";
+  else if (data.Tumornecrosis.indexOf("-") != -1) {
+    data.Tumornecrosis = "0";
   }
-  else if (data.Tumornecrosis != null)
-  {
-      data.Tumornecrosis = "8";
+  else if (data.Tumornecrosis.indexOf("(-)") != -1) {
+    data.Tumornecrosis = "0";
+  }
+  else if (data.Tumornecrosis != null) {
+    data.Tumornecrosis = "8";
   }
   return data;
-  
+
 }
 
 module.exports.fields = [

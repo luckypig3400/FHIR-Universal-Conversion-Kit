@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,22 +51,18 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.Immunohistochemicalstudy != "")
-    {
-      data.Ancillarystudy = data.Immunohistochemicalstudy;
-    }
-  if (data.Immunohistochemicalstains != "")
-    {
-      data.Ancillarystudy = data.Immunohistochemicalstains;
-    }
-  if (data.Others != "")
-    {
-      data.Ancillarystudy = data.Others;
-    }
-  if (data.EBVISH != "")
-    {
-      data.Ancillarystudy = data.EBVISH;
-    }
+  if (data.Immunohistochemicalstudy != "") {
+    data.Ancillarystudy = data.Immunohistochemicalstudy;
+  }
+  if (data.Immunohistochemicalstains != "") {
+    data.Ancillarystudy = data.Immunohistochemicalstains;
+  }
+  if (data.Others != "") {
+    data.Ancillarystudy = data.Others;
+  }
+  if (data.EBVISH != "") {
+    data.Ancillarystudy = data.EBVISH;
+  }
 
   return data;
 }
@@ -83,9 +79,9 @@ module.exports.fields = [
     source: 'Ancillarystudy',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   }
 
 ]

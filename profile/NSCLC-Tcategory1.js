@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -52,69 +52,53 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
 
 
-if (data.Tcategorybasedonthesizeofinvasivefocus != "")
-  {
+  if (data.Tcategorybasedonthesizeofinvasivefocus != "") {
     data.Tcategory = data.Tcategorybasedonthesizeofinvasivefocus;
   }
-if (data.Tcategorybasedonthesizeofviableinvasivefocus != "")
-  {
+  if (data.Tcategorybasedonthesizeofviableinvasivefocus != "") {
     data.Tcategory = data.Tcategorybasedonthesizeofviableinvasivefocus;
   }
-if (data.Tcategorybasedonviableinvasivetumorsizeonly != "")
-  {
+  if (data.Tcategorybasedonviableinvasivetumorsizeonly != "") {
     data.Tcategory = data.Tcategorybasedonviableinvasivetumorsizeonly;
   }
 
-  if (data.Tcategory.includes("pTX"))
-  {
+  if (data.Tcategory.includes("pTX")) {
     data.Tcategory = "pTX";
   }
-  else if (data.Tcategory.includes("pT0"))
-  {
+  else if (data.Tcategory.includes("pT0")) {
     data.Tcategory = "pT0";
   }
-  else if (data.Tcategory.includes("pTis"))
-  {
+  else if (data.Tcategory.includes("pTis")) {
     data.Tcategory = "pTis";
   }
-  else if (data.Tcategory.includes("pT1mi"))
-  {
+  else if (data.Tcategory.includes("pT1mi")) {
     data.Tcategory = "pT1mi";
   }
-  else if (data.Tcategory.includes("pT1a"))
-  {
+  else if (data.Tcategory.includes("pT1a")) {
     data.Tcategory = "pT1a";
   }
-  else if (data.Tcategory.includes("pT1b"))
-  {
+  else if (data.Tcategory.includes("pT1b")) {
     data.Tcategory = "pT1b";
   }
-  else if (data.Tcategory.includes("pT1c"))
-  {
+  else if (data.Tcategory.includes("pT1c")) {
     data.Tcategory = "pT1c";
   }
-  else if (data.Tcategory.includes("pT1"))
-  {
+  else if (data.Tcategory.includes("pT1")) {
     data.Tcategory = "pT1";
   }
-  else if (data.Tcategory.includes("pT2a"))
-  {
+  else if (data.Tcategory.includes("pT2a")) {
     data.Tcategory = "pT2a";
   }
-  else if (data.Tcategory.includes("pT2b"))
-  {
+  else if (data.Tcategory.includes("pT2b")) {
     data.Tcategory = "pT2b";
   }
-  else if (data.Tcategory.includes("pT2"))
-  {
+  else if (data.Tcategory.includes("pT2")) {
     data.Tcategory = "pT2";
   }
-  else if (data.Tcategory.includes("pT3"))
-  {
+  else if (data.Tcategory.includes("pT3")) {
     data.Tcategory = "pT3";
   }
-  else if (data.Tcategory.includes("pT4"))
-  {
+  else if (data.Tcategory.includes("pT4")) {
     data.Tcategory = "pT4";
   }
 
@@ -148,10 +132,10 @@ module.exports.fields = [
       }
       `);
 
-    let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", data);
-    valueCodeableConcept.coding[0].code = codevalue;
-    valueCodeableConcept.coding[0].display = data;
-      
+      let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", data);
+      valueCodeableConcept.coding[0].code = codevalue;
+      valueCodeableConcept.coding[0].display = data;
+
 
       return valueCodeableConcept;
     }

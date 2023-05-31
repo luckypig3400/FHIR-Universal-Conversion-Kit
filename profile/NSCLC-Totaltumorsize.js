@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,20 +51,17 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.Tumorsize != "")
-    {
-      data.Totaltumorsize = data.Tumorsize;
-    }
-  if (data.Tumorbedsize != "")
-    {
-      data.Totaltumorsize = data.Tumorbedsize;
-    }
-  if (data.Totaltumorsizecm != "")
-    {
-      data.Totaltumorsize = data.Totaltumorsizecm;
-    }
-  
-    
+  if (data.Tumorsize != "") {
+    data.Totaltumorsize = data.Tumorsize;
+  }
+  if (data.Tumorbedsize != "") {
+    data.Totaltumorsize = data.Tumorbedsize;
+  }
+  if (data.Totaltumorsizecm != "") {
+    data.Totaltumorsize = data.Totaltumorsizecm;
+  }
+
+
   return data;
 }
 
@@ -80,9 +77,9 @@ module.exports.fields = [
     source: 'Totaltumorsize',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   }
 
 ]

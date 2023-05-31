@@ -24,14 +24,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -42,8 +42,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,51 +51,40 @@ module.exports.globalResource = {
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
   checkLUNG();
- 
+
   data.Histologictype = data.Histologictype.charAt(0).toUpperCase() + data.Histologictype.slice(1)
 
-  if (data.Histologictype == "Minimally invasive adenocarcinoma")
-  {
-      data.Histologictype = "Minimally invasive adenocarcinoma, non-mucinous";
+  if (data.Histologictype == "Minimally invasive adenocarcinoma") {
+    data.Histologictype = "Minimally invasive adenocarcinoma, non-mucinous";
   }
- if (data.Histologictype == "Adenocarcinoma acinar predominant")
-  {
+  if (data.Histologictype == "Adenocarcinoma acinar predominant") {
     data.Histologictype = "Acinar adenocarcinoma";
   }
-  if (data.Histologictype == "Adenocarcinoma micropapillary predominant")
-  {
+  if (data.Histologictype == "Adenocarcinoma micropapillary predominant") {
     data.Histologictype = "Micropapillary adenocarcinoma";
   }
-  if (data.Histologictype == "Adenocarcinoma solid predominant")
-  {
+  if (data.Histologictype == "Adenocarcinoma solid predominant") {
     data.Histologictype = "Solid adenocarcinoma";
   }
-  if (data.Histologictype == "Adenocarcinoma papillary predominant")
-  {
+  if (data.Histologictype == "Adenocarcinoma papillary predominant") {
     data.Histologictype = "Papillary adenocarcinoma, NOS";
   }
-  if (data.Histologictype == "Adenocarcinoma lepidic predominant")
-  {
+  if (data.Histologictype == "Adenocarcinoma lepidic predominant") {
     data.Histologictype = "Lepidic adenocarcinoma";
   }
-  if (data.Histologictype == "Squamous cell carcinoma non-keratinizing")
-  {
+  if (data.Histologictype == "Squamous cell carcinoma non-keratinizing") {
     data.Histologictype = "Squamous cell carcinoma, nonkeratinizing, NOS";
   }
-  if (data.Histologictype == "Squamous cell carcinoma keratinizing")
-  {
+  if (data.Histologictype == "Squamous cell carcinoma keratinizing") {
     data.Histologictype = "Squamous cell carcinoma, keratinizing, NOS"
   }
-  if (data.Histologictype == "Adenocarcinoma in situ")
-  {
+  if (data.Histologictype == "Adenocarcinoma in situ") {
     data.Histologictype = "Adenocarcinoma in situ, NOS";
   }
-  if (data.Histologictype == "Invasive mucinous adenocarcinoma")
-  {
+  if (data.Histologictype == "Invasive mucinous adenocarcinoma") {
     data.Histologictype = "Mucinous adenocarcinoma";
   }
-  if (data.Histologictype == "Non-small cell carcinoma admixed with round cell sarcomatoid area")
-  {
+  if (data.Histologictype == "Non-small cell carcinoma admixed with round cell sarcomatoid area") {
     data.Histologictype = "Squamous cell carcinoma, sarcomatoid";
   }
 
@@ -126,7 +115,7 @@ module.exports.fields = [
         ]
       }
       `);
-      
+
       let codevalue = tools.searchValueSetDisplayValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;

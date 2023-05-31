@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,12 +51,11 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
-  
 
-  if (data.Mitosis != "")
-    {
-      data.Celltype = data.Mitosis;
-    }
+
+  if (data.Mitosis != "") {
+    data.Celltype = data.Mitosis;
+  }
 
   return data;
 
@@ -74,8 +73,8 @@ module.exports.fields = [
     source: 'Celltype',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-        valueString = data;
-        return valueString;
-      }
+      valueString = data;
+      return valueString;
+    }
   }
 ]

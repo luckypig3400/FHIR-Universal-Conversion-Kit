@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -50,7 +50,7 @@ module.exports.globalResource = {
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
   checkLUNG();
-    
+
   return data;
 }
 
@@ -98,34 +98,29 @@ module.exports.fields = [
       }
       `);
 
-      if (data.indexOf("lepidic") != -1)
-      {
+      if (data.indexOf("lepidic") != -1) {
         valueCodeableConcept.coding[0].code = "lepidic";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json","lepidic");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json", "lepidic");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      if (data.indexOf("acinar") != -1)
-      {
+      if (data.indexOf("acinar") != -1) {
         valueCodeableConcept.coding[1].code = "acinar";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json","acinar");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json", "acinar");
         valueCodeableConcept.coding[1].display = displayvalue;
       }
-      if (data.indexOf("papillary") != -1)
-      {
+      if (data.indexOf("papillary") != -1) {
         valueCodeableConcept.coding[2].code = "papillary";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json","papillary");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json", "papillary");
         valueCodeableConcept.coding[2].display = displayvalue;
       }
-      if (data.indexOf("micropapillary") != -1)
-      {
+      if (data.indexOf("micropapillary") != -1) {
         valueCodeableConcept.coding[3].code = "micropapillary";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json","micropapillary");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json", "micropapillary");
         valueCodeableConcept.coding[3].display = displayvalue;
       }
-      if (data.indexOf("solid") != -1)
-      {
+      if (data.indexOf("solid") != -1) {
         valueCodeableConcept.coding[4].code = "solid";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json","solid");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Histologic-pattern.json", "solid");
         valueCodeableConcept.coding[4].display = displayvalue;
       }
 

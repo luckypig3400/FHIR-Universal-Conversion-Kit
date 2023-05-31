@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -52,15 +52,13 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
 
 
-  if (data.TumorgradingWHO2021 != "")
-    {
-      data.Tumordifferentiation = data.TumorgradingWHO2021;
-    }
-  if (data.Tumorgrading != "")
-    {
-      data.Tumordifferentiation = data.Tumorgrading;
-    }
-    
+  if (data.TumorgradingWHO2021 != "") {
+    data.Tumordifferentiation = data.TumorgradingWHO2021;
+  }
+  if (data.Tumorgrading != "") {
+    data.Tumordifferentiation = data.Tumorgrading;
+  }
+
   return data;
 }
 
@@ -88,42 +86,36 @@ module.exports.fields = [
       }
       `);
 
-      if (data.toLowerCase().indexOf("well differentiated") != -1)
-        {
-          valueCodeableConcept.coding[0].code = "G1";
-          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G1");
-          valueCodeableConcept.coding[0].display = displayValue;
-        }
-      if (data.toLowerCase().indexOf("moderately differentiated") != -1)
-        {
-          valueCodeableConcept.coding[0].code = "G2";
-          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G2");
-          valueCodeableConcept.coding[0].display = displayValue;
-        }
-      if (data.toLowerCase().indexOf("poorly differentiated") != -1)
-        {
-          valueCodeableConcept.coding[0].code = "G3";
-          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G3");
-          valueCodeableConcept.coding[0].display = displayValue;
-        }
-      if (data.toLowerCase().indexOf("undifferentiated") != -1)
-        {
-          valueCodeableConcept.coding[0].code = "G4";
-          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G4");
-          valueCodeableConcept.coding[0].display = displayValue;
-        }
-      if (data.toLowerCase().indexOf("cannot be assessed") != -1)
-        {
-          valueCodeableConcept.coding[0].code = "GX";
-          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "GX");
-          valueCodeableConcept.coding[0].display = displayValue;
-        }
-      if (data.toLowerCase().indexOf("not applicable") != -1)
-        {
-          valueCodeableConcept.coding[0].code = "GN";
-          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "GN");
-          valueCodeableConcept.coding[0].display = displayValue;
-        }
+      if (data.toLowerCase().indexOf("well differentiated") != -1) {
+        valueCodeableConcept.coding[0].code = "G1";
+        let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G1");
+        valueCodeableConcept.coding[0].display = displayValue;
+      }
+      if (data.toLowerCase().indexOf("moderately differentiated") != -1) {
+        valueCodeableConcept.coding[0].code = "G2";
+        let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G2");
+        valueCodeableConcept.coding[0].display = displayValue;
+      }
+      if (data.toLowerCase().indexOf("poorly differentiated") != -1) {
+        valueCodeableConcept.coding[0].code = "G3";
+        let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G3");
+        valueCodeableConcept.coding[0].display = displayValue;
+      }
+      if (data.toLowerCase().indexOf("undifferentiated") != -1) {
+        valueCodeableConcept.coding[0].code = "G4";
+        let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "G4");
+        valueCodeableConcept.coding[0].display = displayValue;
+      }
+      if (data.toLowerCase().indexOf("cannot be assessed") != -1) {
+        valueCodeableConcept.coding[0].code = "GX";
+        let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "GX");
+        valueCodeableConcept.coding[0].display = displayValue;
+      }
+      if (data.toLowerCase().indexOf("not applicable") != -1) {
+        valueCodeableConcept.coding[0].code = "GN";
+        let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Grading.json", "GN");
+        valueCodeableConcept.coding[0].display = displayValue;
+      }
 
       return valueCodeableConcept;
     }

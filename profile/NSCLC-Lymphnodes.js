@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,11 +51,10 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.Lymphnodes != "")
-    {
-      data.Lymphnode = data.Lymphnodes;
-    }
-    
+  if (data.Lymphnodes != "") {
+    data.Lymphnode = data.Lymphnodes;
+  }
+
   return data;
 }
 
@@ -84,46 +83,39 @@ module.exports.fields = [
       }
       `);
 
-      if (data.includes("NX"))
-      {
+      if (data.includes("NX")) {
         valueCodeableConcept.coding[0].code = "NX";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","NX");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "NX");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      else if (data.includes("N0"))
-      {
+      else if (data.includes("N0")) {
         valueCodeableConcept.coding[0].code = "N0";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","N0");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "N0");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      else if (data.includes("N1"))
-      {
+      else if (data.includes("N1")) {
         valueCodeableConcept.coding[0].code = "N1";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","N1");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "N1");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      else if (data.includes("N2"))
-      {
+      else if (data.includes("N2")) {
         valueCodeableConcept.coding[0].code = "N2";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","N2");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "N2");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      else if (data.includes("N3"))
-      {
+      else if (data.includes("N3")) {
         valueCodeableConcept.coding[0].code = "N3";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","N3");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "N3");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      else if (data.includes("not present"))
-      {
+      else if (data.includes("not present")) {
         valueCodeableConcept.coding[0].code = "N0";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","N0");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "N0");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
-      else if (data.includes("all without metastatic tumor"))
-      {
+      else if (data.includes("all without metastatic tumor")) {
         valueCodeableConcept.coding[0].code = "N0";
-        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json","N0");
+        let displayvalue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pN.json", "N0");
         valueCodeableConcept.coding[0].display = displayvalue;
       }
       valueCodeableConcept.text = data;

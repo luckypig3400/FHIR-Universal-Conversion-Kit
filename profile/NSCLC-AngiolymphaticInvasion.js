@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,35 +51,28 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.Angiolymphaticinvasion.indexOf("present") != -1)
-  {
-      data.Angiolymphaticinvasion = "1";
-  }
-  else if (data.Angiolymphaticinvasion.indexOf("+") != -1)
-  {
+  if (data.Angiolymphaticinvasion.indexOf("present") != -1) {
     data.Angiolymphaticinvasion = "1";
   }
-  else if (data.Angiolymphaticinvasion.indexOf("(+)") != -1)
-  {
+  else if (data.Angiolymphaticinvasion.indexOf("+") != -1) {
     data.Angiolymphaticinvasion = "1";
   }
-  else if (data.Angiolymphaticinvasion.indexOf("absent") != -1)
-  {
-      data.Angiolymphaticinvasion = "0";
+  else if (data.Angiolymphaticinvasion.indexOf("(+)") != -1) {
+    data.Angiolymphaticinvasion = "1";
   }
-  else if (data.Angiolymphaticinvasion.indexOf("-") != -1)
-  {
-      data.Angiolymphaticinvasion = "0";
+  else if (data.Angiolymphaticinvasion.indexOf("absent") != -1) {
+    data.Angiolymphaticinvasion = "0";
   }
-  else if (data.Angiolymphaticinvasion.indexOf("(-)") != -1)
-  {
-      data.Angiolymphaticinvasion = "0";
+  else if (data.Angiolymphaticinvasion.indexOf("-") != -1) {
+    data.Angiolymphaticinvasion = "0";
   }
-  else if (data.Angiolymphaticinvasion != null)
-  {
-      data.Angiolymphaticinvasion = "8";
+  else if (data.Angiolymphaticinvasion.indexOf("(-)") != -1) {
+    data.Angiolymphaticinvasion = "0";
   }
-  
+  else if (data.Angiolymphaticinvasion != null) {
+    data.Angiolymphaticinvasion = "8";
+  }
+
   return data;
 }
 
@@ -110,7 +103,7 @@ module.exports.fields = [
       valueCodeableConcept.coding[0].code = data;
       let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
       valueCodeableConcept.coding[0].display = displayValue;
-    
+
       return valueCodeableConcept;
     }
   }

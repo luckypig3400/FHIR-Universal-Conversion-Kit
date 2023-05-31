@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -52,19 +52,16 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
 
 
-if (data.Tcategorybasedonthesizeofinvasivefocus != "")
-  {
+  if (data.Tcategorybasedonthesizeofinvasivefocus != "") {
     data.Tcategory = data.Tcategorybasedonthesizeofinvasivefocus;
   }
-if (data.Tcategorybasedonthesizeofviableinvasivefocus != "")
-  {
+  if (data.Tcategorybasedonthesizeofviableinvasivefocus != "") {
     data.Tcategory = data.Tcategorybasedonthesizeofviableinvasivefocus;
   }
-if (data.Tcategorybasedonviableinvasivetumorsizeonly != "")
-  {
+  if (data.Tcategorybasedonviableinvasivetumorsizeonly != "") {
     data.Tcategory = data.Tcategorybasedonviableinvasivetumorsizeonly;
   }
-    
+
   return data;
 }
 
@@ -92,80 +89,67 @@ module.exports.fields = [
       }
       `);
 
-      if (data.includes("pTX"))
-      {
+      if (data.includes("pTX")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pTX");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pTX";
       }
-      else if (data.includes("pT0"))
-      {
+      else if (data.includes("pT0")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT0");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT0";
       }
-      else if (data.includes("pTis"))
-      {
+      else if (data.includes("pTis")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pTis");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pTis";
       }
-      else if (data.includes("pT1mi"))
-      {
+      else if (data.includes("pT1mi")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT1mi");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT1mi";
       }
-      else if (data.includes("pT1a"))
-      {
+      else if (data.includes("pT1a")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT1a");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT1a";
       }
-      else if (data.includes("pT1b"))
-      {
+      else if (data.includes("pT1b")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT1b");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT1b";
       }
-      else if (data.includes("pT1c"))
-      {
+      else if (data.includes("pT1c")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT1c");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT1c";
       }
-      else if (data.includes("pT1"))
-      {
+      else if (data.includes("pT1")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT1");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT1";
       }
-      else if (data.includes("pT2a"))
-      {
+      else if (data.includes("pT2a")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT2a");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT2a";
       }
-      else if (data.includes("pT2b"))
-      {
+      else if (data.includes("pT2b")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT2b");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT2b";
       }
-      else if (data.includes("pT2"))
-      {
+      else if (data.includes("pT2")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT2");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT2";
       }
-      else if (data.includes("pT3"))
-      {
+      else if (data.includes("pT3")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT3");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT3";
       }
-      else if (data.includes("pT4"))
-      {
+      else if (data.includes("pT4")) {
         let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pT.json", "pT4");
         valueCodeableConcept.coding[0].code = codevalue;
         valueCodeableConcept.coding[0].display = "pT4";

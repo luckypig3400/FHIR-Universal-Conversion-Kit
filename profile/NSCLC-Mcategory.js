@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-        coding: [
-          {
-            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-            code: "laboratory",
-            display: "Laboratory"
-          }
-        ]
-      },
+      coding: [
+        {
+          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          code: "laboratory",
+          display: "Laboratory"
+        }
+      ]
+    },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-        reference: "Patient/MitwPatient"
-      }
+      reference: "Patient/MitwPatient"
+    }
   }
 }
 
@@ -51,30 +51,24 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.Mcategory.indexOf("pMX") != -1)
-      {
-        data.Mcategory = "pMX";
-      }
-    else if (data.Mcategory.indexOf("pM0") != -1)
-      {
-        data.Mcategory = "pM0";
-      }
-    else if (data.Mcategory.indexOf("pM1a") != -1)
-      {
-        data.Mcategory = "pM1a";
-      }
-    else if (data.Mcategory.indexOf("pM1b") != -1)
-      {
-        data.Mcategory = "pM1b";
-      }
-    else if (data.Mcategory.indexOf("pM1c") != -1)
-      {
-        data.Mcategory = "pM1c";
-      }
-    else if (data.Mcategory.indexOf("pM1") != -1)
-      {
-        data.Mcategory = "pM1";
-      }
+  if (data.Mcategory.indexOf("pMX") != -1) {
+    data.Mcategory = "pMX";
+  }
+  else if (data.Mcategory.indexOf("pM0") != -1) {
+    data.Mcategory = "pM0";
+  }
+  else if (data.Mcategory.indexOf("pM1a") != -1) {
+    data.Mcategory = "pM1a";
+  }
+  else if (data.Mcategory.indexOf("pM1b") != -1) {
+    data.Mcategory = "pM1b";
+  }
+  else if (data.Mcategory.indexOf("pM1c") != -1) {
+    data.Mcategory = "pM1c";
+  }
+  else if (data.Mcategory.indexOf("pM1") != -1) {
+    data.Mcategory = "pM1";
+  }
 
   return data;
 
@@ -108,7 +102,7 @@ module.exports.fields = [
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
-    return valueCodeableConcept;
+      return valueCodeableConcept;
 
     }
   }
