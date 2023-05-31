@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-      coding: [
-        {
-          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-          code: "laboratory",
-          display: "Laboratory"
-        }
-      ]
-    },
+        coding: [
+          {
+            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+            code: "laboratory",
+            display: "Laboratory"
+          }
+        ]
+      },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-      reference: "Patient/MitwPatient"
-    }
+        reference: "Patient/MitwPatient"
+      }
   }
 }
 
@@ -52,15 +52,35 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
 
-  if (data.Perineuralinvasion == "present" | "+" | "(+)") {
+  if (data.Perineuralinvasion.indexOf("present") != -1)
+  {
+      data.Perineuralinvasion = "1";
+  }
+  else if (data.Perineuralinvasion.indexOf("+") != -1)
+  {
     data.Perineuralinvasion = "1";
   }
-  else if (data.Perineuralinvasion == "absent" | "-" | "(-)") {
-    data.Perineuralinvasion = "0";
+  else if (data.Perineuralinvasion.indexOf("(+)") != -1)
+  {
+    data.Perineuralinvasion = "1";
   }
-  else if (data.Perineuralinvasion != null) {
-    data.Perineuralinvasion = "8"
+  else if (data.Perineuralinvasion.indexOf("absent") != -1)
+  {
+      data.Perineuralinvasion = "0";
   }
+  else if (data.Perineuralinvasion.indexOf("-") != -1)
+  {
+      data.Perineuralinvasion = "0";
+  }
+  else if (data.Perineuralinvasion.indexOf("(-)") != -1)
+  {
+      data.Perineuralinvasion = "0";
+  }
+  else if (data.Perineuralinvasion != null)
+  {
+      data.Perineuralinvasion = "8";
+  }
+
   return data;
 }
 

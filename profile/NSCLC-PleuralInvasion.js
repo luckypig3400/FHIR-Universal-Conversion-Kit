@@ -8,11 +8,7 @@ module.exports.profile = {
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
 }
-// 此Profile的JSON結構資料參考自以下網頁:
-// https://mitw.dicom.org.tw/IG/TWCR_SF/StructureDefinition-weight-profile.html
-// 此Profile的完整JSON範例檔:
-// https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-WeightExample.json.html
-// https://mitw.dicom.org.tw/IG/TWCR_SF/Observation-WeightExample-1.json.html
+
 
 module.exports.globalResource = {
   // Should be resource name
@@ -28,14 +24,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-      coding: [
-        {
-          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-          code: "laboratory",
-          display: "Laboratory"
-        }
-      ]
-    },
+        coding: [
+          {
+            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+            code: "laboratory",
+            display: "Laboratory"
+          }
+        ]
+      },
     code: {
       coding: [
         {
@@ -46,8 +42,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-      reference: "Patient/MitwPatient"
-    }
+        reference: "Patient/MitwPatient"
+      }
   }
 }
 
@@ -56,21 +52,7 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
-
-  // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
-  // 經過beforeProcess的處理後再決定target
-
-  // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
-  // console.log(data);
-  if (data.Pleuralinvasion == "present" | "+" | "(+)") {
-    data.Pleuralinvasion = "1";
-  }
-  else if (data.Pleuralinvasion == "absent" | "-" | "(-)") {
-    data.Pleuralinvasion = "0";
-  }
-  else if (data.Pleuralinvasion != null) {
-    data.Pleuralinvasion = "8"
-  }
+  
   return data;
 }
 
@@ -79,7 +61,7 @@ module.exports.fields = [
     source: 'id',
     target: 'Observation.id',
     beforeConvert: (data) => {
-      return `NSCLC-PleuralInvasion-${data}-${tools.getCurrentTimestamp()}`;
+      return `NSCLC-Pleuralinvasion-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
   {
@@ -93,14 +75,91 @@ module.exports.fields = [
             "system" : "http://mitwfhir.dicom.org.tw/fhir/CodeSystem/NSCLC-Invasion",
             "code" : "code",
             "display" : "display"
+          },
+          {
+            "system" : "http://mitwfhir.dicom.org.tw/fhir/CodeSystem/NSCLC-Invasion",
+            "code" : "code",
+            "display" : "display"
           }
-        ]
+        ],
+        "text":"invades beyond the elastic layer (PL1)"
       }
       `);
-      valueCodeableConcept.coding[0].code = data;
-      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
-      valueCodeableConcept.coding[0].display = displayValue;
 
+      if (data.indexOf("present") != -1)
+        {
+          valueCodeableConcept.coding[0].code = "1";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "1");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+      else if (data.indexOf("+") != -1)
+        {
+          valueCodeableConcept.coding[0].code = "1";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "1");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+      else if (data.indexOf("(+)") != -1)
+        {
+          valueCodeableConcept.coding[0].code = "1";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "1");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+      else if (data.indexOf("absent") != -1)
+        {
+          valueCodeableConcept.coding[0].code = "0";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "0");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+      else if (data.indexOf("-") != -1)
+        {
+          valueCodeableConcept.coding[0].code = "0";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "0");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+      else if (data.indexOf("(-)") != -1)
+        {
+          valueCodeableConcept.coding[0].code = "0";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "0");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+      else if (data != null)
+        {
+          valueCodeableConcept.coding[0].code = "8";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", "8");
+          valueCodeableConcept.coding[0].display = displayValue;
+        }
+
+      if (data.indexOf("PL0") != -1)
+        {
+          valueCodeableConcept.coding[1].code = "PL0";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Pleural-Invasion.json", "PL0");
+          valueCodeableConcept.coding[1].display = displayValue;
+        }
+      if (data.indexOf("PL1") != -1)
+        {
+          valueCodeableConcept.coding[1].code = "PL1";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Pleural-Invasion.json", "PL1");
+          valueCodeableConcept.coding[1].display = displayValue;
+        }
+      if (data.indexOf("PL2") != -1)
+        {
+          valueCodeableConcept.coding[1].code = "PL2";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Pleural-Invasion.json", "PL2");
+          valueCodeableConcept.coding[1].display = displayValue;
+        }
+      if (data.indexOf("PL3") != -1)
+        {
+          valueCodeableConcept.coding[1].code = "PL3";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Pleural-Invasion.json", "PL3");
+          valueCodeableConcept.coding[1].display = displayValue;
+        }
+      if (data.indexOf("PLX") != -1)
+        {
+          valueCodeableConcept.coding[1].code = "PLX";
+          let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Pleural-Invasion.json", "PLX");
+          valueCodeableConcept.coding[1].display = displayValue;
+        }
+      valueCodeableConcept.text = data;
       return valueCodeableConcept;
     }
   }

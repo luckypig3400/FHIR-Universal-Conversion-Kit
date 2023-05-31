@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-      coding: [
-        {
-          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-          code: "laboratory",
-          display: "Laboratory"
-        }
-      ]
-    },
+        coding: [
+          {
+            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+            code: "laboratory",
+            display: "Laboratory"
+          }
+        ]
+      },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-      reference: "Patient/MitwPatient"
-    }
+        reference: "Patient/MitwPatient"
+      }
   }
 }
 
@@ -51,6 +51,20 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
+
+    if (data.Sizeofviableinvasivefocus != "")
+      {
+        data.Sizeofinvasivefocus = data.Sizeofviableinvasivefocus;
+      }
+    if (data.Estimatedviableinvasivetumorsize != "")
+      {
+        data.Sizeofinvasivefocus = data.Estimatedviableinvasivetumorsize;
+      }
+    if (data.Sizeofinvasivefocuscm != "")
+      {
+        data.Sizeofinvasivefocus = data.Sizeofinvasivefocuscm;
+      }
+
   return data;
 }
 
@@ -63,7 +77,7 @@ module.exports.fields = [
     }
   },
   {
-    source: 'Size of invasive focus',
+    source: 'Sizeofinvasivefocus',
     target: 'Observation.valueQuantity',
     beforeConvert: (data) => {
       let valueQuantity = JSON.parse(`
@@ -74,62 +88,8 @@ module.exports.fields = [
         "code" : "cm"
       }
       `);
-
-      valueQuantity.value = parseInt(String(data));
-
-      return valueQuantity;
-    }
-  },
-  {
-    source: 'Size of viable invasive focus',
-    target: 'Observation.valueQuantity',
-    beforeConvert: (data) => {
-      let valueQuantity = JSON.parse(`
-      {
-        "value" : 0.6,
-        "unit" : "cm",
-        "system" : "http://unitsofmeasure.org",
-        "code" : "cm"
-      }
-      `);
-
-      valueQuantity.value = parseInt(String(data));
-
-      return valueQuantity;
-    }
-  },
-  {
-    source: 'Estimated viable invasive tumor size',
-    target: 'Observation.valueQuantity',
-    beforeConvert: (data) => {
-      let valueQuantity = JSON.parse(`
-      {
-        "value" : 0.6,
-        "unit" : "cm",
-        "system" : "http://unitsofmeasure.org",
-        "code" : "cm"
-      }
-      `);
-
-      valueQuantity.value = parseInt(String(data));
-
-      return valueQuantity;
-    }
-  },
-  {
-    source: 'Size of invasive focus (cm)',
-    target: 'Observation.valueQuantity',
-    beforeConvert: (data) => {
-      let valueQuantity = JSON.parse(`
-      {
-        "value" : 0.6,
-        "unit" : "cm",
-        "system" : "http://unitsofmeasure.org",
-        "code" : "cm"
-      }
-      `);
-
-      valueQuantity.value = parseInt(String(data));
+      data = String(data).slice(0,-2);
+      valueQuantity.value = data;
 
       return valueQuantity;
     }

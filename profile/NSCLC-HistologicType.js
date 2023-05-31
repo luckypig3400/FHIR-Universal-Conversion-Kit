@@ -24,14 +24,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-      coding: [
-        {
-          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-          code: "laboratory",
-          display: "Laboratory"
-        }
-      ]
-    },
+        coding: [
+          {
+            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+            code: "laboratory",
+            display: "Laboratory"
+          }
+        ]
+      },
     code: {
       coding: [
         {
@@ -42,8 +42,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-      reference: "Patient/MitwPatient"
-    }
+        reference: "Patient/MitwPatient"
+      }
   }
 }
 
@@ -51,55 +51,56 @@ module.exports.globalResource = {
 // Data will run the following function before we iterate each fields
 module.exports.beforeProcess = (data) => {
   checkLUNG();
-  // 在開始轉換前檢查NSCLC的package是否有更新
+ 
+  data.Histologictype = data.Histologictype.charAt(0).toUpperCase() + data.Histologictype.slice(1)
 
-  // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
-  // console.log(data);
-
-  let Histologictype_oringinal = data.Histologictype.charAt(0).toUpperCase() + data.Histologictype.slice(1);
-  // 備份傳入的原始Histologictype值，同時將首個字母轉為大寫
-
-  data.Histologictype = data.Histologictype.toString().toUpperCase();
-  // 將所有字元轉大寫再比較，或許更能避免資料中大小寫差異造成資料轉換時被忽略的窘境
-
-  if (data.Histologictype == "Minimally invasive adenocarcinoma".toUpperCase()) {
-    data.Histologictype = "Minimally invasive adenocarcinoma, non-mucinous";
+  if (data.Histologictype == "Minimally invasive adenocarcinoma")
+  {
+      data.Histologictype = "Minimally invasive adenocarcinoma, non-mucinous";
   }
-  else if (data.Histologictype == "Adenocarcinoma acinar predominant".toUpperCase()) {
+ if (data.Histologictype == "Adenocarcinoma acinar predominant")
+  {
     data.Histologictype = "Acinar adenocarcinoma";
   }
-  else if (data.Histologictype == "Adenocarcinoma micropapillary predominant".toUpperCase()) {
+  if (data.Histologictype == "Adenocarcinoma micropapillary predominant")
+  {
     data.Histologictype = "Micropapillary adenocarcinoma";
   }
-  else if (data.Histologictype == "Adenocarcinoma solid predominant".toUpperCase()) {
+  if (data.Histologictype == "Adenocarcinoma solid predominant")
+  {
     data.Histologictype = "Solid adenocarcinoma";
   }
-  else if (data.Histologictype == "Adenocarcinoma papillary predominant".toUpperCase()) {
+  if (data.Histologictype == "Adenocarcinoma papillary predominant")
+  {
     data.Histologictype = "Papillary adenocarcinoma, NOS";
   }
-  else if (data.Histologictype == "Adenocarcinoma lepidic predominant".toUpperCase()) {
+  if (data.Histologictype == "Adenocarcinoma lepidic predominant")
+  {
     data.Histologictype = "Lepidic adenocarcinoma";
   }
-  else if (data.Histologictype == "Squamous cell carcinoma non-keratinizing".toUpperCase()) {
+  if (data.Histologictype == "Squamous cell carcinoma non-keratinizing")
+  {
     data.Histologictype = "Squamous cell carcinoma, nonkeratinizing, NOS";
   }
-  else if (data.Histologictype == "Squamous cell carcinoma keratinizing".toUpperCase()) {
+  if (data.Histologictype == "Squamous cell carcinoma keratinizing")
+  {
     data.Histologictype = "Squamous cell carcinoma, keratinizing, NOS"
   }
-  else if (data.Histologictype == "Adenocarcinoma in situ".toUpperCase()) {
+  if (data.Histologictype == "Adenocarcinoma in situ")
+  {
     data.Histologictype = "Adenocarcinoma in situ, NOS";
   }
-  else if (data.Histologictype == "Invasive mucinous adenocarcinoma".toUpperCase()) {
+  if (data.Histologictype == "Invasive mucinous adenocarcinoma")
+  {
     data.Histologictype = "Mucinous adenocarcinoma";
   }
-  else if (data.Histologictype == "Non-small cell carcinoma admixed with round cell sarcomatoid area") {
+  if (data.Histologictype == "Non-small cell carcinoma admixed with round cell sarcomatoid area")
+  {
     data.Histologictype = "Squamous cell carcinoma, sarcomatoid";
-  }
-  else{// 都不符合上方特殊結果，將全被轉換為大寫字母的資料回復為原始資料
-    data.Histologictype = Histologictype_oringinal;
   }
 
   return data;
+
 }
 
 module.exports.fields = [
@@ -125,9 +126,8 @@ module.exports.fields = [
         ]
       }
       `);
-
-      let codevalue = tools.searchValueSetCodeValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
-      // 此份profile，已知display值，以其值搜索ValueSet中對應的code value
+      
+      let codevalue = tools.searchValueSetDisplayValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 

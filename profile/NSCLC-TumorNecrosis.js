@@ -23,14 +23,14 @@ module.exports.globalResource = {
     },
     status: "final", //registered | preliminary | final | amended +
     category: {
-      coding: [
-        {
-          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
-          code: "laboratory",
-          display: "Laboratory"
-        }
-      ]
-    },
+        coding: [
+          {
+            system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+            code: "laboratory",
+            display: "Laboratory"
+          }
+        ]
+      },
     code: {
       coding: [
         {
@@ -41,8 +41,8 @@ module.exports.globalResource = {
       ]
     },
     subject: {
-      reference: "Patient/MitwPatient"
-    }
+        reference: "Patient/MitwPatient"
+      }
   }
 }
 
@@ -52,21 +52,36 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
 
-  // *依據申報內容不同有可能為 valueCodeableConcept 或 valueQuantity
-  // 經過beforeProcess的處理後再決定target
-
-  // beforeProcess超級強大的! 感覺真的什麼資料都可以處理!!!
-  // console.log(data);
-  if (data.Tumornecrosis == "present" | "+" | "(+)") {
+  if (data.Tumornecrosis.indexOf("present") != -1)
+  {
+      data.Tumornecrosis = "1";
+  }
+  else if (data.Tumornecrosis.indexOf("+") != -1)
+  {
     data.Tumornecrosis = "1";
   }
-  else if (data.Tumornecrosis == "absent" | "-" | "(-)") {
-    data.Tumornecrosis = "0";
+  else if (data.Tumornecrosis.indexOf("(+)") != -1)
+  {
+    data.Tumornecrosis = "1";
   }
-  else if (data.Tumornecrosis != null) {
-    data.Tumornecrosis = "8";
+  else if (data.Tumornecrosis.indexOf("absent") != -1)
+  {
+      data.Tumornecrosis = "0";
+  }
+  else if (data.Tumornecrosis.indexOf("-") != -1)
+  {
+      data.Tumornecrosis = "0";
+  }
+  else if (data.Tumornecrosis.indexOf("(-)") != -1)
+  {
+      data.Tumornecrosis = "0";
+  }
+  else if (data.Tumornecrosis != null)
+  {
+      data.Tumornecrosis = "8";
   }
   return data;
+  
 }
 
 module.exports.fields = [
@@ -93,7 +108,7 @@ module.exports.fields = [
       }
       `);
       valueCodeableConcept.coding[0].code = data;
-      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitionsJSON/CodeSystem-NSCLC-Invasion.json", data);
+      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
       valueCodeableConcept.coding[0].display = displayValue;
 
       return valueCodeableConcept;

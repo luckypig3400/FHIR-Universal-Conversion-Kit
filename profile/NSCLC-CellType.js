@@ -3,7 +3,7 @@ const tools = require("../NSCLC_ValueSets/tools.js");
 // 檔案路徑要以FUCK核心所在的位置為基準
 
 module.exports.profile = {
-  name: 'NSCLC-NonTumorousParenchyma',
+  name: 'NSCLC-CellType',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
@@ -14,7 +14,7 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "http://mitwfhir.dicom.org.tw/fhir/StructureDefinition/Observation-LC-Non-tumorous-parenchyma"
+        "http://mitwfhir.dicom.org.tw/fhir/StructureDefinition/Observation-LC-Cell-type"
       ]
     },
     text: {
@@ -34,9 +34,9 @@ module.exports.globalResource = {
     code: {
       coding: [
         {
-          system: "http://snomed.info/sct",
-          code: "113255004",
-          display: "Structure of parenchyma of lung (body structure)"
+          system: "http://loinc.org",
+          code: "32760-1",
+          display: "Cell type in Specimen"
         }
       ]
     },
@@ -51,7 +51,15 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
+  
+
+  if (data.Mitosis != "")
+    {
+      data.Celltype = data.Mitosis;
+    }
+
   return data;
+
 }
 
 module.exports.fields = [
@@ -59,16 +67,15 @@ module.exports.fields = [
     source: 'id',
     target: 'Observation.id',
     beforeConvert: (data) => {
-      return `NSCLC-NonTumorousParenchyma-${data}-${tools.getCurrentTimestamp()}`;
+      return `NSCLC-CellType-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
   {
-    source: 'Nontumorousparenchyma',
+    source: 'Celltype',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
         valueString = data;
         return valueString;
       }
   }
-
 ]

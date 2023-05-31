@@ -3,7 +3,7 @@ const tools = require("../NSCLC_ValueSets/tools.js");
 // 檔案路徑要以FUCK核心所在的位置為基準
 
 module.exports.profile = {
-  name: 'NSCLC-STAS',
+  name: 'NSCLC-Mcategory',
   version: '1.0.0',
   fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',
   action: 'return', // return, upload
@@ -14,7 +14,7 @@ module.exports.globalResource = {
   Observation: {
     meta: {
       profile: [
-        "http://mitwfhir.dicom.org.tw/fhir/StructureDefinition/Observation-LC-STAS"
+        "http://mitwfhir.dicom.org.tw/fhir/StructureDefinition/Observation-LC-Metastasis"
       ]
     },
     text: {
@@ -34,9 +34,9 @@ module.exports.globalResource = {
     code: {
       coding: [
         {
-          system: "http://mitwfhir.dicom.org.tw/fhir/CodeSystem/NSCLC-MicroscopicFinding",
-          code: "STAS",
-          display: "Spread Through Air Spaces(STAS)"
+          system: "http://loinc.org",
+          code: "21901-4",
+          display: "Distant metastases.pathology [Class] Cancer"
         }
       ]
     },
@@ -51,37 +51,33 @@ module.exports.globalResource = {
 module.exports.beforeProcess = (data) => {
   checkLUNG();
 
-  if (data.STAS.indexOf("present") != -1)
-  {
-      data.STAS = "1";
-  }
-  else if (data.STAS.indexOf("+") != -1)
-  {
-    data.STAS = "1";
-  }
-  else if (data.STAS.indexOf("(+)") != -1)
-  {
-    data.STAS = "1";
-  }
-  else if (data.STAS.indexOf("absent") != -1)
-  {
-      data.STAS = "0";
-  }
-  else if (data.STAS.indexOf("-") != -1)
-  {
-      data.STAS = "0";
-  }
-  else if (data.STAS.indexOf("(-)") != -1)
-  {
-      data.STAS = "0";
-  }
-  else if (data.STAS != null)
-  {
-      data.STAS = "8";
-  }
-
+  if (data.Mcategory.indexOf("pMX") != -1)
+      {
+        data.Mcategory = "pMX";
+      }
+    else if (data.Mcategory.indexOf("pM0") != -1)
+      {
+        data.Mcategory = "pM0";
+      }
+    else if (data.Mcategory.indexOf("pM1a") != -1)
+      {
+        data.Mcategory = "pM1a";
+      }
+    else if (data.Mcategory.indexOf("pM1b") != -1)
+      {
+        data.Mcategory = "pM1b";
+      }
+    else if (data.Mcategory.indexOf("pM1c") != -1)
+      {
+        data.Mcategory = "pM1c";
+      }
+    else if (data.Mcategory.indexOf("pM1") != -1)
+      {
+        data.Mcategory = "pM1";
+      }
 
   return data;
+
 }
 
 module.exports.fields = [
@@ -89,29 +85,31 @@ module.exports.fields = [
     source: 'id',
     target: 'Observation.id',
     beforeConvert: (data) => {
-      return `NSCLC-STAS-${data}-${tools.getCurrentTimestamp()}`;
+      return `NSCLC-Mcategory-${data}-${tools.getCurrentTimestamp()}`;
     }
   },
   {
-    source: 'STAS',
+    source: 'Mcategory',
     target: 'Observation.valueCodeableConcept',
     beforeConvert: (data) => {
       let valueCodeableConcept = JSON.parse(`
       {
         "coding" : [
           {
-            "system" : "http://mitwfhir.dicom.org.tw/fhir/CodeSystem/NSCLC-Invasion",
+            "system" : "http://mitwfhir.dicom.org.tw/fhir/CodeSystem/NSCLC-pM",
             "code" : "code",
             "display" : "display"
           }
         ]
       }
       `);
-      valueCodeableConcept.coding[0].code = data;
-      let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-Invasion.json", data);
-      valueCodeableConcept.coding[0].display = displayValue;
 
-      return valueCodeableConcept;
+      let codevalue = tools.searchCodeSystemCodeValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pM.json", data);
+      valueCodeableConcept.coding[0].code = codevalue;
+      valueCodeableConcept.coding[0].display = data;
+
+    return valueCodeableConcept;
+
     }
   }
 ]
