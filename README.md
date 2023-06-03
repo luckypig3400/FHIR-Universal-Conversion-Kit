@@ -5,10 +5,34 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 ### TODO List
 - [x] [NASH profiles](https://mitw.dicom.org.tw/IG/NSCLC/NASHprofiles.html)頁面的 NAS Hprofiles可能為 NASH profiles
 - [x] ~~產生10筆仿照子芸學姊提供的原始資料格式之假資料~~ (為保護個資，測試資料採用Postman傳送)
-- [ ] 驗證目前已有的Profiles能夠正常被F.U.C.K執行
+- [x] 驗證目前已有的Profiles能夠正常被F.U.C.K執行
 (重新開核對Profiles能否正常運行尤其要特別注意HistologicType，這份Profile裡面轉換的邏輯判斷較多)
-- [ ] 校驗目前已有的Profiles轉換出的資料於Code、Display部分是否存在Error
+- [ ] 校驗目前已有的Profiles轉換出的資料於Code、Display部分是否存在Error或""空值
 - [ ] 補完其餘Lung Profiles(撰寫初版並和 :smile_cat:子芸學姊討論)
+
+#### 校驗Profiles Error Code或空值的進度
+- [ ] NSCLC-AncillaryStudy
+- [ ] NSCLC-AngiolymphaticInvasion
+- [ ] NSCLC-CellType
+- [ ] NSCLC-GrossFinding
+- [ ] NSCLC-Histologicpattern
+- [ ] NSCLC-HistologicType
+- [ ] NSCLC-Lymphnodes
+- [ ] NSCLC-Mcategory
+- [ ] NSCLC-NonTumorousParenchyma
+- [ ] NSCLC-PathologicalStaging
+- [ ] NSCLC-PathologicalStaging12
+- [ ] NSCLC-PerineuralInvasion
+- [ ] NSCLC-PleuralInvasion
+- [ ] NSCLC-ResectionMargin
+- [ ] NSCLC-SizeOfInvasionFocus
+- [ ] NSCLC-STAS
+- [ ] NSCLC-Tcategory
+- [ ] NSCLC-Tcategory1
+- [ ] NSCLC-Totaltumorsize
+- [ ] NSCLC-TreatmentEffect
+- [ ] NSCLC-TumorGrading
+- [ ] NSCLC-TumorNecrosis
 
 ### Issues List
 + ~~NSCLC-HistologicType Profile中所查詢的`ValueSet-ICD-O-3-Morphology.json`似乎沒有定義值集~~(已解決，因為FHIR IG上的定義值集JSON包尚未更新至最新版)
