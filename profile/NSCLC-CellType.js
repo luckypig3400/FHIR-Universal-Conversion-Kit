@@ -52,13 +52,11 @@ module.exports.beforeProcess = (data) => {
   checkLUNG();
   // 在開始轉換前檢查TWCR的package是否有更新
 
-
   if (data.Mitosis != "") {
     data.Celltype = data.Mitosis;
   }
 
   return data;
-
 }
 
 module.exports.fields = [
@@ -71,6 +69,14 @@ module.exports.fields = [
   },
   {
     source: 'Celltype',
+    target: 'Observation.valueString',
+    beforeConvert: (data) => {
+      valueString = data;
+      return valueString;
+    }
+  },
+  {
+    source: 'Mitosis',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
       valueString = data;
