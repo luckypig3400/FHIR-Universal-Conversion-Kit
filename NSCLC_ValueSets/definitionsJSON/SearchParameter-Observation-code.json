@@ -1,0 +1,1 @@
+{"resourceType":"SearchParameter","id":"Observation-code","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/Observation-code","version":"0.1.0","name":"ObservationCode","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"Observation的檢查項目(code)","code":"code","base":["Observation"],"type":"token","expression":"Observation.code"}

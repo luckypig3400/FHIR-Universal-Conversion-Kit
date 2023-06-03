@@ -1,0 +1,1 @@
+{"resourceType":"SearchParameter","id":"Observation-status","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/Observation-status","version":"0.1.0","name":"ObservationStatus","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"Observation檢查的狀態(status)","code":"status","base":["Observation"],"type":"token","expression":"Observation.status"}
