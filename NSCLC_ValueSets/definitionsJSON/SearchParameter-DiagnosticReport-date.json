@@ -1,1 +1,0 @@
-{"resourceType":"SearchParameter","id":"DiagnosticReport-date","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/DiagnosticReport-date","version":"0.1.0","name":"DiagnosticReportDate","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"診斷報告的時間(date)","code":"date","base":["DiagnosticReport"],"type":"date","expression":"DiagnosticReport.effective"}

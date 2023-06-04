@@ -1,1 +1,0 @@
-{"resourceType":"SearchParameter","id":"Observation-category","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/Observation-category","version":"0.1.0","name":"ObservationCategory","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"Observation的類別(category)","code":"category","base":["Observation"],"type":"token","expression":"Observation.category"}

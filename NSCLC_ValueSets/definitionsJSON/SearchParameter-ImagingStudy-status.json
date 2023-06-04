@@ -1,1 +1,0 @@
-{"resourceType":"SearchParameter","id":"ImagingStudy-status","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/ImagingStudy-status","version":"0.1.0","name":"ImagingStudyDicomStatus","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"醫療影像的狀態(status)","code":"status","base":["ImagingStudy"],"type":"token","expression":"ImagingStudy.status"}

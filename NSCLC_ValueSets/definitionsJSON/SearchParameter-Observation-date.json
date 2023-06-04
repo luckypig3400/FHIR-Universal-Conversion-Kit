@@ -1,1 +1,0 @@
-{"resourceType":"SearchParameter","id":"Observation-date","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/Observation-date","version":"0.1.0","name":"ObservationDate","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"Observation的檢查時間(date)","code":"date","base":["Observation"],"type":"date","expression":"Observation.effective"}

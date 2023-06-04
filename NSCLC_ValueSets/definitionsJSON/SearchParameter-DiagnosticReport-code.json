@@ -1,1 +1,0 @@
-{"resourceType":"SearchParameter","id":"DiagnosticReport-code","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/DiagnosticReport-code","version":"0.1.0","name":"DiagnosticReportCode","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"診斷報告的代碼(code)","code":"code","base":["DiagnosticReport"],"type":"token","expression":"DiagnosticReport.code"}

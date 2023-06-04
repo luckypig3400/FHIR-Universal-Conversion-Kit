@@ -1,1 +1,0 @@
-{"resourceType":"SearchParameter","id":"Observation-id","url":"http://mitwfhir.dicom.org.tw/fhir/SearchParameter/Observation-id","version":"0.1.0","name":"ObservationID","status":"active","date":"2022-09-13","publisher":"CYLAB","description":"Observation邏輯性ID","code":"_id","base":["Observation"],"type":"token","expression":"Observation.id"}
