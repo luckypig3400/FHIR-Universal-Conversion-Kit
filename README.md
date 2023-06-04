@@ -14,7 +14,8 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [x] NSCLC-AncillaryStudy
 + 修復AncillaryStudy的category.coding.system網址錯誤
 + 解決AncillaryStudy的valueString遇到空值會被轉換出來
-- [ ] NSCLC-AngiolymphaticInvasion
+- [x] NSCLC-AngiolymphaticInvasion
++ + 修復AngiolymphaticInvasion的category.coding.system網址錯誤
 - [ ] NSCLC-CellType
 - [ ] NSCLC-GrossFinding
 - [ ] NSCLC-Histologicpattern
