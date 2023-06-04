@@ -79,8 +79,8 @@ module.exports.fields = [
     source: 'Ancillarystudy',
     target: 'Observation.valueString',
     beforeConvert: (data) => {
-      valueString = data;
-      return valueString;
+      if (data == "") return null;
+      else return data;
     }
   }
 
