@@ -62,8 +62,8 @@ function fetchLatestNSCLC() {
             zip.on('error', function (err) { console.error('[ERROR]', err); });
 
             zip.on('entry', function (entry) {
-              var pathname = path.resolve('../NSCLC_ValueSets/definitionsJSON', entry.name);
-              if (/\.\./.test(path.relative('../NSCLC_ValueSets/definitionsJSON', pathname))) {
+              var pathname = path.resolve('../NSCLC_ValueSets/definitions.json', entry.name);
+              if (/\.\./.test(path.relative('../NSCLC_ValueSets/definitions.json', pathname))) {
                 console.warn("[zip warn]: ignoring maliciously crafted paths in zip file:", entry.name);
                 return;
               }
