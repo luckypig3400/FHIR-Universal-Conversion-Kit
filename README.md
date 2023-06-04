@@ -11,7 +11,9 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [ ] 補完其餘Lung Profiles(撰寫初版並和 :smile_cat:子芸學姊討論)
 
 #### 校驗Profiles Error Code或空值的進度
-- [ ] NSCLC-AncillaryStudy
+- [x] NSCLC-AncillaryStudy
++ 修復AncillaryStudy的category.coding.system網址錯誤
++ 解決AncillaryStudy的valueString遇到空值會被轉換出來
 - [ ] NSCLC-AngiolymphaticInvasion
 - [ ] NSCLC-CellType
 - [ ] NSCLC-GrossFinding
