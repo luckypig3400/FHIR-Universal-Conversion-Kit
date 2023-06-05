@@ -74,13 +74,5 @@ module.exports.fields = [
       valueString = data;
       return valueString;
     }
-  },
-  {
-    source: 'Mitosis',
-    target: 'Observation.valueString',
-    beforeConvert: (data) => {
-      valueString = data;
-      return valueString;
-    }
   }
 ]
