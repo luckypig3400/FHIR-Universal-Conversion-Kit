@@ -124,6 +124,13 @@ module.exports.fields = [
         valueCodeableConcept.coding[4].display = displayvalue;
       }
 
+      // 將未使用到的coding object移除
+      for (let i = 0; i < 5; i++) {
+        if (valueCodeableConcept.coding[i].code == "code") {
+          valueCodeableConcept.coding[i] = null;
+        }
+      }
+
       return valueCodeableConcept;
     }
   }
