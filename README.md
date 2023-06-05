@@ -19,7 +19,9 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [x] NSCLC-CellType
 + 修復 CellType 的category.coding.system網址錯誤
 + 解決 CellType 的valueString遇到空值會被轉換出來
-- [ ] NSCLC-GrossFinding
+- [x] NSCLC-GrossFinding
++ 修復 GrossFinding 的category.coding.system網址錯誤
++ ⚠️ GrossFinding的source data欄位為GrossFinding，似乎不存在於原始csv資料中
 - [ ] NSCLC-Histologicpattern
 - [ ] NSCLC-HistologicType
 - [ ] NSCLC-Lymphnodes
