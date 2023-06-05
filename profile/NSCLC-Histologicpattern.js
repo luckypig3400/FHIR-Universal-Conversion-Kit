@@ -131,6 +131,12 @@ module.exports.fields = [
         }
       }
 
+      // 將null於valueCodeableConcept.coding陣列中移除
+      valueCodeableConcept.coding = valueCodeableConcept.coding.filter(element => {
+        return element !== null;
+        // https://bobbyhadz.com/blog/javascript-remove-null-values-from-array
+      });
+
       return valueCodeableConcept;
     }
   }
