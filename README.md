@@ -8,7 +8,7 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [x] 驗證目前已有的Profiles能夠正常被F.U.C.K執行
 (重新開核對Profiles能否正常運行尤其要特別注意HistologicType，這份Profile裡面轉換的邏輯判斷較多)
 - [ ] 校驗目前已有的Profiles轉換出的資料於Code、Display部分是否存在Error或""空值
-- [ ] 補完其餘Lung Profiles(撰寫初版並和 :smile_cat:子芸學姊討論)
+- [ ] 補完其餘NSCLC Profiles(撰寫初版並和 :smiling_face_with_three_hearts: 子芸學姊💗 討論)
 
 #### 校驗Profiles Error Code或空值的進度
 - [x] NSCLC-AncillaryStudy
@@ -23,6 +23,10 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 + 修復 GrossFinding 的category.coding.system網址錯誤
 + ⚠️ GrossFinding的source data欄位為GrossFinding，似乎不存在於原始csv資料中
 - [ ] NSCLC-Histologicpattern
++ 修復 Histologicpattern 的category.coding.system網址錯誤
++ 將未使用到的coding object移除(有兩筆commits)
++ 雖然是可選的，但我還是將valueCodeableConcept.text也轉換出來
++ 最後檢查轉換出來的valueCodeableConcept若為空值則不回傳
 - [ ] NSCLC-HistologicType
 - [ ] NSCLC-Lymphnodes
 - [ ] NSCLC-Mcategory
@@ -41,9 +45,9 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [ ] NSCLC-TumorGrading
 - [ ] NSCLC-TumorNecrosis
 
-### Issues List
+### Issues List(此區已棄用，各profile遇到的議題都放在上方checklist下方)
 + ~~NSCLC-HistologicType Profile中所查詢的`ValueSet-ICD-O-3-Morphology.json`似乎沒有定義值集~~(已解決，因為FHIR IG上的定義值集JSON包尚未更新至最新版)
-+ ~~子芸學姊的FHIR IG官網上提供的[definitions.json.zip](https://mitw.dicom.org.tw/IG/NSCLC/downloads.html)似乎還沒更新到最新版~~(子芸學姊回復目前尚未更新到網站上)
++ ~~子芸學姊的FHIR IG官網上提供的[definitions.json.zip](https://mitw.dicom.org.tw/IG/NSCLC/downloads.html)似乎還沒更新到最新版(子芸學姊回復目前尚未更新到網站上)~~ 😍子芸學姊已於6/2更新最新版的定義檔至FHIR IG網站上了
 + Error NSCLC-HistologicType ValueSet 找不到對應的值(Keep中的筆記有詳細描述)
 + NSCLC-PleuralInvasion的valueCoadableConcept，在資料轉換上似乎少了[Pleural-Invasion的資料](https://mitw.dicom.org.tw/IG/NSCLC/Observation-Pleuralinvasion.json.html)("code" : "PL0")
 
