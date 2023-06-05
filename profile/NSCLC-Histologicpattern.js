@@ -137,6 +137,10 @@ module.exports.fields = [
         // https://bobbyhadz.com/blog/javascript-remove-null-values-from-array
       });
 
+      // 雖然是optional的，但是範例檔中有列出因此還是將其轉換出來
+      // https://mitw.dicom.org.tw/IG/NSCLC/Observation-Histologicpattern.json.html
+      valueCodeableConcept.text = data;
+
       return valueCodeableConcept;
     }
   }
