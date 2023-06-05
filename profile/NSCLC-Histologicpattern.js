@@ -141,7 +141,11 @@ module.exports.fields = [
       // https://mitw.dicom.org.tw/IG/NSCLC/Observation-Histologicpattern.json.html
       valueCodeableConcept.text = data;
 
-      return valueCodeableConcept;
+      // 最後檢查轉換出來的valueCodeableConcept若為空值則不回傳
+      if (valueCodeableConcept.coding.length == 0 && valueCodeableConcept.text == "")
+        return null;
+      else
+        return valueCodeableConcept;
     }
   }
 ]
