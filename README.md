@@ -16,7 +16,9 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 + [解決AncillaryStudy的valueString遇到空值會被轉換出來](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/2cc9fceea34dbc90eaac7bf02144724fc5462dec)
 - [x] NSCLC-AngiolymphaticInvasion
 + [修復AngiolymphaticInvasion的category.coding.system網址錯誤](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/ecf5dd599138bcd9bd14ec433f1f70e18b607f3a)
-- [ ] NSCLC-CellType
+- [x] NSCLC-CellType
++ 修復 CellType 的category.coding.system網址錯誤
++ 解決 CellType 的valueString遇到空值會被轉換出來
 - [ ] NSCLC-GrossFinding
 - [ ] NSCLC-Histologicpattern
 - [ ] NSCLC-HistologicType
