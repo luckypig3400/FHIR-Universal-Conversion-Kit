@@ -17,16 +17,16 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 - [x] NSCLC-AngiolymphaticInvasion
 + [修復AngiolymphaticInvasion的category.coding.system網址錯誤](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/ecf5dd599138bcd9bd14ec433f1f70e18b607f3a)
 - [x] NSCLC-CellType
-+ 修復 CellType 的category.coding.system網址錯誤
-+ 解決 CellType 的valueString遇到空值會被轉換出來
++ [修復 CellType 的category.coding.system網址錯誤](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/16c21e44f32b89dddeb180b837c4ae064ef4358b)
++ [解決 CellType 的valueString遇到空值會被轉換出來](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/79e55cdd845b7de9d6c92b9fccfe95d81827e721)
 - [x] NSCLC-GrossFinding
-+ 修復 GrossFinding 的category.coding.system網址錯誤
++ [修復 GrossFinding 的category.coding.system網址錯誤](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/63cfb832ba7d35965be8691f3cd6c5aec96b6f81)
 + ⚠️ GrossFinding的source data欄位為GrossFinding，似乎不存在於原始csv資料中
 - [x] NSCLC-Histologicpattern
-+ 修復 Histologicpattern 的category.coding.system網址錯誤
-+ 將未使用到的coding object移除(有兩筆commits)
-+ 雖然是可選的，但我還是將valueCodeableConcept.text也轉換出來
-+ 最後檢查轉換出來的valueCodeableConcept若為空值則不回傳
++ [修復 Histologicpattern 的category.coding.system網址錯誤](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/39464e4b4b34f19d9446fd0e29157b11f56024c0)
++ 將未使用到的coding object移除(有兩筆commits)[第一筆](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/5bafcbf446ba752131445b226c087f11bbf71264)、[第二筆](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/054149766bee026d5e8540acebf5f7de13531057)
++ [雖然是可選的，但我還是將valueCodeableConcept.text也轉換出來](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/ed4d1618da034c607c5cca01d389dd518dc81f5c)
++ [最後檢查轉換出來的valueCodeableConcept若為空值則不回傳](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/78d795e0248682600711f3e79dd62984ba4553f4)
 - [ ] NSCLC-HistologicType
 - [ ] NSCLC-Lymphnodes
 - [ ] NSCLC-Mcategory
