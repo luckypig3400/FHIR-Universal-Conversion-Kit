@@ -116,7 +116,7 @@ module.exports.fields = [
       }
       `);
 
-      let codevalue = tools.searchValueSetDisplayValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
+      let codevalue = tools.searchValueSetCodeValue("../NSCLC_ValueSets/definitions.json/ValueSet-ICD-O-3-Morphology.json", data);
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
