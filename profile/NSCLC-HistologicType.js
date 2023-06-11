@@ -26,7 +26,7 @@ module.exports.globalResource = {
     category: {
       coding: [
         {
-          system: "http://hl7.org/fhir/R4/codesystem-observation-category.html",
+          system: "http://terminology.hl7.org/CodeSystem/observation-category",
           code: "laboratory",
           display: "Laboratory"
         }
