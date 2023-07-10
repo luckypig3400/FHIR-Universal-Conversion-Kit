@@ -102,7 +102,8 @@ module.exports.fields = [
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
-      return valueCodeableConcept;
+      if (data == "") return null;
+      else return valueCodeableConcept;
 
     }
   }
