@@ -27,7 +27,8 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 + 將未使用到的coding object移除(有兩筆commits)[第一筆](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/5bafcbf446ba752131445b226c087f11bbf71264)、[第二筆](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/054149766bee026d5e8540acebf5f7de13531057)
 + [雖然是可選的，但我還是將valueCodeableConcept.text也轉換出來](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/ed4d1618da034c607c5cca01d389dd518dc81f5c)
 + [最後檢查轉換出來的valueCodeableConcept若為空值則不回傳](https://github.com/luckypig3400/FHIR-Universal-Conversion-Kit/commit/78d795e0248682600711f3e79dd62984ba4553f4)
-- [ ] NSCLC-HistologicType
+- [x] NSCLC-HistologicType
++ 除了ValueSet-ICD-O-3-Morphology.json中有部分值集缺失外，沒有其他問題
 - [ ] NSCLC-Lymphnodes
 - [ ] NSCLC-Mcategory
 - [ ] NSCLC-NonTumorousParenchyma
