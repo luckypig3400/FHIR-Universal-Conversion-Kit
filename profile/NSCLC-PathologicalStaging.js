@@ -111,7 +111,7 @@ module.exports.beforeProcess = (data) => {
 
   switch (true) {
     case data.Lymphnode.includes("NX"):
-      data.Lymphnode = "N0";
+      data.Lymphnode = "NX";
       break;
     case data.Lymphnode.includes("N0"):
       data.Lymphnode = "N0";
