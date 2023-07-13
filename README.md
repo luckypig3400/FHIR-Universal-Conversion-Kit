@@ -35,6 +35,7 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 + 已將Mcategory為空值的Profile忽略掉不轉出valueCodeableConcept
 - [x] NSCLC-NonTumorousParenchyma
 - [ ] NSCLC-PathologicalStaging
++ 修正Lymphnode的Code與Display查詢錯誤
 - [ ] NSCLC-PathologicalStaging12
 - [ ] NSCLC-PerineuralInvasion
 - [ ] NSCLC-PleuralInvasion
