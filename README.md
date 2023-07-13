@@ -34,11 +34,12 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 + Mcategory Profile於子芸學姊FHIR IG官網上名為Metastasis
 + 已將Mcategory為空值的Profile忽略掉不轉出valueCodeableConcept
 - [x] NSCLC-NonTumorousParenchyma
-- [ ] NSCLC-PathologicalStaging
+- [x] NSCLC-PathologicalStaging
 + 修正Lymphnode的Code與Display查詢錯誤
 + 將beforeProcess內部多數if-else改為switch-case，方便摺疊程式碼
 + 修正Lymphnode的NX編碼疑似轉換錯誤
 + 所有欄位遇到空值就不轉換
++ 最後處理一些特殊值導致轉換為Error的傳入資料(例如:anthracosis、not submitted、separate等等)
 - [ ] NSCLC-PathologicalStaging12
 - [ ] NSCLC-PerineuralInvasion
 - [ ] NSCLC-PleuralInvasion
