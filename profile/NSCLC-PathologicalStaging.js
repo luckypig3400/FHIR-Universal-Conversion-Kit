@@ -62,222 +62,183 @@ module.exports.beforeProcess = (data) => {
     data.Tcategory = data.Tcategorybasedonviableinvasivetumorsizeonly;
   }
 
-  if (data.Tcategory.includes("pTX")) {
-    data.Tcategory = "pTX";
-  }
-  else if (data.Tcategory.includes("pT0")) {
-    data.Tcategory = "pT0";
-  }
-  else if (data.Tcategory.includes("pTis")) {
-    data.Tcategory = "pTis";
-  }
-  else if (data.Tcategory.includes("pT1mi")) {
-    data.Tcategory = "pT1mi";
-  }
-  else if (data.Tcategory.includes("pT1a")) {
-    data.Tcategory = "pT1a";
-  }
-  else if (data.Tcategory.includes("pT1b")) {
-    data.Tcategory = "pT1b";
-  }
-  else if (data.Tcategory.includes("pT1c")) {
-    data.Tcategory = "pT1c";
-  }
-  else if (data.Tcategory.includes("pT1")) {
-    data.Tcategory = "pT1";
-  }
-  else if (data.Tcategory.includes("pT2a")) {
-    data.Tcategory = "pT2a";
-  }
-  else if (data.Tcategory.includes("pT2b")) {
-    data.Tcategory = "pT2b";
-  }
-  else if (data.Tcategory.includes("pT2")) {
-    data.Tcategory = "pT2";
-  }
-  else if (data.Tcategory.includes("pT3")) {
-    data.Tcategory = "pT3";
-  }
-  else if (data.Tcategory.includes("pT4")) {
-    data.Tcategory = "pT4";
+  switch (true) {
+    case data.Tcategory.includes("pTX"):
+      data.Tcategory = "pTX";
+      break;
+    case data.Tcategory.includes("pT0"):
+      data.Tcategory = "pT0";
+      break;
+    case data.Tcategory.includes("pTis"):
+      data.Tcategory = "pTis";
+      break;
+    case data.Tcategory.includes("pT1mi"):
+      data.Tcategory = "pT1mi";
+      break;
+    case data.Tcategory.includes("pT1a"):
+      data.Tcategory = "pT1a";
+      break;
+    case data.Tcategory.includes("pT1b"):
+      data.Tcategory = "pT1b";
+      break;
+    case data.Tcategory.includes("pT1c"):
+      data.Tcategory = "pT1c";
+      break;
+    case data.Tcategory.includes("pT1"):
+      data.Tcategory = "pT1";
+      break;
+    case data.Tcategory.includes("pT2a"):
+      data.Tcategory = "pT2a";
+      break;
+    case data.Tcategory.includes("pT2b"):
+      data.Tcategory = "pT2b";
+      break;
+    case data.Tcategory.includes("pT2"):
+      data.Tcategory = "pT2";
+      break;
+    case data.Tcategory.includes("pT3"):
+      data.Tcategory = "pT3";
+      break;
+    case data.Tcategory.includes("pT4"):
+      data.Tcategory = "pT4";
+      break;
   }
 
   // Lymph nodes
-
   if (data.Lymphnodes != "") {
     data.Lymphnode = data.Lymphnodes;
   }
 
-  if (data.Lymphnode.includes("NX")) {
-    data.Lymphnode = "N0";
-  }
-  else if (data.Lymphnode.includes("N0")) {
-    data.Lymphnode = "N0";
-  }
-  else if (data.Lymphnode.includes("N1")) {
-    data.Lymphnode = "N1";
-  }
-  else if (data.Lymphnode.includes("N2")) {
-    data.Lymphnode = "N2";
-  }
-  else if (data.Lymphnode.includes("N3")) {
-    data.Lymphnode = "N3";
-  }
-  else if (data.Lymphnode.includes("not present")) {
-    data.Lymphnode = "N0";
-  }
-  else if (data.Lymphnode.includes("all without metastatic tumor")) {
-    data.Lymphnode = "N0";
+  switch (true) {
+    case data.Lymphnode.includes("NX"):
+      data.Lymphnode = "N0";
+      break;
+    case data.Lymphnode.includes("N0"):
+      data.Lymphnode = "N0";
+      break;
+    case data.Lymphnode.includes("N1"):
+      data.Lymphnode = "N1";
+      break;
+    case data.Lymphnode.includes("N2"):
+      data.Lymphnode = "N2";
+      break;
+    case data.Lymphnode.includes("N3"):
+      data.Lymphnode = "N3";
+      break;
+    case data.Lymphnode.includes("not present"):
+      data.Lymphnode = "N0";
+      break;
+    case data.Lymphnode.includes("all without metastatic tumor"):
+      data.Lymphnode = "N0";
+      break;
   }
 
   // Metastasis
-
-  if (data.Mcategory.indexOf("pMX") != -1) {
-    data.Mcategory = "pMX";
-  }
-  else if (data.Mcategory.indexOf("pM0") != -1) {
-    data.Mcategory = "pM0";
-  }
-  else if (data.Mcategory.indexOf("pM1a") != -1) {
-    data.Mcategory = "pM1a";
-  }
-  else if (data.Mcategory.indexOf("pM1b") != -1) {
-    data.Mcategory = "pM1b";
-  }
-  else if (data.Mcategory.indexOf("pM1c") != -1) {
-    data.Mcategory = "pM1c";
-  }
-  else if (data.Mcategory.indexOf("pM1") != -1) {
-    data.Mcategory = "pM1";
+  switch (true) {
+    case data.Mcategory.indexOf("pMX") !== -1:
+      data.Mcategory = "pMX";
+      break;
+    case data.Mcategory.indexOf("pM0") !== -1:
+      data.Mcategory = "pM0";
+      break;
+    case data.Mcategory.indexOf("pM1a") !== -1:
+      data.Mcategory = "pM1a";
+      break;
+    case data.Mcategory.indexOf("pM1b") !== -1:
+      data.Mcategory = "pM1b";
+      break;
+    case data.Mcategory.indexOf("pM1c") !== -1:
+      data.Mcategory = "pM1c";
+      break;
+    case data.Mcategory.indexOf("pM1") !== -1:
+      data.Mcategory = "pM1";
+      break;
   }
 
   // Staging
-
-  if (data.Pathologicalstaging.includes("TisN0")) {
-    data.Pathologicalstaging = "0";
-  }
-  else if (data.Pathologicalstaging.includes("T1miN0")) {
-    data.Pathologicalstaging = "IA1";
-  }
-  else if (data.Pathologicalstaging.includes("T1aN0")) {
-    data.Pathologicalstaging = "IA1";
-  }
-  else if (data.Pathologicalstaging.includes("T1bN0")) {
-    data.Pathologicalstaging = "IA2";
-  }
-  else if (data.Pathologicalstaging.includes("T1cN0")) {
-    data.Pathologicalstaging = "IA3";
-  }
-  else if (data.Pathologicalstaging.includes("T2aN0")) {
-    data.Pathologicalstaging = "IB";
-  }
-  else if (data.Pathologicalstaging.includes("T2bN0")) {
-    data.Pathologicalstaging = "IIA";
-  }
-  else if (data.Pathologicalstaging.includes("T1aN1")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T1bN1")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T1cN1")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T2aN1")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T2bN1")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T3N0")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T1aN2")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T1bN2")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T1cN2")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T2aN2")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T2bN2")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T3N1")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T4N0")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T4N1")) {
-    data.Pathologicalstaging = "IIIA";
-  }
-  else if (data.Pathologicalstaging.includes("T1aN3")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T1bN3")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T1cN3")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T2aN3")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T2bN3")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T3N2")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T4N2")) {
-    data.Pathologicalstaging = "IIIB";
-  }
-  else if (data.Pathologicalstaging.includes("T3N3")) {
-    data.Pathologicalstaging = "IIIC";
-  }
-  else if (data.Pathologicalstaging.includes("T4N3")) {
-    data.Pathologicalstaging = "IIIC";
-  }
-  else if (data.Pathologicalstaging.includes("M1a")) {
-    data.Pathologicalstaging = "IVA";
-  }
-  else if (data.Pathologicalstaging.includes("M1b")) {
-    data.Pathologicalstaging = "IVA";
-  }
-  else if (data.Pathologicalstaging.includes("M1c")) {
-    data.Pathologicalstaging = "IVB";
-  }
-  else if (data.Pathologicalstaging.includes("Tis")) {
-    data.Pathologicalstaging = "0";
-  }
-  else if (data.Pathologicalstaging.includes("T1mi")) {
-    data.Pathologicalstaging = "IA1";
-  }
-  else if (data.Pathologicalstaging.includes("T1a")) {
-    data.Pathologicalstaging = "IA1";
-  }
-  else if (data.Pathologicalstaging.includes("T1b")) {
-    data.Pathologicalstaging = "IA2";
-  }
-  else if (data.Pathologicalstaging.includes("T1c")) {
-    data.Pathologicalstaging = "IA3";
-  }
-  else if (data.Pathologicalstaging.includes("T2a")) {
-    data.Pathologicalstaging = "IB";
-  }
-  else if (data.Pathologicalstaging.includes("T2b")) {
-    data.Pathologicalstaging = "IIA";
-  }
-  else if (data.Pathologicalstaging.includes("T3")) {
-    data.Pathologicalstaging = "IIB";
-  }
-  else if (data.Pathologicalstaging.includes("T4")) {
-    data.Pathologicalstaging = "IIIA";
+  switch (true) {
+    case data.Pathologicalstaging.includes("TisN0"):
+      data.Pathologicalstaging = "0";
+      break;
+    case data.Pathologicalstaging.includes("T1miN0"):
+    case data.Pathologicalstaging.includes("T1aN0"):
+      data.Pathologicalstaging = "IA1";
+      break;
+    case data.Pathologicalstaging.includes("T1bN0"):
+      data.Pathologicalstaging = "IA2";
+      break;
+    case data.Pathologicalstaging.includes("T1cN0"):
+      data.Pathologicalstaging = "IA3";
+      break;
+    case data.Pathologicalstaging.includes("T2aN0"):
+      data.Pathologicalstaging = "IB";
+      break;
+    case data.Pathologicalstaging.includes("T2bN0"):
+      data.Pathologicalstaging = "IIA";
+      break;
+    case data.Pathologicalstaging.includes("T1aN1"):
+    case data.Pathologicalstaging.includes("T1bN1"):
+    case data.Pathologicalstaging.includes("T1cN1"):
+    case data.Pathologicalstaging.includes("T2aN1"):
+    case data.Pathologicalstaging.includes("T2bN1"):
+    case data.Pathologicalstaging.includes("T3N0"):
+      data.Pathologicalstaging = "IIB";
+      break;
+    case data.Pathologicalstaging.includes("T1aN2"):
+    case data.Pathologicalstaging.includes("T1bN2"):
+    case data.Pathologicalstaging.includes("T1cN2"):
+    case data.Pathologicalstaging.includes("T2aN2"):
+    case data.Pathologicalstaging.includes("T2bN2"):
+    case data.Pathologicalstaging.includes("T3N1"):
+    case data.Pathologicalstaging.includes("T4N0"):
+    case data.Pathologicalstaging.includes("T4N1"):
+      data.Pathologicalstaging = "IIIA";
+      break;
+    case data.Pathologicalstaging.includes("T1aN3"):
+    case data.Pathologicalstaging.includes("T1bN3"):
+    case data.Pathologicalstaging.includes("T1cN3"):
+    case data.Pathologicalstaging.includes("T2aN3"):
+    case data.Pathologicalstaging.includes("T2bN3"):
+    case data.Pathologicalstaging.includes("T3N2"):
+    case data.Pathologicalstaging.includes("T4N2"):
+      data.Pathologicalstaging = "IIIB";
+      break;
+    case data.Pathologicalstaging.includes("T3N3"):
+    case data.Pathologicalstaging.includes("T4N3"):
+      data.Pathologicalstaging = "IIIC";
+      break;
+    case data.Pathologicalstaging.includes("M1a"):
+    case data.Pathologicalstaging.includes("M1b"):
+      data.Pathologicalstaging = "IVA";
+      break;
+    case data.Pathologicalstaging.includes("M1c"):
+      data.Pathologicalstaging = "IVB";
+      break;
+    case data.Pathologicalstaging.includes("Tis"):
+      data.Pathologicalstaging = "0";
+      break;
+    case data.Pathologicalstaging.includes("T1mi"):
+    case data.Pathologicalstaging.includes("T1a"):
+      data.Pathologicalstaging = "IA1";
+      break;
+    case data.Pathologicalstaging.includes("T1b"):
+      data.Pathologicalstaging = "IA2";
+      break;
+    case data.Pathologicalstaging.includes("T1c"):
+      data.Pathologicalstaging = "IA3";
+      break;
+    case data.Pathologicalstaging.includes("T2a"):
+      data.Pathologicalstaging = "IB";
+      break;
+    case data.Pathologicalstaging.includes("T2b"):
+      data.Pathologicalstaging = "IIA";
+      break;
+    case data.Pathologicalstaging.includes("T3"):
+      data.Pathologicalstaging = "IIB";
+      break;
+    case data.Pathologicalstaging.includes("T4"):
+      data.Pathologicalstaging = "IIIA";
+      break;
   }
 
 
