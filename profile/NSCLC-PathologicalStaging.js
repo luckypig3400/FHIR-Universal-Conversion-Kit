@@ -273,6 +273,7 @@ module.exports.fields = [
       let displayValue = tools.searchCodeSystemDisplayValue("../NSCLC_ValueSets/definitions.json/CodeSystem-NSCLC-pTNM.json", data);
       valueCodeableConcept.coding[0].display = displayValue;
 
+      if (data == "") return null;
       return valueCodeableConcept;
     }
   },
@@ -296,6 +297,7 @@ module.exports.fields = [
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
+      if (data == "") return null;
       return valueCodeableConcept;
     }
   },
@@ -319,6 +321,7 @@ module.exports.fields = [
       valueCodeableConcept.coding[0].code = data;
       valueCodeableConcept.coding[0].display = displayValue;
 
+      if (data == "") return null;
       return valueCodeableConcept;
     }
   },
@@ -342,6 +345,7 @@ module.exports.fields = [
       valueCodeableConcept.coding[0].code = codevalue;
       valueCodeableConcept.coding[0].display = data;
 
+      if (data == "") return null;
       return valueCodeableConcept;
 
     }

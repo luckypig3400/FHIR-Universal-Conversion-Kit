@@ -38,6 +38,7 @@ FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that ca
 + 修正Lymphnode的Code與Display查詢錯誤
 + 將beforeProcess內部多數if-else改為switch-case，方便摺疊程式碼
 + 修正Lymphnode的NX編碼疑似轉換錯誤
++ 所有欄位遇到空值就不轉換
 - [ ] NSCLC-PathologicalStaging12
 - [ ] NSCLC-PerineuralInvasion
 - [ ] NSCLC-PleuralInvasion
