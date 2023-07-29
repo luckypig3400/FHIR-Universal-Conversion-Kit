@@ -7,8 +7,19 @@ module.exports.profile = {
 }
 
 module.exports.globalResource = {
-
+  Practitioner: {
+    communication: [{
+      coding: [{
+        system: "urn:ietf:bcp:47",
+        code: "zh-TW",
+        display: "Chinese (Taiwan)"
+      }]
+    }],
+    text: "zh-TW 繁體中文"
+  }
 }
+// REF1: http://hl7.org/fhir/R4/valueset-languages.html
+// REF2: https://www.hl7.org/fhir/practitioner-example-f003-mv.json.html
 
 module.exports.fields = [
   {
