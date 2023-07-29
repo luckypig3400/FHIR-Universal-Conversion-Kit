@@ -1,0 +1,9 @@
+POST http://localhost:1337
+content-type: application/json
+
+{
+    "profile": "doctor",
+    "data": [
+        {"doctor_id":"1"}
+    ]
+}
