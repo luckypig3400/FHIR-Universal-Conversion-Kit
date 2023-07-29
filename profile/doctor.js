@@ -23,32 +23,39 @@ module.exports.globalResource = {
 
 module.exports.fields = [
   {
-    source: 'doctor_id',
+    source: 'id',
     target: 'Practitioner.id',
     beforeConvert: (data) => {
       return `prac-${data}`
     }
-    // },
-    // {
-    //     source: 'identifier',
-    //     target: 'Patient.identifier',
-    //     beforeConvert: (data) => {
-    //         return {
-    //             use: 'official',
-    //             system: 'https://www.vghtc.gov.tw/',
-    //             value: data,
-    //         }
-    //     }
-    // },
-    // {
-    //     source: 'name',
-    //     target: 'Patient.name',
-    //     beforeConvert: (data) => {
-    //         return {
-    //             use: 'official',
-    //             text: data,
-    //         }
-    //     }
-    // },
-  }
+  },
+  {
+    source: 'doctorLicense',
+    target: 'Practitioner.identifier',
+    beforeConvert: (data) => {
+      return {
+        use: 'official',
+        system: 'https://www.vghtc.gov.tw/',
+        value: data
+      }
+    }
+  },
+  {
+    source: 'zhTW_name',
+    target: 'Practitioner.name',
+    beforeConvert: (data) => {
+      return {
+        use: 'official',
+        text: data,
+      }
+    }
+  },
+  {
+    source: 'gender',
+    target: 'Practitioner.gender'
+  },
+  {
+    source: 'birthDate',
+    target: 'Practitioner.birthDate'
+  },
 ]
