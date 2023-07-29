@@ -4,6 +4,32 @@ content-type: application/json
 {
     "profile": "doctor",
     "data": [
-        {"doctor_id":"1"}
-    ]
+  {
+    "id": 1,
+    "doctorLicense": "KP018681702",
+    "zhTW_name": "王依昇",
+    "Last_Name": "Wang",
+    "First_Name": "Yi Sheng",
+    "gender": "male",
+    "birthDate": "1967-10-18"
+  },
+  {
+    "id": 2,
+    "doctorLicense": "KP090711069",
+    "zhTW_name": "金師傅",
+    "Last_Name": "Jin",
+    "First_Name": "Shih Fu",
+    "gender": "male",
+    "birthDate": "1964-11-03"
+  },
+  {
+    "id": 3,
+    "doctorLicense": "KP090713007",
+    "zhTW_name": "洛伊德·佛傑",
+    "Last_Name": "Forger",
+    "First_Name": "Loid",
+    "gender": "male",
+    "birthDate": "1993-07-11"
+  }
+]
 }
