@@ -1,270 +1,326 @@
+<p align="center">
+  <img src="fuck-logo.png" alt="FHIR Universal Conversion Kit Logo" width="200" height="271">
+</p>
+
 # FHIR Universal Conversion Kit (Project F.U.C.K)
 
-FHIR Universal Conversion Kit (F.U.C.K.) is a super awesome and sexy kit that can convert albitary data to HL7 FHIR data. 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![npm version](https://badge.fury.io/js/@fhir-uck%2Ffhir-converter-core.svg)](https://badge.fury.io/js/@fhir-uck%2Ffhir-converter-core) [![HitCount](https://hits.dwyl.com/Lorex/FHIR-Universal-Conversion-Kit.svg?style=flat-square)](http://hits.dwyl.com/Lorex/FHIR-Universal-Conversion-Kit)
 
-## Installation & Usage Overview
-### 1. Make sure your system enviroment already meet the [Requirements](#requirements)
+[![NPM](https://nodei.co/npm/@fhir-uck%2Ffhir-converter-core.png)](https://nodei.co/npm/@fhir-uck%2Ffhir-converter-core/)
 
-### 2. Follow the [Installation Steps](#installation) to install this Kit on your local machine
+FHIR Universal Conversion Kit (F.U.C.K.) is an awesome and sexy tool that can convert arbitrary medical data into HL7 FHIR format and supports uploading to FHIR Server.
 
-### 3. See [API Usage](#api) and test with [API Usage Example](#usage-example)
+For Chinese documentation, please refer to [README_zh-TW.md](README_zh-TW.md)
 
-### 4. You can [Learn about F.U.C.K Profile](#profile) and start to [Create your FHIR Convert Profile](#how-to-create-your-fhir-convert-profile)
+## Disclaimer 專案聲明
 
-### 5. [Learn How to convert CSV file to Payload JSON](#how-to-convert-csv-to-payload-json)
+[不要點我 Don't Click Me](itri-do-better.md)
 
-### 6. We provide [TWcore 10 Basic FHIR Resources Convert Profile and Excel format template](#twcore-10-basic-fhir-resources)
+## Introduction
 
----
+### What the F.U.C.K.?
 
-## Requirements
-- node.js 16.8.0
-- Any Restful API Client Tools
-  * [Postman](https://www.postman.com/downloads/)
-  * VScode Extension: [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+F.U.C.K. is a tool designed to convert various medical data into FHIR format and supports uploading to FHIR Server. Traditional medical data integration between different systems often requires writing a conversion program for each data format, which can be burdensome for developers. F.U.C.K. offers a Low-Code or even No-Code solution, allowing users to simply write a configuration file to convert various data into FHIR format. Subsequently, the FHIR format can be used for cross-hospital or cross-system data exchange.
 
-## Installation
-### Step1.Clone this repository to your computer
+
+### Why is it called F.U.C.K.?
+
+F.U.C.K. stands for "FHIR Universal Conversion Kit", so the middle dot should not be omitted. :P
+
+### Why should I F.U.C.K.?
+
+- **Multi-FHIR Version Support**: Supports multiple FHIR versions, ensuring broad compatibility.
+- **Data Validation**: Converts and validates data, then automatically uploads to FHIR Server.
+- **Data Pre/Post-processor**: Offers options for pre-processing and post-processing of data.
+- **Auto Uploader**: Converts and validates data, then automatically uploads to FHIR Server.
+- **Less Coding**: Provides a GUI for creating configuration files without writing code.
+- **Efficiency**: Save your ass and NEVER write code to convert medical data again!
+
+
+## Development Progress
+- :white_check_mark: Core Conversion Engine
+- :white_check_mark: Multiple Configuration File Support
+- :white_check_mark: Data Preprocessor
+- :white_check_mark: FHIR Data Uploader
+- :white_check_mark: Detailed Error Handling
+- :white_check_mark: FHIR Resource Validator
+- :white_check_mark: GUI Configuration Builder
+- :arrow_right: Multi-source Data Support
+- :arrow_right: TW Core IG Built-in Support
+
+## How to get F.U.C.K.ed?
+
+### Requirements
+- Node.js 20.18.0 or higher
+
+### Installation
+Install F.U.C.K. using npm:
+
 ```bash
-$ git clone https://github.com/Lorex/FHIR-Universal-Conversion-Kit.git
+npm install @fhir-uck/fhir-converter-core
 ```
 
-### Step2.Install npm packages
-```bash
-$ cd src
-$ npm install
-```
+## Go F.U.C.K. yourself!
 
-### Step3.Run Service
-#### Method 1 (Make sure you're in the project's root folder)
-```bash
-$ chmod +x ./start_server
-$ ./start_server
-```
+### As a Library
 
-#### Method 2 (Make sure you're in the `src` folder)
-```bash
-$ node app.js
-```
+You can use F.U.C.K. directly in your Node.js application. You may pass either a config name (string) or a config object:
 
-## API
-
-Server will default listen on port 1337.
-
-### Usage Guide
-API Endpoint
-```
-POST <serverurl>
-```
-
-Payload
-```json
-{
-    "profile": "<Profile Name>",
-    "data": [
-        "Source Data",
-    ]
-}
-```
-
-Response
-```json
-{
-    "success": true,
-    "data": [
-        "Response Data"
-    ]
-}
-```
-
-### Usage Example
-API Endpoint
-```
-POST http://localhost:1337
-```
-
-Payload
-```json
-{
-  "profile": "dental",
-  "data": [
-    {
-      "doctor_id": "6"
-    },
-    {
-      "doctor_id": "69"
-    },
-  ]
-}
-```
-
-Response
-<details>
-
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "resourceType": "Bundle",
-      "type": "transaction",
-      "entry": [
-        {
-          "fullUrl": "https://hapi.fhir.tw/fhir/Practitioner/prac-6",
-          "resource": {
-            "resourceType": "Practitioner",
-            "id": "prac-6"
-          },
-          "request": {
-            "method": "PUT",
-            "url": "/Practitioner/prac-6"
-          }
-        }
-      ]
-    },
-    {
-      "resourceType": "Bundle",
-      "type": "transaction",
-      "entry": [
-        {
-          "fullUrl": "https://hapi.fhir.tw/fhir/Practitioner/prac-69",
-          "resource": {
-            "resourceType": "Practitioner",
-            "id": "prac-69"
-          },
-          "request": {
-            "method": "PUT",
-            "url": "/Practitioner/prac-69"
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-</details>
-
-## Profile
-
-### Basic Knowledge
-
-If you have many different data source formats, you can create separate profiles (also known as config files) for each of them.
-Each profile can define different data sources, source fields, conversion rules, and preprocessors.
-
-**ATTENTION: The 'Profile' in this section is NOT FHIR Profile**
-
-Every source data will be processed and converted as the following workflow: 
-
-![workflow](https://i.imgur.com/6JwsLXC.png)
-
-### How to create your FHIR convert Profile
-
-To define a profile, just create `<profileName>.js` in the `profile` folder simply, the server should automatically load all profiles at the start.
-
-**ATTENTION: The 'Profile' in this section is NOT FHIR Profile**
-
-This is an example of the profile:
 ```javascript
-module.exports.profile = {
-    // Name of the profile
-    name: 'example',
+const { Convert } = require('@fhir-uck/fhir-converter-core');
 
-    // version of the profile
+// Option 1: Use config name (string)
+const configName = 'your_config_name';
+const convert1 = new Convert(configName);
+
+// Option 2: Use config object
+const configObject = require('./config/your_config_name');
+const convert2 = new Convert(configObject);
+
+const data = [/* your data array */];
+
+async function convertData() {
+  // Use either convert1 or convert2
+  const result = await convert1.convert(data);
+  // If validation is enabled in config, result will include validationResults
+  // Otherwise, result will only have the bundle field
+  console.log(result);
+}
+
+convertData();
+```
+
+### As an API
+
+To deploy F.U.C.K. as an API, you'll need to create a server application. Here's a basic example using Express:
+
+1. Install Express:
+   ```bash
+   npm install express
+   ```
+
+2. Create a server file (e.g., `server.js`):
+   ```javascript
+   const express = require('express');
+   const { Convert, Validator } = require('@fhir-uck/fhir-converter-core');
+
+   const app = express();
+   app.use(express.json());
+
+   app.post('/api/convert', async (req, res) => {
+     const { config, data, validate } = req.body;
+     
+     try {
+       const convert = new Convert(config);
+       const result = await convert.convert(data);
+       
+       if (validate) {
+         const validator = new Validator();
+         const validationResult = await validator.validate(result);
+         res.json({ result, validationResult });
+       } else {
+         res.json({ result });
+       }
+     } catch (error) {
+       res.status(500).json({ error: error.message });
+     }
+   });
+
+   const PORT = process.env.PORT || 3000;
+   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+   ```
+
+3. Start the server:
+   ```bash
+   node server.js
+   ```
+
+4. Make a POST request to the API endpoint:
+   ```
+   POST http://localhost:3000/api/convert
+   ```
+
+   With the following JSON payload:
+   ```json
+   {
+     "config": "your_config_name",
+     "data": [/* your data array */],
+     "validate": true  // Set to true if you want to validate the converted data
+   }
+   ```
+
+### Running the Example Conversion
+To run a conversion using an example script, create a new file (e.g., `example_convert.js`) with the following content:
+
+```javascript
+const { Convert, Validator } = require('@fhir-uck/fhir-converter-core');
+
+const config = 'example_config'; // Replace with your config name
+const data = [/* your example data */];
+
+async function exampleConvert() {
+  const convert = new Convert(config);
+  const result = await convert.convert(data);
+  
+  const validator = new Validator();
+  const validationResult = await validator.validate(result);
+  
+  console.log('Conversion result:', result);
+  console.log('Validation result:', validationResult);
+}
+
+exampleConvert();
+```
+
+Then run the script:
+
+```bash
+node example_convert.js
+```
+
+## Configuration Files
+Configuration files are located in the `config` folder. Each configuration file defines:
+- Data source format
+- Conversion rules
+- Pre-processing and post-processing hooks
+- Validation rules
+
+You can create new configuration files by adding `.js` files to the `config` folder, or use the GUI builder to create configuration files.
+
+### Conversion Process
+The conversion process follows this workflow:
+1. Load configuration
+2. Pre-process data (if defined)
+3. Convert individual fields
+4. Post-process data (if defined)
+5. Validate the resulting FHIR Bundle (if enabled)
+6. Return or upload the resulting FHIR Bundle
+
+### Using the GUI Configuration Builder
+
+F.U.C.K. provides a user-friendly GUI for creating and editing configuration files. To use the GUI:
+
+1. Open the `config_builder/index.html` file in your web browser.
+2. Use the interface to set up your configuration, including field mappings, preprocessors, and postprocessors.
+3. Click the "Download Config" button to save your configuration file.
+4. Place the downloaded configuration file in the `config` folder of your F.U.C.K. installation.
+
+
+### Configuration File Structure
+
+Here's an example of a configuration file:
+
+```javascript
+const uuid = require('uuid');
+
+const organizationId = uuid.v4();
+
+module.exports.config = {
+    name: 'example_config',
     version: '1.0.0',
-
-    // The base URL of the FHIR server, this field will affect the 'fullUrl' element in the generated bundle.
-    fhirServerBaseUrl: 'https://hapi.fhir.tw/fhir',     // 
-
-    // Whether should we do after conversion?
-    // 'upload': Upload the converted data to the FHIR server and return the server response.
-    // 'return': Don't upload, just return the converted data.
-    action: 'upload',
-    token: 'your-token-string' // You can add your token~
+    fhirServerBaseUrl: 'https://hapi.fhir.org/baseR4',
+    action: 'upload', // 'upload' or 'return'
 }
 
 module.exports.globalResource = {
-    // Should be resource name
-    Patient: {
-        // Defile resource template here
-        active: true
-        
-        // If you want to reference to other resource of this bundle automatically, use '{ reference: #<ResourceType> }'
-        managingOrganization: {
-            reference: '#Organization',
-        }
-    },
-    Practitioner: {
-        active: true,
-    },
+    // Define global FHIR Resource templates here
+    // You can customize FHIR Resource Template, if not defined, it will use FHIR default Resource Template
 }
 
-// Global Preprocessor Hook
-// Data will run the following function before we iterate each fields
-module.exports.beforeProcess = (data) => {
-    // Do something
-    return data
-}
-
-// Define your fields and conversion rules here
 module.exports.fields = [
+    // Define field mappings here
     {
-        // Field name of the source data
-        source: 'pname',
-
-        // Target element of FHIR resource which source data will converted to
-        target: 'Patient.id',
-
-        // Field preprocessor hook before we convert the source data
-        beforeConvert: (data) => {
-            return `pat-test2-${data}`
-        }
+      source: 'source field name',
+      target: 'target FHIR field name, using FHIR Path',
+      beforeConvert: (data) => {
+        // Process the data field before conversion
+        return data;
+      }
     }
 ]
 
+module.exports.beforeProcess = (data) => {
+    // Pre-processing logic
+    return data;
+}
+
+module.exports.afterProcess = (bundle) => {
+    // Post-processing logic
+    return bundle;
+}
 ```
 
-## How to convert csv to payload json
+## FHIR Resource Validator
 
-### 1. Open `csv2json_HTML_ver` folder
-### 2. Open `csv2json.html` with your browser
-### 3. Copy your CSV file content as text
-### 4. Paste your CSV text in input box
-![](https://i.imgur.com/q4vdPf3.png)
-### 5. Copy your converted Payload JSON from output textbox and paste into your REST Client 😄
+F.U.C.K. includes a built-in FHIR Resource Validator, which can be used to validate whether the converted FHIR resources comply with FHIR specifications. The validator checks:
 
-## TWcore 10 Basic FHIR Resources
-### What is TWcore
-+ https://twcore.mohw.gov.tw/ig/
+- The accuracy of resource structure
+- Mandatory fields
+- Data type consistency
+- Value set regulations
 
-### List of supported FHIR Resources
-| **FHIR Resource Type** | **Corresponding F.U.C.K convert Profile** |
-|------------------------|-------------------------------------------|
-| Condition              | conditionMS.js                            |
-| Encounter              | encounterMS.js                            |
-| Location               | location.js                               |
-| Medication             | medication-TWCore.js                      |
-| MedicationRequest      | medicationRequestMS.js                    |
-| Observation            | observationMS.js                          |
-| Organization           | organizationMS.js                         |
-| Patient                | patientMS.js                              |
-| Practitioner           | practitionerMS.js                         |
-| Procedure              | procedureMS.js                            |
+The validator has two operating modes:
 
-### Excel format template Usage
-All files are located in `twcore` folder
+### 1. Automatic Validation in Configuration File
 
-See the documentation for [How To Use TWcore Excel Format](./Excel-templates/twcore/how-to-use-twcore.md#excel範例格式使用說明)
+You can enable automatic validation in the configuration file. This way, every conversion will automatically include validation:
 
-### Convert Profile Usage Example
-See the documentation for [How To Use TWcore Convert Profiles](./Excel-templates/twcore/how-to-use-twcore.md#fuck-profile使用範例)
+```javascript
+module.exports.config = {
+    name: 'example_config',
+    version: '1.0.0',
+    fhirServerBaseUrl: 'https://hapi.fhir.org/baseR4',
+    action: 'upload',
+    validate: true  // Enable automatic validation
+}
+```
 
-## Special Thanks
-🎉🎉🎉
-### Fork from [Lorex L. Yang's Github](https://github.com/Lorex)
-🥇🥇🥇
-### Original Repo: [FHIR Universal Conversion Kit (Project F.U.C.K)](https://github.com/Lorex/FHIR-Universal-Conversion-Kit)
-👍👍👍
+When `validate` is set to `true`, the conversion process will automatically include validation steps. If validation fails, the conversion result will include validation error information. If validation is not enabled, the result will only contain the bundle field and will not include validationResults.
 
-## TODO List
-- [x] 完善TWcore使用手冊
+### 2. Independent Use
+
+You can also use the validator independently, allowing you to manually validate when needed:
+
+```javascript
+const { Validator } = require('path/to/src');
+
+const validator = new Validator();
+const validationResult = await validator.validate(fhirBundle);
+
+if (validationResult.valid) {
+  console.log('FHIR resource is valid');
+} else {
+  console.log('Validation errors:', validationResult.errors);
+}
+```
+
+> Note: Standalone validation returns only validation info (such as valid, errors), not the bundle. In the main conversion process, validationResults is only present if validation is enabled; otherwise, only bundle is returned.
+
+## Error Handling
+F.U.C.K. provides detailed error messages, including:
+- Server response status
+- Response body
+- Validation errors
+
+If the conversion fails, it will return an error message with an error code for easy debugging.
+
+## Contributing
+If you have any new ideas, feel free to submit an Issue or Pull Request.
+
+## License
+
+For users outside Taiwan:
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+
+You are free to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- NonCommercial — You may not use the material for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
+For more details, please refer to the [LICENSE](LICENSE) file.
+
+© 2023 Lorex and Sitatech Information Services Co., Ltd. All Rights Reserved.
